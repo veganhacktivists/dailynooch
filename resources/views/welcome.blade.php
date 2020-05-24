@@ -3,5 +3,5 @@
 @section('title', title(__('Welcome')))
 
 @section('content')
-  Welcome!
+  {{ @widget(\App\Widgets\RssFeed::class, ['url' => 'https://nutritionfacts.org/feed']) }}
 @endsection
