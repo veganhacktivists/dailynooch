@@ -13,21 +13,24 @@ class BackpackUser extends User
     protected $table = 'users';
 
     /**
+     * @var string
+     */
+    private $email;
+
+    /**
      * Send the password reset notification.
      *
      * @param string $token
      */
-    public function sendPasswordResetNotification($token)
+    public function sendPasswordResetNotification($token): void
     {
         $this->notify(new ResetPasswordNotification($token));
     }
 
     /**
      * Get the e-mail address where password reset links are sent.
-     *
-     * @return string
      */
-    public function getEmailForPasswordReset()
+    public function getEmailForPasswordReset(): string
     {
         return $this->email;
     }
