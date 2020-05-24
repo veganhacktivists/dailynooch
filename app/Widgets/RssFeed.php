@@ -9,10 +9,6 @@ class RssFeed extends AbstractWidget
 {
     protected $container = 'widgets.container';
 
-    /**
-     * Treat this method as a normal PHP method, or a controller action.
-     * You may return view() or other content to render and display.
-     */
     public function make(): View
     {
         $url = '';
