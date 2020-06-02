@@ -7,6 +7,12 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-.herp {
-    background: green;
+.bg-tertiary {
+  background-color: color("orange");
+}
+.text-gray {
+  color: color("gray");
+}
+.text-tertiary {
+  color: color("orange");
 }

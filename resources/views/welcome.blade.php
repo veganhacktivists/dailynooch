@@ -3,5 +3,5 @@
 @section('title', title(__('Welcome')))
 
 @section('content')
-  Welcome!
+<widget-overview></widget-overview>
 @endsection
