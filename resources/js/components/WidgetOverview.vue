@@ -4,7 +4,7 @@
       <div class="col col-md-3">
         <button class="btn btn-primary mb-4" @click="toggleEdit">Toggle edit mode</button>
         <Container
-          group-name="moveable"
+          group-name="movable"
           :get-child-payload="i => widgetsLeft[i]"
           drag-handle-selector=".handle"
           @drop="onDrop('widgetsLeft', $event)"
@@ -16,7 +16,7 @@
       </div>
       <div class="col-12 col-md-9 col-lg-6">
         <Container
-          group-name="moveable"
+          group-name="movable"
           :get-child-payload="i => widgetsCenter[i]"
           drag-handle-selector=".handle"
           @drop="onDrop('widgetsCenter', $event)"
@@ -28,7 +28,7 @@
       </div>
       <div class="col col-md-3">
         <Container
-          group-name="moveable"
+          group-name="movable"
           :get-child-payload="i => widgetsRight[i]"
           drag-handle-selector=".handle"
           @drop="onDrop('widgetsRight', $event)"
