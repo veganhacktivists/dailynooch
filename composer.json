@@ -22,8 +22,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "laravelcollective/html": "^6.0",
-        "livewire/livewire": "^1.0",
-        "rinvex/laravel-widgets": "^4.0"
+        "livewire/livewire": "^1.0"
     },
     "require-dev": {
         "backpack/generators": "^2.0",

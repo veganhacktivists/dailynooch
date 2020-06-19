@@ -2,27 +2,20 @@
 
 namespace App\Widgets;
 
-use Illuminate\View\View;
-use Rinvex\Widgets\Models\AbstractWidget;
+use Illuminate\Http\JsonResponse;
 
 class RssFeed extends AbstractWidget
 {
-    protected $container = 'widgets.container';
+    protected $name = 'Rss Feed';
+    protected $description = 'Get information from your favorite blog or website right in your dashboard!';
 
-    public function make(): View
+    public function action(): JsonResponse
     {
         $url = '';
         if (array_key_exists('url', $this->params) && $this->params['url'] !== null) {
             $url = $this->params['url'];
         }
 
-        $feed = \Feed::loadRss($url);
-
-        return view('widgets.rss_feed', ['feed' => $feed]);
-    }
-
-    public function placeholder(): string
-    {
-        return 'Loading...';
+        return new JsonResponse(\Feed::loadRss($url)->toArray());
     }
 }
