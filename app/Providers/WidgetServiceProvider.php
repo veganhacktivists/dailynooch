@@ -7,10 +7,10 @@ use Illuminate\Http\JsonResponse;
 
 class WidgetServiceProvider extends RouteServiceProvider
 {
-    /**
-     * const widgets = [.
-        ]
-     */
+    private $defaultTypes = [
+        'nutritional-facts',
+    ];
+
     public function boot(): void
     {
         // Batch endpoint
