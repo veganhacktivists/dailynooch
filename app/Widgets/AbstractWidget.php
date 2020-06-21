@@ -21,6 +21,11 @@ class AbstractWidget
      */
     protected $name;
 
+    /**
+     * @var string
+     */
+    protected $type;
+
     public function __construct(array $params)
     {
         $this->params = $params;
