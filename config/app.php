@@ -181,6 +181,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\MailchimpServiceProvider::class,
+        App\Providers\WidgetServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
     ],
 
