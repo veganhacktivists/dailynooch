@@ -13,15 +13,25 @@ class WidgetServiceProvider extends RouteServiceProvider
 
     public function boot(): void
     {
-        // Batch endpoint
         $this->app['router']->get('widgets', function () {
-            // Takes a query parameter types={comma-seperated-widgets}
-            $widget = WidgetFactory::make();
-            if ($widget === null) {
-                return new JsonResponse([], 404);
+            $types = request()->query('types');
+            if ($types !== null) {
+                $types = explode(',', $types);
+            } else {
+                $types = $this->defaultTypes;
             }
 
-            return $widget->action();
+            $widgetData = [];
+            foreach ($types as $type) {
+                $widget = WidgetFactory::make($type);
+                if ($widget === null) {
+                    return new JsonResponse(['error' => 'Widget type: `'.$type.'` doesn\'t exist'], 404);
+                }
+
+                $widgetData[] = $widget->getData();
+            }
+
+            return new JsonResponse($widgetData);
         });
 
         $this->app['router']->get('widgets/{name}', function (string $name) {

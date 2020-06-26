@@ -4,7 +4,7 @@ namespace App\Widgets;
 
 use Illuminate\Http\JsonResponse;
 
-class AbstractWidget
+abstract class AbstractWidget
 {
     /**
      * @var array
@@ -41,7 +41,10 @@ class AbstractWidget
         return $this->description;
     }
 
+    abstract public function getData(): array;
+
     public function action(): JsonResponse
     {
+        return new JsonResponse($this->getData());
     }
 }

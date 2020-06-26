@@ -2,8 +2,6 @@
 
 namespace App\Widgets;
 
-use Illuminate\Http\JsonResponse;
-
 class AbstractRssFeed extends AbstractWidget
 {
     protected $name = 'Rss Feed';
@@ -15,8 +13,8 @@ class AbstractRssFeed extends AbstractWidget
      */
     protected $url;
 
-    public function action(): JsonResponse
+    public function getData(): array
     {
-        return new JsonResponse(\Feed::loadRss($this->url)->toArray());
+        return \Feed::loadRss($this->url)->toArray();
     }
 }
