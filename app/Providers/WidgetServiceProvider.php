@@ -28,7 +28,11 @@ class WidgetServiceProvider extends RouteServiceProvider
                     return new JsonResponse(['error' => 'Widget type: `'.$type.'` doesn\'t exist'], 404);
                 }
 
-                $widgetData[] = $widget->getData();
+                $widgetData[] = [
+                    'type' => $widget->getType(),
+                    'name' => $widget->getName(),
+                    'data' => $widget->getData(),
+                ];
             }
 
             return new JsonResponse($widgetData);

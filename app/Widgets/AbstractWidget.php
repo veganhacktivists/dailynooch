@@ -41,10 +41,19 @@ abstract class AbstractWidget
         return $this->description;
     }
 
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
     abstract public function getData(): array;
 
     public function action(): JsonResponse
     {
-        return new JsonResponse($this->getData());
+        return new JsonResponse([
+            'type' => $this->getType(),
+            'name' => $this->getName(),
+            'data' => $this->getData(),
+        ]);
     }
 }
