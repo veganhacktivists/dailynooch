@@ -1,14 +1,24 @@
 <template>
-  <Widget title="Lives counter" />
+  <Widget :name="name" />
 </template>
 
 <script>
-import Widget from "../components/Widget"
+import Widget from '../components/Widget'
 
 export default {
-  name: "livesCounter",
+  name: 'lives-counter',
+  props: {
+    data: {
+      type: Object,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+  },
   components: {
-    Widget
-  }
+    Widget,
+  },
 }
 </script>

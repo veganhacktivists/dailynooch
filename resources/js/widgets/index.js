@@ -1,13 +1,15 @@
-import Art from '../widgets/Art'
-import LivesCounter from '../widgets/LivesCounter'
-import News from '../widgets/News'
-import Quote from '../widgets/Quote'
-import Recipe from '../widgets/Recipe'
+import Art from './Art'
+import LivesCounter from './LivesCounter'
+import News from './News'
+import NutritionalFacts from './NutritionalFacts'
+import Quote from './Quote'
+import Recipe from './Recipe'
 
 export default {
   art: Art,
-  livesCounter: LivesCounter,
+  'lives-counter': LivesCounter,
   news: News,
+  'nutritional-facts': NutritionalFacts,
   quote: Quote,
   recipe: Recipe,
 }

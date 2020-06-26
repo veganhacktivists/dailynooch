@@ -1,6 +1,16 @@
 <template>
   <div class="container">
-    <div class="row">
+    <!-- @todo Display error message according to design -->
+    <div v-if="state === 'error'">
+      <p>Unable to load widgets</p>
+    </div>
+
+    <!-- @todo Display loading indicator according to design -->
+    <div v-else-if="state === 'loading'" class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+
+    <div v-else class="row">
       <div class="col col-md-3">
         <button class="btn btn-primary mb-4" @click="toggleEdit">Toggle edit mode</button>
         <Container
@@ -10,7 +20,7 @@
           @drop="onDrop('widgetsLeft', $event)"
         >
           <Draggable v-for="widget in widgetsLeft" :key="widget.id">
-            <component :is="widget.type" :data="widget.data" />
+            <component :is="widget.type" :name="widget.name" :data="widget.data" />
           </Draggable>
         </Container>
       </div>
@@ -22,7 +32,7 @@
           @drop="onDrop('widgetsCenter', $event)"
         >
           <Draggable v-for="widget in widgetsCenter" :key="widget.id">
-            <component :is="widget.type" :data="widget.data" />
+            <component :is="widget.type" :name="widget.name" :data="widget.data" />
           </Draggable>
         </Container>
       </div>
@@ -34,7 +44,7 @@
           @drop="onDrop('widgetsRight', $event)"
         >
           <Draggable v-for="widget in widgetsRight" :key="widget.id">
-            <component :is="widget.type" :data="widget.data" />
+            <component :is="widget.type" :name="widget.name" :data="widget.data" />
           </Draggable>
         </Container>
       </div>
@@ -45,50 +55,55 @@
 <script>
 import { Container, Draggable } from 'vue-smooth-dnd'
 import Widget from './Widget'
-import { applyDrag } from "../util/helpers"
-import widgetComponents from "../widgets"
-
-// Mock data.
-const widgets = [
-  {
-    id: 1,
-    type: "art",
-    data: {
-      caption: "By anonymous",
-      imageAlt: "Life is too short to make other lives shorter",
-      imageUrl: "https://i.imgur.com/Qvh34OM.png"
-    }
-  },
-  { id: 2, type: "livesCounter", data: null },
-  { id: 3, type: "news", data: null },
-  { id: 4, type: "quote", data: null },
-  { id: 5, type: "recipe", data: null }
-]
+import { applyDrag } from '../util/helpers'
+import widgetComponents from '../widgets'
 
 export default {
   name: 'widget-overview',
   components: {
     Container,
     Draggable,
-    ...widgetComponents
+    ...widgetComponents,
   },
   provide() {
     return {
-      widgetContext: this.widgetContext
+      widgetContext: this.widgetContext,
     }
   },
   data() {
     // @todo Come up with a better way to structure widgets and figure out what
     // the initial position of each widget should be.
-    const left = widgets.slice(0, 2)
-    const center = widgets.slice(2, 4)
-    const right = widgets.slice(4)
 
     return {
       widgetContext: { mode: 'view' },
-      widgetsLeft: left,
-      widgetsCenter: center,
-      widgetsRight: right,
+      widgetsLeft: [],
+      widgetsCenter: [],
+      widgetsRight: [
+        {
+          id: 1,
+          type: 'art',
+          name: 'Art of the day',
+          data: {
+            caption: 'By anonymous',
+            imageAlt: 'Life is too short to make other lives shorter',
+            imageUrl: 'https://i.imgur.com/Qvh34OM.png'
+          }
+        },
+      ],
+      // Either loading, success or error.
+      state: 'loading',
+    }
+  },
+  async mounted() {
+    try {
+      const { data } = await axios.get('/widgets')
+
+      this.state = 'success'
+      // @todo Figure how where each widget should be positioned and how to
+      // store this in state.
+      this.widgetsCenter = data.widgets
+    } catch (err) {
+      this.state = 'error'
     }
   },
   methods: {
@@ -97,8 +112,8 @@ export default {
     },
     toggleEdit() {
       this.widgetContext.mode = this.widgetContext.mode === 'edit' ? 'view' : 'edit'
-    }
-  }
+    },
+  },
 }
 </script>
 

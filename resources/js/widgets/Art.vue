@@ -1,5 +1,5 @@
 <template>
-  <Widget title="Art of the day">
+  <Widget :name="name">
     <figure>
       <img class="image" :src="data.imageUrl" :alt="data.imageAlt" />
       <figcaption>— {{ data.caption }}</figcaption>
@@ -9,25 +9,28 @@
 </template>
 
 <script>
-import Widget from "./../components/Widget"
+import Widget from './../components/Widget'
 
 export default {
   name: 'art-widget',
   props: {
     data: {
-      imageUrl: String,
-      imageAlt: String,
-      caption: String
-    }
+      type: Object,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
   },
   components: {
-    Widget
+    Widget,
   },
   methods: {
     share() {
       alert('not yet implemented')
-    }
-  }
+    },
+  },
 }
 </script>
 

@@ -7,7 +7,7 @@
             <HandleIcon />
           </div>
         </template>
-        <h5 class="card-title text-tertiary">{{ title }}</h5>
+        <h5 class="card-title text-tertiary">{{ name }}</h5>
       </div>
       <slot />
     </div>
@@ -16,20 +16,20 @@
 
 
 <script>
-import HandleIcon from "./HandleIcon"
+import HandleIcon from './HandleIcon'
 
 export default {
-  name: "widget",
+  name: 'widget',
   inject: ['widgetContext'],
   props: {
-    title: {
+    name: {
       type: String,
-      required: true
+      required: true,
     }
   },
   components: {
-    HandleIcon
-  }
+    HandleIcon,
+  },
 }
 </script>
 

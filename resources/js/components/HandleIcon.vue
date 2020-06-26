@@ -6,12 +6,12 @@
 
 <script>
 export default {
-  name: "handle-icon",
+  name: 'handle-icon',
   props: {
     color: {
       type: String,
-      default: "#f27405"
-    }
-  }
+      default: '#f27405',
+    },
+  },
 }
 </script>
