@@ -22,10 +22,12 @@ class WidgetServiceProvider extends RouteServiceProvider
             }
 
             $widgetData = [];
+            $missingWidgets = [];
             foreach ($types as $type) {
                 $widget = WidgetFactory::make($type);
                 if ($widget === null) {
-                    return new JsonResponse(['error' => 'Widget type: `'.$type.'` doesn\'t exist'], 404);
+                    $missingWidgets[] = $type;
+                    continue;
                 }
 
                 $widgetData[] = [
@@ -35,7 +37,7 @@ class WidgetServiceProvider extends RouteServiceProvider
                 ];
             }
 
-            return new JsonResponse($widgetData);
+            return new JsonResponse(['widgets' => $widgetData, 'missing_widgets' => $missingWidgets]);
         });
 
         $this->app['router']->get('widgets/{name}', function (string $name) {
