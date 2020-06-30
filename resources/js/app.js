@@ -1,8 +1,11 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 require('./bootstrap')
-require('./dates')
+const Vue = require('vue')
+
+// Register the global widget-overview component
+Vue.component(
+  'widget-overview',
+  require('./components/WidgetOverview.vue').default,
+)
+
+// Create the Vue instance
+new Vue({ el: '#app' })
