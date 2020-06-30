@@ -16,3 +16,12 @@
 .text-tertiary {
   color: color("orange");
 }
+
+// Logo
+.logo-text {
+  font-size: 3rem;
+}
+.logo-tagline {
+  text-transform: lowercase;
+  color: rgba(0, 0, 0, 0.35);
+}

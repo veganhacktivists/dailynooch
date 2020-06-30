@@ -1,11 +1,10 @@
-{{-- @todo Remove inline style --}}
-<div class="container" style="padding-top: 7rem">
+<div class="container pt-5 mb-2">
   <div class="row">
     <div class="col d-flex flex-column">
-      <span class="h1 font-weight-bold text-dark mb-0">
+      <span class="h1 font-weight-bold text-dark mb-0 logo-text">
         My<span class="text-primary">Vegan</span>Dashboard
       </span>
-      <span class="text-gray">customizable dashboard with news, resources and inspiration</span>
+      <span class="logo-tagline">Customizable dashboard with news, resources and inspiration</span>
     </div>
 
     {{-- Enable once we support authentication --}}
