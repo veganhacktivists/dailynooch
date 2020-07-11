@@ -10,6 +10,9 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        Role::create(['name' => 'admin']);
+        Role::create([
+            'name' => 'admin',
+            'guard_name' => 'backpack',
+        ]);
     }
 }
