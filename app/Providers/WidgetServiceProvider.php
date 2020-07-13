@@ -54,9 +54,15 @@ class WidgetServiceProvider extends RouteServiceProvider
         });
 
         $this->app['router']->get('widgets/{name}', function (string $name) {
-            $widget = WidgetFactory::make($name);
-            if ($widget === null) {
-                return new JsonResponse([], 404);
+            if (Cache::has(sprintf(self::CACHE_KEY, $name))) {
+                $widget = Cache::get(sprintf(self::CACHE_KEY, $name));
+            } else {
+                $widget = WidgetFactory::make($name);
+                if ($widget === null) {
+                    return new JsonResponse([], 404);
+                }
+
+                Cache::put(sprintf(self::CACHE_KEY, $name), $widget, now()->addMinutes(self::CACHE_TTL));
             }
 
             return $widget->action();
