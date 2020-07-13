@@ -4,9 +4,14 @@ namespace App\Providers;
 
 use App\Widgets\WidgetFactory;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Cache;
 
 class WidgetServiceProvider extends RouteServiceProvider
 {
+    // TTL in minutes
+    private const CACHE_TTL = 10;
+    private const CACHE_KEY = 'widgets.%s';
+
     private $defaultTypes = [
         'nutritional-facts',
     ];
@@ -24,10 +29,16 @@ class WidgetServiceProvider extends RouteServiceProvider
             $widgetData = [];
             $missingWidgets = [];
             foreach ($types as $type) {
-                $widget = WidgetFactory::make($type);
-                if ($widget === null) {
-                    $missingWidgets[] = $type;
-                    continue;
+                if (Cache::has(sprintf(self::CACHE_KEY, $type))) {
+                    $widget = Cache::get(sprintf(self::CACHE_KEY, $type));
+                } else {
+                    $widget = WidgetFactory::make($type);
+                    if ($widget === null) {
+                        $missingWidgets[] = $type;
+                        continue;
+                    }
+
+                    Cache::put(sprintf(self::CACHE_KEY, $type), $widget, now()->addMinutes(self::CACHE_TTL));
                 }
 
                 $widgetData[] = [
