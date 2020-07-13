@@ -10,6 +10,8 @@ class WidgetServiceProvider extends RouteServiceProvider
 {
     // TTL in minutes
     private const CACHE_TTL = 10;
+
+    // TODO: Add custom parameters to key when feature is available
     private const CACHE_KEY = 'widgets.%s';
 
     private $defaultTypes = [
