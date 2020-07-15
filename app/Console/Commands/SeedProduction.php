@@ -3,10 +3,12 @@
 namespace App\Console\Commands;
 
 use App\Models\BackpackUser;
+use App\Models\Quote;
 use App\Role;
 use Illuminate\Console\Command;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
 class SeedProduction extends Command
@@ -58,7 +60,7 @@ class SeedProduction extends Command
 
         $this->info('Creating roles:');
         foreach ($roleNames as $roleName) {
-            Role::create(['name' => $roleName]);
+            Role::create(['name' => $roleName, 'guard_name' => 'backpack']);
             $this->line("* `$roleName` role created");
         }
     }
@@ -101,6 +103,24 @@ class SeedProduction extends Command
 
     private function seedCustomData()
     {
-        $this->info('No custom data seeded');
+        $this->info('Seeding Quotes');
+        $this->seedQuotes();
+    }
+
+    private function seedQuotes()
+    {
+        $quotesJson = File::get('database/data/quotes.json');
+        $quotes = json_decode($quotesJson);
+        $newQuotes = [];
+        foreach ($quotes as $quote) {
+            $newQuote = [
+                'author' => $quote->Author,
+                'text' => $quote->Text,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+            array_push($newQuotes, $newQuote);
+        }
+        Quote::insert($newQuotes);
     }
 }
