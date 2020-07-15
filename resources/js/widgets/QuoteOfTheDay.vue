@@ -1,7 +1,12 @@
 <template>
   <Widget :name="name">
-      <h3>{{ data.author }}</h3>
-      {{ data.text }}
+      <blockquote class="blockquote quote">
+            &#8220;{{ data.text }}&#8221;
+            <p>
+                <em>&mdash;{{ data.author }}</em>
+            </p>
+        </blockquote>
+        <button class="btn btn-primary" @click="share">Share</button>
   </Widget>
 </template>
 
@@ -22,6 +27,11 @@ export default {
   },
   components: {
     Widget,
+  },
+  methods: {
+    share() {
+      alert('not yet implemented')
+    },
   },
 }
 </script>
