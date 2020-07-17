@@ -34,9 +34,9 @@
     </ul>
 </li>
 
-<li class='nav-item'>
-    <a class='nav-link' href='{{ backpack_url('quote') }}'>
-        <i class='nav-icon fa fa-question'></i>
+<li class="nav-item">
+    <a class="nav-link" href="{{ backpack_url('quote') }}">
+        <i class="nav-icon fa fa-question"></i>
         <span>Quotes</span>
     </a>
 </li>
