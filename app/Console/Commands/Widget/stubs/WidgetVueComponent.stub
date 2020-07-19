@@ -1,7 +1,7 @@
 <template>
   <Widget :name="name">
-        {{ data.testData }}
-        <button class="btn btn-primary" @click="share">Share</button>
+    {{ data.testData }}
+    <button class="btn btn-primary" @click="share">Share</button>
   </Widget>
 </template>
 

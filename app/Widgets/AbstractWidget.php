@@ -46,7 +46,7 @@ abstract class AbstractWidget
         return $this->type;
     }
 
-    abstract public function getData();
+    abstract public function getData(): array;
 
     public function action(): JsonResponse
     {

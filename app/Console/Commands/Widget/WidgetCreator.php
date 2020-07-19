@@ -7,9 +7,9 @@ use Illuminate\Support\Str;
 
 class WidgetCreator
 {
-    const STUBS_DIR_PATH = __DIR__.'/stubs';
+    protected const STUBS_DIR_PATH = __DIR__.'/stubs';
 
-    const CREATES = [
+    protected const CREATES = [
         'app/Widgets' => [
             '{{ widgetClass }}.php' => 'WidgetClass.stub',
         ],
@@ -18,7 +18,7 @@ class WidgetCreator
         ],
     ];
 
-    const APPENDS = [
+    protected const APPENDS = [
         'app/Providers' => [
             'WidgetServiceProvider.php' => "\n// Move this into \$defaultTypes: -->  '{{ widgetType }}',  <--",
         ],
