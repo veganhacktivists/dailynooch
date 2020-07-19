@@ -1,7 +1,7 @@
 <template>
   <Widget :name="name">
-    <blockquote class="blockquote quote">
-      &#8220;{{ data.text }}&#8221;
+    <blockquote class="blockquote">
+      <read-more more-str="More" :text="quoteText" link="#" less-str="Less" :max-chars="150"></read-more>
       <p>
         <em>&mdash;{{ data.author }}</em>
       </p>
@@ -27,6 +27,13 @@ export default {
   },
   components: {
     Widget,
+  },
+  computed: {
+    quoteText: {
+        get(){
+            return `“${this.data.text}”`
+        }
+    }
   },
   methods: {
     share() {
