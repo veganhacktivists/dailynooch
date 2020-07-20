@@ -8,9 +8,6 @@ use Illuminate\Support\Facades\Cache;
 
 class WidgetServiceProvider extends RouteServiceProvider
 {
-    // TTL in minutes
-    private const CACHE_TTL = 10;
-
     // TODO: Add custom parameters to key when feature is available
     private const CACHE_KEY = 'widgets.%s';
 
@@ -40,7 +37,7 @@ class WidgetServiceProvider extends RouteServiceProvider
                         continue;
                     }
 
-                    Cache::put(sprintf(self::CACHE_KEY, $type), $widget, now()->addMinutes(self::CACHE_TTL));
+                    Cache::put(sprintf(self::CACHE_KEY, $type), $widget, now()->addMinutes($widget->getTtl()));
                 }
 
                 $widgetData[] = [
