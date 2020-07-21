@@ -11,6 +11,8 @@
     <a
       v-else-if="textTooLong && link"
       :href="link"
+      rel="noopener"
+      target="_blank"
     >
       {{ moreStr }}
     </a>
@@ -43,17 +45,19 @@ export default {
   },
   data() {
     return {
-      textTooLong: (this.text.length > this.maxChars),
       textExpanded: false,
     };
   },
   computed: {
+    textTooLong() {
+      return this.text.length > this.maxChars
+    },
     formattedString() {
       if (this.textExpanded || !this.textTooLong) return this.text;
 
       return this.text
         .match(new RegExp(`^(.{${this.maxChars}}[\\w]*)`))[1]
-        + "...";
+        + "…";
     }
   },
   methods: {
