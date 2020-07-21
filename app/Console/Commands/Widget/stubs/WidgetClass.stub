@@ -8,7 +8,7 @@ class {{ widgetClass }} extends AbstractWidget
     protected $type = '{{ widgetType }}';
     protected $description = 'Description of this widget.';
 
-    public function getData() : array
+    public function getData(): array
     {
         return [
             'testData' => 'Hello World.',
