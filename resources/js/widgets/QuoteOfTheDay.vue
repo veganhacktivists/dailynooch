@@ -1,7 +1,7 @@
 <template>
   <Widget :name="name">
     <blockquote class="blockquote">
-      <read-more more-str="More" :text="quoteText" link="#" less-str="Less" :max-chars="150"></read-more>
+      <ReadMore more-str="More" :text="quoteText" less-str="Less" :max-chars="150"></ReadMore>
       <p>
         <em>&mdash;{{ data.author }}</em>
       </p>
@@ -12,6 +12,7 @@
 
 <script>
 import Widget from '../components/Widget'
+import ReadMore from '../components/ReadMore'
 
 export default {
   name: 'quote-of-the-day',
@@ -27,12 +28,11 @@ export default {
   },
   components: {
     Widget,
+    ReadMore
   },
   computed: {
-    quoteText: {
-        get(){
-            return `“${this.data.text}”`
-        }
+    quoteText() {
+      return `“${this.data.text}”`
     }
   },
   methods: {

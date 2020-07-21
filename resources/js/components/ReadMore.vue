@@ -1,13 +1,20 @@
 <template>
-	<div>
-		<p>
-            {{ formattedString }}&nbsp;
-            <span v-show="text.length > maxChars">
-                <a :href="link" id="readmore" v-show="!isReadMore" v-on:click="triggerReadMore($event, true)">{{moreStr}}</a>
-                <a :href="link" id="readmore" v-show="isReadMore" v-on:click="triggerReadMore($event, false)">{{lessStr}}</a>
-            </span>
-        </p>
-	</div>
+  <p>
+    {{ formattedString }}
+    <button
+      v-if="textTooLong && !link"
+      class="btn btn-link shadow-none"
+      @click="toggleReadMore"
+    >
+      {{ textExpanded ? lessStr : moreStr }}
+    </button>
+    <a
+      v-else-if="textTooLong && link"
+      :href="link"
+    >
+      {{ moreStr }}
+    </a>
+  </p>
 </template>
 
 <script>
@@ -27,7 +34,7 @@ export default {
     },
     link: {
       type: String,
-      default: "#"
+      default: null
     },
     maxChars: {
       type: Number,
@@ -36,26 +43,22 @@ export default {
   },
   data() {
     return {
-      isReadMore: false
+      textTooLong: (this.text.length > this.maxChars),
+      textExpanded: false,
     };
   },
   computed: {
     formattedString() {
-      var val_container = this.text;
-      if (!this.isReadMore && this.text.length > this.maxChars) {
-        val_container = val_container
-            .match(new RegExp(`^(.{${this.maxChars}}[^\\s]*).*`))[1]
-            + " ...";
-      }
-      return val_container;
+      if (this.textExpanded || !this.textTooLong) return this.text;
+
+      return this.text
+        .match(new RegExp(`^(.{${this.maxChars}}[\\w]*)`))[1]
+        + "...";
     }
   },
   methods: {
-    triggerReadMore(e, b) {
-      if (this.link == "#") {
-        e.preventDefault();
-      }
-      if (this.lessStr !== null || this.lessStr !== "") this.isReadMore = b;
+    toggleReadMore() {
+      this.textExpanded = !this.textExpanded
     }
   }
 };

@@ -10,9 +10,10 @@ class QuoteOfTheDay extends AbstractWidget
     protected $type = 'quote-of-the-day';
     protected $description = 'Vegan quotes of the day.';
 
-    public function getData() : array
+    public function getData(): array
     {
         $quoteOfTheDay = Quote::inRandomOrder()->first();
+
         return [
             'author' => $quoteOfTheDay->author,
             'text' => $quoteOfTheDay->text,

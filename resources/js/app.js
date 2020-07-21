@@ -7,7 +7,5 @@ Vue.component(
   require('./components/WidgetOverview.vue').default,
 )
 
-Vue.component('read-more', require('./components/ReadMore.vue').default)
-
 // Create the Vue instance
 new Vue({ el: '#app' })
