@@ -4,9 +4,13 @@ namespace App\Providers;
 
 use App\Widgets\WidgetFactory;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Cache;
 
 class WidgetServiceProvider extends RouteServiceProvider
 {
+    // TODO: Add custom parameters to key when feature is available
+    private const CACHE_KEY = 'widgets.%s';
+
     private $defaultTypes = [
         'nutritional-facts',
     ];
@@ -24,10 +28,16 @@ class WidgetServiceProvider extends RouteServiceProvider
             $widgetData = [];
             $missingWidgets = [];
             foreach ($types as $type) {
-                $widget = WidgetFactory::make($type);
-                if ($widget === null) {
-                    $missingWidgets[] = $type;
-                    continue;
+                if (Cache::has(sprintf(self::CACHE_KEY, $type))) {
+                    $widget = Cache::get(sprintf(self::CACHE_KEY, $type));
+                } else {
+                    $widget = WidgetFactory::make($type);
+                    if ($widget === null) {
+                        $missingWidgets[] = $type;
+                        continue;
+                    }
+
+                    Cache::put(sprintf(self::CACHE_KEY, $type), $widget, now()->addMinutes($widget->getTtl()));
                 }
 
                 $widgetData[] = [
@@ -41,9 +51,15 @@ class WidgetServiceProvider extends RouteServiceProvider
         });
 
         $this->app['router']->get('widgets/{name}', function (string $name) {
-            $widget = WidgetFactory::make($name);
-            if ($widget === null) {
-                return new JsonResponse([], 404);
+            if (Cache::has(sprintf(self::CACHE_KEY, $name))) {
+                $widget = Cache::get(sprintf(self::CACHE_KEY, $name));
+            } else {
+                $widget = WidgetFactory::make($name);
+                if ($widget === null) {
+                    return new JsonResponse([], 404);
+                }
+
+                Cache::put(sprintf(self::CACHE_KEY, $name), $widget, now()->addMinutes(self::CACHE_TTL));
             }
 
             return $widget->action();

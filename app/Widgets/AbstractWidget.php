@@ -31,6 +31,14 @@ abstract class AbstractWidget
         $this->params = $params;
     }
 
+    /**
+     * Cache TTL in minutes
+     */
+    public function getTtl(): int
+    {
+        return 10;
+    }
+
     public function getName(): string
     {
         return $this->name;
