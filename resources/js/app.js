@@ -1,7 +1,7 @@
 require('./bootstrap')
 const Vue = require('vue')
 
-// Register our global components
+// Register the global widget-overview component
 Vue.component(
   'widget-overview',
   require('./components/WidgetOverview.vue').default,
