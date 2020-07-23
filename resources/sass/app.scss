@@ -19,9 +19,15 @@
 
 // Logo
 .logo-text {
-  font-size: 3rem;
+  font-size: 2rem;
 }
 .logo-tagline {
   text-transform: lowercase;
   color: rgba(0, 0, 0, 0.35);
+}
+
+@include media-breakpoint-up(sm) {
+  .logo-text {
+    font-size: 3rem;
+  }
 }
