@@ -60,7 +60,7 @@ class WidgetServiceProvider extends RouteServiceProvider
                     return new JsonResponse([], 404);
                 }
 
-                Cache::put(sprintf(self::CACHE_KEY, $name), $widget, now()->addMinutes(self::CACHE_TTL));
+                Cache::put(sprintf(self::CACHE_KEY, $name), $widget, now()->addMinutes($widget->getTtl()));
             }
 
             return $widget->action();
