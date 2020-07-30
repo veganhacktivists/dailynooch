@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     shareTitle() {
-      return `${this.data.imageUrl} - find more vegan art at vDashboard.org!`
+      return `${this.data.imageUrl} - find more vegan art at ${window.location.protocol + '//' + window.location.hostname}!`
     }
   },
   methods: {

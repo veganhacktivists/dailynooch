@@ -37,7 +37,7 @@ export default {
       return `“${this.data.text}”`
     },
     shareTitle() {
-      return `${this.quoteText} - find more vegan quotes at vDashboard.org!`
+      return `${this.quoteText} - find more vegan quotes at ${window.location.protocol + '//' + window.location.hostname}!`
     }
   },
   methods: {
