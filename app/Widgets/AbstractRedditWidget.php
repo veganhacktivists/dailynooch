@@ -12,17 +12,22 @@ abstract class AbstractRedditWidget extends AbstractWidget
 
     /**
      * @var string
-     * Subreddit to retrieve
      */
     protected $subreddit;
+
     /**
      * @var string
      * The sorting mode to use on each subreddit. Supported modes are: top, hot, controversial, rising
      */
     protected $sortMode;
+
+    protected const SORTMODE_TOP = 'top';
+    protected const SORTMODE_HOT = 'hot';
+    protected const SORTMODE_CONTROVERSIAL = 'controversial';
+    protected const SORTMODE_RISING = 'rising';
+
     /**
      * @var integer
-     * The number of threads to retrieve (note we initially retrieve 5 more to filter out pinned posts/threads)
      */
     protected $numberOfThreads;
 
@@ -32,7 +37,7 @@ abstract class AbstractRedditWidget extends AbstractWidget
      *
      * @param redditThread - Json formatted individual Reddit Thread as returned by Reddit.
      */
-    protected function filterThread($redditThread): bool {
+    protected function filterThread(array $redditThread): bool {
         return false;
     }
 
@@ -42,15 +47,16 @@ abstract class AbstractRedditWidget extends AbstractWidget
         $threadLimit = $this->numberOfThreads+10;
 
         // The json url to retrieve from Reddit.
-        $jsonUrl = 'https://www.reddit.com/r/'.$this->subreddit.'/'.$this->sortMode.'/.json?limit='.$threadLimit;
+        $redditUrl = 'https://www.reddit.com/r/'.$this->subreddit.'/'.$this->sortMode.'/.json?limit='.$threadLimit;
 
         // Retrieve the Reddit threads.
-        $decodedJson = json_decode(file_get_contents($jsonUrl), true);
-        $jsonChildren = $decodedJson['data']['children'];
+        $redditResponse = file_get_contents($redditUrl);
+        $decodedRedditResponse = json_decode($redditResponse, true);
+        $subredditThreads = $decodedRedditResponse['data']['children'];
 
         // Remove any filtered threads and make sure the number doesn't exceed $this->numberOfThreads
         $processedThreads = array();
-        foreach ($jsonChildren as $rawRedditThread) {
+        foreach ($subredditThreads as $rawRedditThread) {
             $redditThread = $rawRedditThread['data'];
 
             // Turn the permalink url into an absolute path by adding the Reddit.com prefix.
