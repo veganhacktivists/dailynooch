@@ -54,18 +54,22 @@ export default {
 </script>
 
 <style scoped>
+/* Disable styling on links to match figma design */
 a, a:hover, a:visited {
   color: inherit;
   text-decoration: inherit;
 }
+/* Change carousel buttons to black so they're visible */
 .carousel-control-next,
 .carousel-control-prev {
     filter: invert(100%);
 }
+/* Display image as block so we can centre it */
 img {
   display: block;
   margin: 0 auto;
 }
+/* Remove dash prefix on footer */
 .blockquote-footer::before {
   content: none;
 }
