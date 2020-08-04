@@ -30,7 +30,7 @@ class AbstractRedditWidget extends AbstractWidget
      *
      * @param redditThread - Json formatted individual Reddit Thread as returned by Reddit.
      */
-    private function filterThread($redditThread): boolean {
+    private function filterThread($redditThread): bool {
         return false;
     }
 
