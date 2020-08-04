@@ -8,6 +8,8 @@ abstract class AbstractRedditWidget extends AbstractWidget
     protected $type = 'reddit-threads';
     protected $description = 'Load threads from your favourite subreddit whilst filtering out threads you\'re not interested in.';
 
+    protected $baseUrl = 'https://www.reddit.com';
+
     /**
      * @var string
      * Subreddit to retrieve
@@ -50,6 +52,9 @@ abstract class AbstractRedditWidget extends AbstractWidget
         $processedThreads = array();
         foreach ($jsonChildren as $rawRedditThread) {
             $redditThread = $rawRedditThread['data'];
+
+            // Turn the permalink url into an absolute path by adding the Reddit.com prefix.
+            $redditThread['permalink'] = $this->baseUrl.$redditThread['permalink'];
 
             // If the thread shouldn't be filtered then add it to our array of processed threads.
             if (!$this->filterThread($redditThread)) {

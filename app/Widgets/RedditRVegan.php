@@ -4,7 +4,7 @@ namespace App\Widgets;
 
 class RedditRVegan extends AbstractRedditWidget
 {
-    protected $name = 'Vegan Reddit';
+    protected $name = 'Hot r/Vegan Posts';
     protected $type = 'reddit-rvegan';
     protected $description = 'Displays threads from the vegan subreddit.';
 

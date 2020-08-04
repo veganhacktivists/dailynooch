@@ -1,7 +1,7 @@
 <template>
   <Widget :name="name">
-    <p v-for="thread of data" :key="thread.url">
-      <a :href="thread.url" target="_blank">{{ thread.title }}</a>
+    <p v-for="thread of data" :key="thread.permalink">
+      <a :href="thread.permalink" target="_blank">{{ thread.title }}</a>
     </p>
   </Widget>
 </template>
