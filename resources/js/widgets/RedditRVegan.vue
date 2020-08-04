@@ -1,7 +1,8 @@
 <template>
   <Widget :name="name">
-    {{ data.testData }}
-    <button class="btn btn-primary" @click="share">Share</button>
+    <p v-for="thread of data.slice(0, 10)" :key="thread.url">
+      {{ thread.title }}
+    </p>
   </Widget>
 </template>
 
@@ -12,7 +13,7 @@ export default {
   name: 'reddit-threads',
   props: {
     data: {
-      type: Object,
+      type: Array,
       required: true,
     },
     name: {
