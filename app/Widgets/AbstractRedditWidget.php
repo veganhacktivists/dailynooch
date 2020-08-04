@@ -2,7 +2,7 @@
 
 namespace App\Widgets;
 
-class AbstractRedditWidget extends AbstractWidget
+abstract class AbstractRedditWidget extends AbstractWidget
 {
     protected $name = 'Reddit Threads';
     protected $type = 'reddit-threads';
@@ -30,7 +30,7 @@ class AbstractRedditWidget extends AbstractWidget
      *
      * @param redditThread - Json formatted individual Reddit Thread as returned by Reddit.
      */
-    private function filterThread($redditThread): bool {
+    protected function filterThread($redditThread): bool {
         return false;
     }
 
@@ -57,7 +57,7 @@ class AbstractRedditWidget extends AbstractWidget
             }
 
             // If we've reached the thread limit then stop looping.
-            if (count($processedThreads) === $this->numberOfThreads) {
+            if (count($processedThreads) >= $this->numberOfThreads) {
                 break;
             }
         }

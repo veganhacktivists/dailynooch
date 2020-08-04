@@ -18,7 +18,7 @@ class RedditRVegan extends AbstractRedditWidget
      *
      * @param redditThread - Json formatted individual Reddit Thread as returned by Reddit.
      */
-    private function filterThread($redditThread): boolean {
+    protected function filterThread($redditThread): bool {
         // Filter out stickied threads.
         return $redditThread['stickied'];
     }
