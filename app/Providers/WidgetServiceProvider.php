@@ -14,6 +14,7 @@ class WidgetServiceProvider extends RouteServiceProvider
     private $defaultTypes = [
         'nutritional-facts',
         'quote-of-the-day',
+        'reddit-threads',
     ];
 
     public function boot(): void
