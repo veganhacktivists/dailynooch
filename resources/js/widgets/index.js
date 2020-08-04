@@ -4,7 +4,7 @@ import News from './News'
 import NutritionalFacts from './NutritionalFacts'
 import QuoteOfTheDay from './QuoteOfTheDay'
 import Recipe from './Recipe'
-import RedditThreads from './RedditThreads'
+import RedditRVegan from './RedditRVegan'
 
 export default {
   art: Art,
@@ -13,5 +13,5 @@ export default {
   'nutritional-facts': NutritionalFacts,
   'quote-of-the-day': QuoteOfTheDay,
   recipe: Recipe,
-  'reddit-threads': RedditThreads,
+  'reddit-threads': RedditRVegan,
 }
