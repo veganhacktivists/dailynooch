@@ -13,5 +13,5 @@ export default {
   'nutritional-facts': NutritionalFacts,
   'quote-of-the-day': QuoteOfTheDay,
   recipe: Recipe,
-  'reddit-threads': RedditRVegan,
+  'reddit-rvegan': RedditRVegan,
 }
