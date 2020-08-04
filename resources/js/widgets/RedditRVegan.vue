@@ -1,16 +1,29 @@
 <template>
   <Widget :name="name">
-    <p v-for="thread of data" :key="thread.permalink">
-      <a :href="thread.permalink" target="_blank">
-        <img :src="thread.thumbnail" v-if="thread.thumbnail !== 'self'" height="140px" width="140px" />
-        <img :src="thread.thumbnail" v-if="thread.thumbnail == 'self'" height="140px" width="140px" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22200%22%20height%3D%22200%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20200%20200%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_173b9ddb486%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A10pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_173b9ddb486%22%3E%3Crect%20width%3D%22200%22%20height%3D%22200%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2274%22%20y%3D%22104.5%22%3Eno_thumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" />
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
 
-        <blockquote class="blockquote">
-          <p class="mb-0">{{ thread.title }}</p>
-          <footer class="blockquote-footer">{{ thread.ups }} upvotes | {{ thread.num_comments }} comments</footer>
-        </blockquote>
+        <div v-for="(thread,index) in data" :key="thread.permalink" :class="['carousel-item text-center ', (index === 0 ? 'active' : '')]">
+          <a :href="thread.permalink" target="_blank">
+            <img :src="thread.thumbnail" v-if="thread.thumbnail !== 'self'" />
+            <img :src="thread.thumbnail" v-if="thread.thumbnail == 'self'" height="140px" width="140px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIwAAACMCAYAAACuwEE+AAAEqUlEQVR4nO3ZwW6jSBRG4X7/Z2PFio03tUBigZAQQmUhdGcRXaYoFw6/OxmTzGnpU6sJXVD4GMrxn6qqDDjrz7tPAD8LwUBCMJAQDCQEAwnBQEIwkBAMJAQDCcFAQjCQEAwkBAMJwUBCMJAQDCQEAwnBQEIwkBAMJAQDCcFAQjCQEAwkBAMJwUBCMJAQDCQEAwnBQEIwkBAMJAQDCcFAQjCQEAwkBAMJwUBCMJAQDCQEAwnBQEIwkBAMJAQDCcFAQjCQEAwkBAMJwUBCMJAQDCQEAwnBQEIwkBAMJAQDCcFAQjCQEAwkPyqYYRh2/x7H0WKMbz+vkiucW9d1FmO02+22bYsx2jiOL4/5Y4KZ59nMbLctxviw7SqucG7DMJiZWQhh22ZmfxXyjwmm9AJc4UVRzve/1jSNhRCsrmuCucqLopzvFbwtGH8W1nVtwzBYjNFijNb3/a7oVNd1Ns+zxRhtnmfruu7T49xuN4sx2rqu22T9GZy+KOnY4zha0zQPx86f5y5fb6T7tm1bHDeEYNM0WYzRpml6GDc9t77vn16f9Ph+7KN5VFVldV1b13Xb8f0c0kfP0ZzfFoyZ2f1+t3VdbV1XizHasizb9nyCfgFL+x4FdjaY9O/7/b4dJ73Yped56cVN9/Wx0nGXZbG+77efHx3Px0zHOJqzMo+6rnfnku5rZrs34aXWMP5nmqbi5Nu23b2DfN90jGmaittLnj2S7vf77qL6C5p+GnglmHVdd+9OX3jn4/j+6ac4H3NZlt0YpTkfzcPHTefh17Lv+4c3lh/v0sHkd4e2bXcXr67rh4mk/F337C7zWTBpnOkx0wvzSjD5x88QgpmZzfNc3J7uf3RuPud1XV+ahx/vzDW6XDClCPzieTCli5l69kKeDab0nP+KYPI1Vj63fHt6vGeLXr9L+Lko88j5Omscx+2xfdlgSgc+Cia/yF8ZzJnzeyWYfN+vCiYfX5lHVX0sZtN1i5lta0mCIZjiPJZlsWEYLISwrZEu/0g6E4wvxvLnvvNF4DuDOfPOfDWY0trMF8/+CFLm4XeS0ri/4g5TVf8ubPPfVZRW9t8VTNd1Zna8kP2uYPJ9fc5n70b5vkfXy+f3K4Lxbeu6Wt/3FkKwruu2d0Tpk8RRMG3bHt6Cn51f0zTbOfitfBiG08/+V4Px/fM5518Inp2H7zvPs4UQtl8g+tx+RTBV9fFx2+80/mdZllOx5O8gP666WGzbdruofoH9t6HfFUwaic85H1cNP1/w+nX08/YYLxVMuthK1XVtIYTiR8Sq+rglH/3fz/iXaX4BfCzl/Pxn6Zdy+TilL+2ezc23p8dLxyz9vHRNlHmUrmN+fqV5vHrt/zoY/D8RDCQEAwnBQEIwkBAMJAQDCcFAQjCQEAwkBAMJwUBCMJAQDCQEAwnBQEIwkBAMJAQDCcFAQjCQEAwkBAMJwUBCMJAQDCQEAwnBQEIwkBAMJAQDCcFAQjCQEAwkBAMJwUBCMJAQDCQEAwnBQEIwkBAMJAQDCcFAQjCQEAwkBAMJwUBCMJAQDCQEAwnBQEIwkBAMJAQDCcFAQjCQEAwkBAMJwUBCMJAQDCQEA8k/EEevN+OTeggAAAAASUVORK5CYII=" />
+
+            <blockquote class="blockquote">
+              <p class="mb-0">{{ thread.title }}</p>
+              <footer class="blockquote-footer">{{ thread.ups }} upvotes | {{ thread.num_comments }} comments</footer>
+            </blockquote>
+          </a>
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
       </a>
-    </p>
+      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
   </Widget>
 </template>
 
@@ -44,5 +57,16 @@ export default {
 a, a:hover, a:visited {
   color: inherit;
   text-decoration: inherit;
+}
+.carousel-control-next,
+.carousel-control-prev {
+    filter: invert(100%);
+}
+img {
+  display: block;
+  margin: 0 auto;
+}
+.blockquote-footer::before {
+  content: none;
 }
 </style>
