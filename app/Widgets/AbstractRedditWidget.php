@@ -21,11 +21,6 @@ abstract class AbstractRedditWidget extends AbstractWidget
      */
     protected $sortMode;
 
-    protected const SORTMODE_TOP = 'top';
-    protected const SORTMODE_HOT = 'hot';
-    protected const SORTMODE_CONTROVERSIAL = 'controversial';
-    protected const SORTMODE_RISING = 'rising';
-
     /**
      * @var integer
      */
