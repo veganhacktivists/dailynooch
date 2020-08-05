@@ -10,6 +10,16 @@ abstract class AbstractRedditWidget extends AbstractWidget
 
     protected $baseUrl = 'https://www.reddit.com';
 
+    /*
+     * These constants are the valid values for sortMode.
+     */
+    protected const SORTMODE_HOT =           'hot';
+    protected const SORTMODE_TOP =           'top';
+    protected const SORTMODE_CONTROVERSIAL = 'controversial';
+    protected const SORTMODE_RISING =        'rising';
+
+    protected const REDDIT_URL_FORMAT = 'https://www.reddit.com/r/%s/%s/.json?limit=%s';
+
     /**
      * @var string
      */
@@ -17,7 +27,7 @@ abstract class AbstractRedditWidget extends AbstractWidget
 
     /**
      * @var string
-     * The sorting mode to use on each subreddit. Supported modes are: top, hot, controversial, rising
+     * The sorting mode to use on each subreddit. Supported modes are the SORTMODE constants defined above.
      */
     protected $sortMode;
 
@@ -41,8 +51,8 @@ abstract class AbstractRedditWidget extends AbstractWidget
         // Set the thread limit to way higher than the number of threads because threads may be removed via filterThread().
         $threadLimit = $this->numberOfThreads+10;
 
-        // The json url to retrieve from Reddit.
-        $redditUrl = 'https://www.reddit.com/r/'.$this->subreddit.'/'.$this->sortMode.'/.json?limit='.$threadLimit;
+        // The JSON url to retrieve from Reddit.
+        $redditUrl = sprintf(self::REDDIT_URL_FORMAT, $this->subreddit, $this->sortMode, $threadLimit);
 
         // Retrieve the Reddit threads.
         $redditResponse = file_get_contents($redditUrl);

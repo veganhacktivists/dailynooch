@@ -10,8 +10,8 @@ class RedditRVegan extends AbstractRedditWidget
 
     // Abstract Reddit Widget params
     protected $subreddit = 'vegan';
-    protected $sortMode = 'hot';
-    protected $numberOfThreads = '6';
+    protected $sortMode = self::SORTMODE_HOT;
+    protected $numberOfThreads = 6;
 
     protected function filterThread(array $redditThread): bool {
         return $redditThread['stickied'];
