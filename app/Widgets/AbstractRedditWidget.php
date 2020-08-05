@@ -2,6 +2,8 @@
 
 namespace App\Widgets;
 
+use Illuminate\Support\Facades\Http;
+
 abstract class AbstractRedditWidget extends AbstractWidget
 {
     protected $name = 'Reddit Threads';
@@ -52,29 +54,56 @@ abstract class AbstractRedditWidget extends AbstractWidget
         $redditUrl = sprintf(self::REDDIT_URL_FORMAT, $this->subreddit, $this->sortMode, $threadLimit);
 
         // Retrieve the Reddit threads.
-        $redditResponse = file_get_contents($redditUrl);
-        $decodedRedditResponse = json_decode($redditResponse, true);
-        $subredditThreads = $decodedRedditResponse['data']['children'];
+        $redditResponse = Http::withHeaders([
+            'User-agent' => ''
+        ])->get($redditUrl);
 
-        // Remove any filtered threads and make sure the number doesn't exceed $this->numberOfThreads
-        $processedThreads = array();
-        foreach ($subredditThreads as $rawRedditThread) {
-            $redditThread = $rawRedditThread['data'];
+        if ($redditResponse->successful()) {
 
-            // Turn the permalink url into an absolute path by adding the Reddit.com prefix.
-            $redditThread['permalink'] = self::REDDIT_URL_BASE.$redditThread['permalink'];
+            if (isset($redditResponse['data']) && isset($redditResponse['data']['children'])) {
+                $subredditThreads = $redditResponse['data']['children'];
 
-            // If the thread shouldn't be filtered then add it to our array of processed threads.
-            if (!$this->filterThread($redditThread)) {
-                $processedThreads[] = $redditThread;
+                // Remove any filtered threads and make sure the number doesn't exceed $this->numberOfThreads
+                $processedThreads = array();
+                foreach ($subredditThreads as $rawRedditThread) {
+                    $redditThread = $rawRedditThread['data'];
+
+                    // Turn the permalink url into an absolute path by adding the Reddit.com prefix.
+                    $redditThread['permalink'] = self::REDDIT_URL_BASE.$redditThread['permalink'];
+
+                    // If the thread shouldn't be filtered then add it to our array of processed threads.
+                    if (!$this->filterThread($redditThread)) {
+                        $processedThreads[] = $redditThread;
+                    }
+
+                    // If we've reached the thread limit then stop looping.
+                    if (count($processedThreads) === $this->numberOfThreads) {
+                        break;
+                    }
+                }
+
+                if (empty($processedThreads)) {
+                    return buildError('Reddit returned no posts for the subreddit: '+$this->subreddit);
+                }
+                else {
+                    return $processedThreads;
+                }
             }
-
-            // If we've reached the thread limit then stop looping.
-            if (count($processedThreads) >= $this->numberOfThreads) {
-                break;
+            else {
+                return buildError('Reddit\'s response format has changed and cannot be processed.');
             }
         }
+        else {
+            return buildError('Reddit returned a '.$redditResponse->status().' error code.');
+        }
+    }
 
-        return $processedThreads;
+    // Helper method to build errors in the correct format for the widget error handling.
+    private function buildError(str $message): array {
+        return [
+            'error' => [
+                'message' => $message
+            ],
+        ];
     }
 }
