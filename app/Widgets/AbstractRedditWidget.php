@@ -83,27 +83,18 @@ abstract class AbstractRedditWidget extends AbstractWidget
                 }
 
                 if (empty($processedThreads)) {
-                    return buildError('Reddit returned no posts for the subreddit: '+$this->subreddit);
+                    return $this->buildError('Reddit returned no posts for the subreddit: '+$this->subreddit);
                 }
                 else {
                     return $processedThreads;
                 }
             }
             else {
-                return buildError('Reddit\'s response format has changed and cannot be processed.');
+                return $this->buildError('Reddit\'s response format has changed and cannot be processed.');
             }
         }
         else {
-            return buildError('Reddit returned a '.$redditResponse->status().' error code.');
+            return $this->buildError('Reddit returned a '.$redditResponse->status().' error code.');
         }
-    }
-
-    // Helper method to build errors in the correct format for the widget error handling.
-    private function buildError(str $message): array {
-        return [
-            'error' => [
-                'message' => $message
-            ],
-        ];
     }
 }
