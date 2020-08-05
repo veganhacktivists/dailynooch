@@ -63,7 +63,7 @@ export default {
 /* Change carousel buttons to black so they're visible */
 .carousel-control-next,
 .carousel-control-prev {
-    filter: invert(100%);
+  filter: invert(100%);
 }
 /* Display image as block so we can centre it */
 .carousel-item img {
