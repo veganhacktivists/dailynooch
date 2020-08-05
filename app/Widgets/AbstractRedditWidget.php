@@ -47,10 +47,8 @@ abstract class AbstractRedditWidget extends AbstractWidget
 
     public function getData(): array
     {
-        // Set the thread limit to way higher than the number of threads because threads may be removed via filterThread().
         $threadLimit = $this->numberOfThreads+10;
 
-        // The JSON url to retrieve from Reddit.
         $redditUrl = sprintf(self::REDDIT_URL_FORMAT, $this->subreddit, $this->sortMode, $threadLimit);
 
         // Retrieve the Reddit threads.
@@ -68,7 +66,7 @@ abstract class AbstractRedditWidget extends AbstractWidget
 
             // If the thread shouldn't be filtered then add it to our array of processed threads.
             if (!$this->filterThread($redditThread)) {
-                array_push($processedThreads, $redditThread);
+                $processedThreads[] = $redditThread;
             }
 
             // If we've reached the thread limit then stop looping.
