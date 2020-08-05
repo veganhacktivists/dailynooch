@@ -50,16 +50,13 @@ export default {
     Widget,
   },
   methods: {
-    share() {
-      alert('not yet implemented')
-    },
   },
 }
 </script>
 
 <style scoped>
 /* Disable styling on links to match figma design */
-a, a:hover, a:visited {
+.carousel-item a, .carousel-item a:hover, .carousel-item a:visited {
   color: inherit;
   text-decoration: inherit;
 }
@@ -69,7 +66,7 @@ a, a:hover, a:visited {
     filter: invert(100%);
 }
 /* Display image as block so we can centre it */
-img {
+.carousel-item img {
   display: block;
   margin: 0 auto;
 }
