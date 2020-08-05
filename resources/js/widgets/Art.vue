@@ -1,5 +1,5 @@
 <template>
-  <Widget :name="name">
+  <Widget :name="name" :error="data.error">
     <figure>
       <img class="image" :src="data.imageUrl" :alt="data.imageAlt" />
       <figcaption>— {{ data.caption }}</figcaption>

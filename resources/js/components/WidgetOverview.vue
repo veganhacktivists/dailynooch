@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <!-- @todo Display error message according to design -->
-    <div v-if="state === 'error'">
-      <p>Unable to load widgets</p>
+    <div v-if="state === 'error'" class="alert alert-danger" role="alert">
+      <i class="fas fa-kiwi-bird"></i>&nbsp;
+      There was a problem loading the widgets. Please try again later.
     </div>
 
     <!-- @todo Display loading indicator according to design -->

@@ -1,5 +1,5 @@
 <template>
-  <Widget :name="name">
+  <Widget :name="name" :error="data.error">
     {{ data.testData }}
     <button class="btn btn-primary" @click="share">Share</button>
   </Widget>

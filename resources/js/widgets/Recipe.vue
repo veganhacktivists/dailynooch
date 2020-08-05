@@ -1,5 +1,5 @@
 <template>
-  <Widget :name="Recipe" />
+  <Widget :name="Recipe" :error="data.error" />
 </template>
 
 <script>
