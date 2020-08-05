@@ -27,7 +27,7 @@ class WidgetServiceProvider extends RouteServiceProvider
                 $types = $this->defaultTypes;
             }
 
-            $widgetData = [];
+            $widgets = [];
             $missingWidgets = [];
             foreach ($types as $type) {
                 if (Cache::has(sprintf(self::CACHE_KEY, $type))) {
@@ -43,27 +43,34 @@ class WidgetServiceProvider extends RouteServiceProvider
                 }
 
                 try {
-                    $data = $widget->getData();
+                    $widgetData = $widget->getData();
                 } catch (\Throwable $th) {
                     Log::error($th);
 
                     if (app()->environment('production')) {
-                        continue;
+                        $widgetData = [
+                            'error' => true,
+                        ];
+                    } else {
+                        $widgetData = [
+                            'error' => [
+                                'message' => $th->getMessage(),
+                                'file' => $th->getFile(),
+                                'line' => $th->getLine(),
+                                'trace' => $th->getTraceAsString(),
+                            ],
+                        ];
                     }
-
-                    $data = [
-                        'error' => $th,
-                    ];
                 }
 
-                $widgetData[] = [
+                $widgets[] = [
                     'type' => $widget->getType(),
                     'name' => $widget->getName(),
-                    'data' => $data,
+                    'data' => $widgetData,
                 ];
             }
 
-            return new JsonResponse(['widgets' => $widgetData, 'missing_widgets' => $missingWidgets]);
+            return new JsonResponse(['widgets' => $widgets, 'missing_widgets' => $missingWidgets]);
         });
 
         $this->app['router']->get('widgets/{name}', function (string $name) {

@@ -9,7 +9,18 @@
         </template>
         <h5 class="card-title text-tertiary">{{ name }}</h5>
       </div>
-      <div v-if="error" v-html="error['xdebug_message']" class="widget-error"></div>
+      <div v-if="error">
+        <div v-if="error.message" class="widget-error">
+          <i class="fa fa-exclamation-triangle" aria-hidden="true" /> Error: <pre>{{ error.message}}</pre>
+          File: <pre>{{ error.file}}</pre>
+          Line: <pre>{{ error.line}}</pre>
+          Trace: <pre>{{ error.trace}}</pre>
+        </div>
+        <div v-else class="alert alert-danger" role="alert">
+          <i class="fas fa-kiwi-bird"></i>&nbsp;
+          There was a problem loading this widget. Please try again later.
+        </div>
+      </div>
       <slot v-else />
     </div>
   </div>
@@ -51,6 +62,10 @@ export default {
 
   .widget-error {
     max-height: 20rem;
-    overflow-y: auto;
+    overflow: auto;
+
+    i {
+      color: red;
+    }
   }
 </style>

@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <div v-if="state === 'error'" class="alert alert-danger" role="alert">
+      <i class="fas fa-kiwi-bird"></i>&nbsp;
       There was a problem loading the widgets. Please try again later.
     </div>
 
