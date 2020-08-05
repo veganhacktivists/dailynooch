@@ -8,8 +8,6 @@ abstract class AbstractRedditWidget extends AbstractWidget
     protected $type = 'reddit-threads';
     protected $description = 'Load threads from your favourite subreddit whilst filtering out threads you\'re not interested in.';
 
-    protected $baseUrl = 'https://www.reddit.com';
-
     /*
      * These constants are the valid values for sortMode.
      */
@@ -19,6 +17,7 @@ abstract class AbstractRedditWidget extends AbstractWidget
     protected const SORTMODE_RISING =        'rising';
 
     protected const REDDIT_URL_FORMAT = 'https://www.reddit.com/r/%s/%s/.json?limit=%s';
+    protected const REDDIT_URL_BASE = 'https://www.reddit.com';
 
     /**
      * @var string
@@ -65,7 +64,7 @@ abstract class AbstractRedditWidget extends AbstractWidget
             $redditThread = $rawRedditThread['data'];
 
             // Turn the permalink url into an absolute path by adding the Reddit.com prefix.
-            $redditThread['permalink'] = $this->baseUrl.$redditThread['permalink'];
+            $redditThread['permalink'] = self::REDDIT_URL_BASE.$redditThread['permalink'];
 
             // If the thread shouldn't be filtered then add it to our array of processed threads.
             if (!$this->filterThread($redditThread)) {
