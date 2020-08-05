@@ -83,7 +83,7 @@ abstract class AbstractRedditWidget extends AbstractWidget
                 }
 
                 if (empty($processedThreads)) {
-                    return $this->buildError('Reddit returned no posts for the subreddit: '+$this->subreddit);
+                    return $this->buildError('Reddit returned no posts for the subreddit: '.$this->subreddit);
                 }
                 else {
                     return $processedThreads;
