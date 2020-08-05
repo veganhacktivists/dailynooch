@@ -9,7 +9,8 @@
         </template>
         <h5 class="card-title text-tertiary">{{ name }}</h5>
       </div>
-      <slot />
+      <div v-if="error" v-html="error['xdebug_message']" style="max-height: 20rem; overflow-y: auto;"></div>
+      <slot v-else />
     </div>
   </div>
 </template>
@@ -25,6 +26,9 @@ export default {
     name: {
       type: String,
       required: true,
+    },
+    error: {
+      type: Object,
     }
   },
   components: {

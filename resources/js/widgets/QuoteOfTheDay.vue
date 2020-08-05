@@ -1,5 +1,5 @@
 <template>
-  <Widget :name="name">
+  <Widget :name="name" :error="data.error">
     <blockquote class="blockquote">
       <ReadMore more-str="More" :text="quoteText" less-str="Less" :max-chars="150"></ReadMore>
       <p>

@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Widgets\WidgetFactory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class WidgetServiceProvider extends RouteServiceProvider
 {
@@ -41,10 +42,25 @@ class WidgetServiceProvider extends RouteServiceProvider
                     Cache::put(sprintf(self::CACHE_KEY, $type), $widget, now()->addMinutes($widget->getTtl()));
                 }
 
+                try {
+                    $data = $widget->getData();
+                } catch (\Throwable $th) {
+                    Log::error($th);
+
+                    if (app()->environment('production')) {
+                        continue;
+                    }
+
+                    $data = [
+                        'state' => 'error',
+                        'error' => $th,
+                    ];
+                }
+
                 $widgetData[] = [
                     'type' => $widget->getType(),
                     'name' => $widget->getName(),
-                    'data' => $widget->getData(),
+                    'data' => $data,
                 ];
             }
 
