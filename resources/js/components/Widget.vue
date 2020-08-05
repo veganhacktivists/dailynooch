@@ -9,7 +9,7 @@
         </template>
         <h5 class="card-title text-tertiary">{{ name }}</h5>
       </div>
-      <div v-if="error" v-html="error['xdebug_message']" style="max-height: 20rem; overflow-y: auto;"></div>
+      <div v-if="error" v-html="error['xdebug_message']" class="widget-error"></div>
       <slot v-else />
     </div>
   </div>
@@ -37,7 +37,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   .handle {
     display: flex;
     align-items: center;
@@ -47,5 +47,10 @@ export default {
     margin-right: 0.5rem;
     cursor: -webkit-grab;
     cursor: grab;
+  }
+
+  .widget-error {
+    max-height: 20rem;
+    overflow-y: auto;
   }
 </style>

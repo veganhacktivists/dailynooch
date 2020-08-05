@@ -52,7 +52,6 @@ class WidgetServiceProvider extends RouteServiceProvider
                     }
 
                     $data = [
-                        'state' => 'error',
                         'error' => $th,
                     ];
                 }
