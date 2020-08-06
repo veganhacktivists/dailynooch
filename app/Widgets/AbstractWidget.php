@@ -66,7 +66,7 @@ abstract class AbstractWidget
     }
 
     // Helper method to build errors in the correct format for the widget error handling.
-    private function buildError(str $message): array {
+    private function buildError(string $message): array {
         return [
             'error' => [
                 'message' => $message
