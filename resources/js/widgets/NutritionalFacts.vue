@@ -1,8 +1,8 @@
 <template>
   <Widget :name="name" :error="data.error">
-    <template v-if="data.item">
+    <template v-if="data.feedItems">
       <!-- @todo Implement proper design -->
-      <p v-for="item of data.item.slice(0, 10)" :key="item.link">
+      <p v-for="item of data.feedItems.slice(0, 10)" :key="item.link">
         {{ item.title }}
       </p>
     </template>
