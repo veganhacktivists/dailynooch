@@ -55,18 +55,18 @@ abstract class AbstractRedditWidget extends AbstractWidget
                 }
 
                 if (empty($processedThreads)) {
-                    return $this->buildError('Reddit returned no posts for the subreddit: '.$this->subreddit);
+                    throw new Exception('Reddit returned no posts for the subreddit: '.$this->subreddit);
                 }
                 else {
                     return $processedThreads;
                 }
             }
             else {
-                return $this->buildError('Reddit\'s response format has changed and cannot be processed.');
+                throw new Exception('Reddit\'s response format has changed and cannot be processed.');
             }
         }
         else {
-            return $this->buildError('Reddit returned a '.$redditResponse->status().' error code.');
+            throw new Exception('Reddit returned a '.$redditResponse->status().' error code.');
         }
     }
 }
