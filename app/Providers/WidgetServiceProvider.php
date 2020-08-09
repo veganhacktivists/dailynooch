@@ -13,9 +13,9 @@ class WidgetServiceProvider extends RouteServiceProvider
     private const CACHE_KEY = 'widgets.%s';
 
     private $defaultTypes = [
-        'nutritional-facts',
-        'quote-of-the-day',
+        'nutrition-facts',
         'nutrition-facts-videos',
+        'quote-of-the-day',
     ];
 
     public function boot(): void

@@ -4,7 +4,7 @@ namespace App\Widgets;
 
 class NutritionFactsVideos extends AbstractRssFeed
 {
-    protected $name = 'Nutrition facts videos';
+    protected $name = 'NutritionFacts.org videos';
     protected $type = 'nutrition-facts-videos';
     protected $description = 'Nutrition facts videos';
 

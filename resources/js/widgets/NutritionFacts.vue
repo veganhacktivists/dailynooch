@@ -13,7 +13,7 @@
 import Widget from '../components/Widget'
 
 export default {
-  name: 'nutritional-facts',
+  name: 'nutrition-facts',
   props: {
     data: {
       type: Object,
