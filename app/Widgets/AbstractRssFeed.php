@@ -29,9 +29,8 @@ class AbstractRssFeed extends AbstractWidget
     private function getFeedItems($feed)
     {
         $feedItems = [];
-
         foreach ($feed->get_items() as $item) {
-            array_push($feedItems, $this->getItemWithElements($item));
+            $feedItems[] = $this->getItemWithElements($item);
         }
 
         return $feedItems;
@@ -40,7 +39,6 @@ class AbstractRssFeed extends AbstractWidget
     private function getItemWithElements($item)
     {
         $feedItem = [];
-
         foreach ($this->elementNames as $elementName) {
             $methodName = 'get_'.$elementName;
 
