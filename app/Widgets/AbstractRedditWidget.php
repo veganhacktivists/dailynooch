@@ -63,13 +63,13 @@ abstract class AbstractRedditWidget extends AbstractWidget
             $redditThread = $rawRedditThread['data'];
 
             if (count($processedThreads) < $this->numberOfThreads && !$this->filterThread($redditThread)) {
-                $processedThreads[] = $this->processThread($redditThread);
+                $processedThreads[] = $this->formatPermalink($redditThread);
             }
         }
         return $processedThreads;
     }
 
-    protected function processThread(array $redditThread): array
+    private function formatPermalink(array $redditThread): array
     {
         $redditThread['permalink'] = self::REDDIT_URL_BASE.$redditThread['permalink'];
         return $redditThread;
