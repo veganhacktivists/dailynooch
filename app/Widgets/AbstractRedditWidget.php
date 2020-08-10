@@ -20,53 +20,58 @@ abstract class AbstractRedditWidget extends AbstractWidget
     protected $subreddit;
     protected $sortMode;
     protected $numberOfThreads;
+    protected $extraLimitToAccountForFilter = 10;
 
 
-    protected function filterThread(array $redditThread): bool {
+    protected function filterThread(array $redditThread): bool
+    {
         return false;
     }
 
     public function getData(): array
     {
-        $threadLimit = $this->numberOfThreads+10;
-        $redditUrl = sprintf(self::REDDIT_URL_FORMAT, $this->subreddit, $this->sortMode, $threadLimit);
-
         $redditResponse = Http::withHeaders([
             'User-agent' => ''
-        ])->get($redditUrl);
+        ])->get(
+            sprintf(self::REDDIT_URL_FORMAT, $this->subreddit, $this->sortMode, $this->numberOfThreads+$this->extraLimitToAccountForFilter)
+        );
 
-        if ($redditResponse->successful()) {
+        $this->validateReponseOrFail($redditResponse);
 
-            if (isset($redditResponse['data']) && isset($redditResponse['data']['children'])) {
-                $subredditThreads = $redditResponse['data']['children'];
+        $processedThreads = $this->getProcessedThreads($redditResponse['data']['children']);
 
-                $processedThreads = array();
-                foreach ($subredditThreads as $rawRedditThread) {
-                    $redditThread = $rawRedditThread['data'];
-
-                    if (!$this->filterThread($redditThread)) {
-                        $redditThread['permalink'] = self::REDDIT_URL_BASE.$redditThread['permalink'];
-                        $processedThreads[] = $redditThread;
-                    }
-
-                    if (count($processedThreads) === $this->numberOfThreads) {
-                        break;
-                    }
-                }
-
-                if (empty($processedThreads)) {
-                    throw new Exception('Reddit returned no posts for the subreddit: '.$this->subreddit);
-                }
-                else {
-                    return $processedThreads;
-                }
-            }
-            else {
-                throw new Exception('Reddit\'s response format has changed and cannot be processed.');
-            }
+        if (empty($processedThreads)) {
+            throw new Exception('Reddit returned no posts for the subreddit: '.$this->subreddit);
         }
-        else {
+        return $processedThreads;
+    }
+
+    protected function validateReponseOrFail($redditResponse)
+    {
+        if (!$redditResponse->successful()) {
             throw new Exception('Reddit returned a '.$redditResponse->status().' error code.');
         }
+        else if (!isset($redditResponse['data']) || !isset($redditResponse['data']['children'])) {
+            throw new Exception('Reddit\'s response format has changed and cannot be processed.');
+        }
+    }
+
+    protected function getProcessedThreads(array $rawSubredditThreads): array
+    {
+        $processedThreads = array();
+        foreach ($rawSubredditThreads as $rawRedditThread) {
+            $redditThread = $rawRedditThread['data'];
+
+            if (count($processedThreads) < $this->numberOfThreads && !$this->filterThread($redditThread)) {
+                $processedThreads[] = $this->processThread($redditThread);
+            }
+        }
+        return $processedThreads;
+    }
+
+    protected function processThread(array $redditThread): array
+    {
+        $redditThread['permalink'] = self::REDDIT_URL_BASE.$redditThread['permalink'];
+        return $redditThread;
     }
 }

@@ -12,7 +12,8 @@ class RedditRvegan extends AbstractRedditWidget
     protected $sortMode = self::SORTMODE_HOT;
     protected $numberOfThreads = 6;
 
-    protected function filterThread(array $redditThread): bool {
+    protected function filterThread(array $redditThread): bool
+    {
         return $redditThread['stickied'];
     }
 }
