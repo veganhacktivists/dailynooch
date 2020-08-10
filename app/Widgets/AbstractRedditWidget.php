@@ -46,7 +46,7 @@ abstract class AbstractRedditWidget extends AbstractWidget
         return $processedThreads;
     }
 
-    protected function validateReponseOrFail($redditResponse)
+    private function validateReponseOrFail($redditResponse)
     {
         if (!$redditResponse->successful()) {
             throw new Exception('Reddit returned a '.$redditResponse->status().' error code.');
@@ -56,7 +56,7 @@ abstract class AbstractRedditWidget extends AbstractWidget
         }
     }
 
-    protected function getProcessedThreads(array $rawSubredditThreads): array
+    private function getProcessedThreads(array $rawSubredditThreads): array
     {
         $processedThreads = array();
         foreach ($rawSubredditThreads as $rawRedditThread) {
