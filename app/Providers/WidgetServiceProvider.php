@@ -16,6 +16,7 @@ class WidgetServiceProvider extends RouteServiceProvider
         'nutrition-facts',
         'nutrition-facts-videos',
         'quote-of-the-day',
+        'reddit-rvegan',
     ];
 
     public function boot(): void
