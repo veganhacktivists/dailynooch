@@ -33,7 +33,12 @@ abstract class AbstractRedditWidget extends AbstractWidget
         $redditResponse = Http::withHeaders([
             'User-agent' => ''
         ])->get(
-            sprintf(self::REDDIT_URL_FORMAT, $this->subreddit, $this->sortMode, $this->numberOfThreads+$this->extraLimitToAccountForFilter)
+            sprintf(
+                self::REDDIT_URL_FORMAT,
+                $this->subreddit,
+                $this->sortMode,
+                $this->numberOfThreads + $this->extraLimitToAccountForFilter
+            )
         );
 
         $this->validateReponseOrFail($redditResponse);
