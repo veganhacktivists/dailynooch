@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Widgets\WidgetFactory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class WidgetServiceProvider extends RouteServiceProvider
 {
@@ -12,7 +13,8 @@ class WidgetServiceProvider extends RouteServiceProvider
     private const CACHE_KEY = 'widgets.%s';
 
     private $defaultTypes = [
-        'nutritional-facts',
+        'nutrition-facts',
+        'nutrition-facts-videos',
         'quote-of-the-day',
         'reddit-rvegan',
     ];
@@ -27,7 +29,7 @@ class WidgetServiceProvider extends RouteServiceProvider
                 $types = $this->defaultTypes;
             }
 
-            $widgetData = [];
+            $widgets = [];
             $missingWidgets = [];
             foreach ($types as $type) {
                 if (Cache::has(sprintf(self::CACHE_KEY, $type))) {
@@ -42,14 +44,35 @@ class WidgetServiceProvider extends RouteServiceProvider
                     Cache::put(sprintf(self::CACHE_KEY, $type), $widget, now()->addMinutes($widget->getTtl()));
                 }
 
-                $widgetData[] = [
+                try {
+                    $widgetData = $widget->getData();
+                } catch (\Throwable $th) {
+                    Log::error($th);
+
+                    if (app()->environment('production')) {
+                        $widgetData = [
+                            'error' => true,
+                        ];
+                    } else {
+                        $widgetData = [
+                            'error' => [
+                                'message' => $th->getMessage(),
+                                'file' => $th->getFile(),
+                                'line' => $th->getLine(),
+                                'trace' => $th->getTraceAsString(),
+                            ],
+                        ];
+                    }
+                }
+
+                $widgets[] = [
                     'type' => $widget->getType(),
                     'name' => $widget->getName(),
-                    'data' => $widget->getData(),
+                    'data' => $widgetData,
                 ];
             }
 
-            return new JsonResponse(['widgets' => $widgetData, 'missing_widgets' => $missingWidgets]);
+            return new JsonResponse(['widgets' => $widgets, 'missing_widgets' => $missingWidgets]);
         });
 
         $this->app['router']->get('widgets/{name}', function (string $name) {

@@ -1,9 +1,11 @@
 <template>
-  <Widget :name="name">
-    <!-- @todo Implement proper design -->
-    <p v-for="item of data.item.slice(0, 10)" :key="item.link">
-      {{ item.title }}
-    </p>
+  <Widget :name="name" :error="data.error">
+    <template v-if="data.feedItems">
+      <!-- @todo Implement proper design -->
+      <p v-for="item of data.feedItems.slice(0, 10)" :key="item.link">
+        {{ item.title }}
+      </p>
+    </template>
   </Widget>
 </template>
 
@@ -11,7 +13,7 @@
 import Widget from '../components/Widget'
 
 export default {
-  name: 'nutritional-facts',
+  name: 'nutrition-facts',
   props: {
     data: {
       type: Object,
