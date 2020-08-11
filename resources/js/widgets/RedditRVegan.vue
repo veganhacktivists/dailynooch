@@ -49,8 +49,6 @@ export default {
   components: {
     Widget,
   },
-  methods: {
-  },
 }
 </script>
 
