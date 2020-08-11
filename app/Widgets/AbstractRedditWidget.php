@@ -10,12 +10,12 @@ abstract class AbstractRedditWidget extends AbstractWidget
     protected $type = 'reddit-threads';
     protected $description = 'Load threads from your favourite subreddit whilst filtering out threads you\'re not interested in.';
 
-    protected const SORTMODE_HOT =           'hot';
-    protected const SORTMODE_TOP =           'top';
+    protected const SORTMODE_HOT           = 'hot';
+    protected const SORTMODE_TOP           = 'top';
     protected const SORTMODE_CONTROVERSIAL = 'controversial';
-    protected const SORTMODE_RISING =        'rising';
-    protected const REDDIT_URL_FORMAT = 'https://www.reddit.com/r/%s/%s/.json?limit=%s';
-    protected const REDDIT_URL_BASE = 'https://www.reddit.com';
+    protected const SORTMODE_RISING        = 'rising';
+    protected const REDDIT_URL_FORMAT      = 'https://www.reddit.com/r/%s/%s/.json?limit=%s';
+    protected const REDDIT_URL_BASE        = 'https://www.reddit.com';
 
     protected $subreddit;
     protected $sortMode;
