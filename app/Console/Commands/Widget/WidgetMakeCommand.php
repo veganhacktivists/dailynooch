@@ -34,8 +34,8 @@ class WidgetMakeCommand extends Command
     /**
      * Execute the console command.
      *
-     * @param  \App\Console\Commands\Widget\WidgetCreator  $creator
-     * @param  \Illuminate\Support\Composer  $composer
+     * @param \App\Console\Commands\Widget\WidgetCreator $creator
+     *
      * @return mixed
      */
     public function handle(WidgetCreator $creator, Composer $composer)

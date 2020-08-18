@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
 use Illuminate\Foundation\Http\FormRequest;
 
 class QuoteRequest extends FormRequest
@@ -27,7 +26,7 @@ class QuoteRequest extends FormRequest
     {
         return [
             'author' => 'required',
-            'text' => 'required'
+            'text' => 'required',
         ];
     }
 
@@ -39,7 +38,6 @@ class QuoteRequest extends FormRequest
     public function attributes()
     {
         return [
-            //
         ];
     }
 
@@ -51,7 +49,6 @@ class QuoteRequest extends FormRequest
     public function messages()
     {
         return [
-            //
         ];
     }
 }

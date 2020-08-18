@@ -32,7 +32,7 @@ abstract class AbstractWidget
     }
 
     /**
-     * Cache TTL in minutes
+     * Cache TTL in minutes.
      */
     public function getTtl(): int
     {
