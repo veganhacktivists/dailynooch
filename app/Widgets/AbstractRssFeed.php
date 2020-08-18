@@ -2,6 +2,7 @@
 
 namespace App\Widgets;
 
+use App\Models\RssSource;
 use Vedmant\FeedReader\Facades\FeedReader;
 
 class AbstractRssFeed extends AbstractWidget
@@ -21,9 +22,16 @@ class AbstractRssFeed extends AbstractWidget
 
     public function getData(): array
     {
-        $feed = FeedReader::read($this->url);
+        if ($this->url) {
+            $urls = $this->url;
+        } else {
+            $rssSources = RssSource::where('widget_type', $this->type)->select('url')->get();
+            $urls = $rssSources->map(fn ($source) => $source->url)->toArray();
+        }
 
-        return ['feedItems' => $this->getFeedItems($feed)];
+        $feeds = FeedReader::read($urls);
+
+        return ['feedItems' => $this->getFeedItems($feeds)];
     }
 
     private function getFeedItems($feed)
