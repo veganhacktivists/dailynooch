@@ -34,6 +34,11 @@ class AbstractRssFeed extends AbstractWidget
         return ['feedItems' => $this->getFeedItems($feeds)];
     }
 
+    protected function formatItemData($items)
+    {
+        return $items;
+    }
+
     private function getFeedItems($feed)
     {
         $feedItems = [];
@@ -41,7 +46,7 @@ class AbstractRssFeed extends AbstractWidget
             $feedItems[] = $this->getItemWithElements($item);
         }
 
-        return $feedItems;
+        return $this->formatItemData($feedItems);
     }
 
     private function getItemWithElements($item)
