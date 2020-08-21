@@ -6,6 +6,7 @@ import QuoteOfTheDay from './QuoteOfTheDay'
 import Recipe from './Recipe'
 import RedditRvegan from './RedditRvegan'
 import NutritionFactsVideos from './NutritionFactsVideos'
+import RedditRveganart from './RedditRveganart'
 
 export default {
   art: Art,
@@ -16,4 +17,5 @@ export default {
   'quote-of-the-day': QuoteOfTheDay,
   recipe: Recipe,
   'reddit-rvegan': RedditRvegan,
+  'reddit-rveganart': RedditRveganart,
 }
