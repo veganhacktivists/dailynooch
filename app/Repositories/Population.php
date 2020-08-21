@@ -24,6 +24,7 @@ class Population
             'per_page' => 1000,
         ]);
         $this->validateOrFail($response);
+
         return PopulationCollection::make($response[1]);
     }
 

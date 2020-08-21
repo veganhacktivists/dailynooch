@@ -7,8 +7,8 @@ use App\Repositories\Population;
 
 class AnimalsSavedCounter extends AbstractWidget
 {
-    protected $name = 'Saved Life Counter';
-    protected $type = 'saved-life-counter';
+    protected $name = 'Animals Saved Counter';
+    protected $type = 'animals-saved-counter';
     protected $description = 'Number of lives saved by being vegan.';
 
     public function getTtl(): int
