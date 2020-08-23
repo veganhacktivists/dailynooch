@@ -7,14 +7,14 @@ use Exception;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
-class Population
+class WorldBankRepository
 {
     private const URL_COUNTRY_INDICATOR = 'https://api.worldbank.org/v2/country/%s/indicator/%s';
 
     public const COUNTRY_WORLD = '1W';
     public const INDICATOR_POPULATION_TOTAL = 'SP.POP.TOTL';
 
-    public function all(): PopulationCollection
+    public function population(): PopulationCollection
     {
         $response = Http::get(vsprintf(self::URL_COUNTRY_INDICATOR, [
             self::COUNTRY_WORLD,
@@ -25,7 +25,7 @@ class Population
         ]);
         $this->validateOrFail($response);
 
-        return PopulationCollection::make($response[1]);
+        return PopulationCollection::fromWorldBank($response[1]);
     }
 
     private function validateOrFail(Response $response): void

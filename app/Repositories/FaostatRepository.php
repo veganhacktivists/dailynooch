@@ -2,12 +2,12 @@
 
 namespace App\Repositories;
 
-use App\Http\Resources\FaostatCollection;
+use App\Http\Resources\AnimalMurderCollection;
 use Exception;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
-class Faostat
+class FaostatRepository
 {
     private const API_URL = 'http://fenixservices.fao.org/faostat/api/%s/en/data/%s';
     private const API_VERSION = 'v1';
@@ -20,7 +20,7 @@ class Faostat
     private const REGION_WORLD = 5000;
     private const ITEM_MEAT_TOTAL = 1765;
 
-    public function all(): FaostatCollection
+    public function all(): AnimalMurderCollection
     {
         $response = $this->get(self::API_ENDPOINT, [
             'area' => self::REGION_WORLD,
@@ -28,7 +28,8 @@ class Faostat
             'item' => self::ITEM_MEAT_TOTAL . self::API_LIST,
             'year' => implode(',', range(self::YEAR_START, now()->year)),
         ]);
-        return FaostatCollection::make($response['data']);
+
+        return AnimalMurderCollection::fromFaostat($response['data']);
     }
 
     private function get(string $endpoint, array $query): Response
@@ -38,6 +39,7 @@ class Faostat
             $endpoint,
         ]), $query);
         $this->validateOrFail($response);
+
         return $response;
     }
 

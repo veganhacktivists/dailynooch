@@ -2,8 +2,8 @@
 
 namespace App\Widgets;
 
-use App\Repositories\Faostat;
-use App\Repositories\Population;
+use App\Repositories\FaostatRepository;
+use App\Repositories\WorldBankRepository;
 
 class AnimalsSavedCounter extends AbstractWidget
 {
@@ -18,27 +18,28 @@ class AnimalsSavedCounter extends AbstractWidget
 
     public function getData(): array
     {
-        $population = collect((new Population())->all())
+        $population = (new WorldBankRepository)->population()
             ->groupBy('year')
             ->map(function ($population) {
                 return $population->pluck('value')->sum();
             });
 
-        $animals = collect((new Faostat())->all())
+        $animals = (new FaostatRepository)->all()
             ->map(function ($animal) use ($population) {
-                return array_merge($animal, [
-                    'value' => $animal['value'] / $population[$animal['year']],
-                ]);
+                $animal->resource['value'] /= $population[$animal['year']];
+                return $animal;
             })
-            ->groupBy('item')
-            ->map(function ($animals, $item) {
+            ->groupBy('name')
+            ->map(function ($values, $name) {
                 return [
-                    'item' => $item,
-                    'values' => $animals->sortBy('year')->pluck('value'),
+                    'name' => $name,
+                    'values' => $values->sortBy('year')->pluck('value'),
                 ];
             })
             ->values();
 
-        return $animals->toArray();
+        return [
+            'animals' => $animals->toArray(),
+        ];
     }
 }
