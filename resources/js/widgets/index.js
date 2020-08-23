@@ -7,6 +7,7 @@ import Recipe from './Recipe'
 import RedditRvegan from './RedditRvegan'
 import NutritionFactsVideos from './NutritionFactsVideos'
 import AnimalsSavedCounter from './AnimalsSavedCounter'
+import DeathCounter from './DeathCounter'
 
 export default {
   art: Art,
@@ -18,4 +19,5 @@ export default {
   recipe: Recipe,
   'reddit-rvegan': RedditRvegan,
   'animals-saved-counter': AnimalsSavedCounter,
+  'death-counter': DeathCounter
 }
