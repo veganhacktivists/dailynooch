@@ -5,7 +5,7 @@
         <ul class="list-group" v-for="animal in animals" :key="animal.name">
           <li class="list-group-item px-0 border-0">
             <img
-              :src="'/img/icons/' + animal.name.toLowerCase() + '.png'"
+              :src="animal.icon"
               :alt="animal.name + ' icon'"
               :title="animal.name"
             />
@@ -55,6 +55,7 @@ export default {
       animals = _.orderBy(animals, 'value', 'desc')
       animals = _.map(animals, (animal) =>
         _.assign(animal, {
+          icon: `/img/icons/${_.kebabCase(animal.name)}.png`,
           value: (animal.value / 365 / 24 / 60 / 60 / 1000) * this.duration,
         }),
       )

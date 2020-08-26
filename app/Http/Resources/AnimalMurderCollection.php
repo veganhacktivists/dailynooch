@@ -15,6 +15,7 @@ class AnimalMurderCollection extends ResourceCollection
         $animals = $animals->map(function ($animal) {
             $name = (string) Str::of($animal['Item'])
                 ->after('Meat,')
+                ->after('Other')
                 ->replace('Meat', 'Other')
                 ->before('and')
                 ->before('nes')
@@ -45,6 +46,7 @@ class AnimalMurderCollection extends ResourceCollection
                         ->where('year', $animal['year'])
                         ->pluck('value')
                         ->sum();
+
                     return $animal;
                 default:
                     return $animal;
@@ -55,6 +57,7 @@ class AnimalMurderCollection extends ResourceCollection
                 case 'Other Camelids':
                     return false;
             }
+
             return true;
         });
 
