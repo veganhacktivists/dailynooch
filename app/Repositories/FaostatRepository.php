@@ -25,7 +25,7 @@ class FaostatRepository
         $response = $this->get(self::API_ENDPOINT, [
             'area' => self::REGION_WORLD,
             'element' => self::ELEMENTS_SLAUGHTERED,
-            'item' => self::ITEM_MEAT_TOTAL . self::API_LIST,
+            'item' => self::ITEM_MEAT_TOTAL.self::API_LIST,
             'year' => implode(',', range(self::YEAR_START, now()->year)),
         ]);
 

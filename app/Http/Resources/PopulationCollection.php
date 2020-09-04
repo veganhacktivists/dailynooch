@@ -17,6 +17,7 @@ class PopulationCollection extends ResourceCollection
                 'year' => $population['date'],
             ]);
         });
+
         return self::make($populations);
     }
 }

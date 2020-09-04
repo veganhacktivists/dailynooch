@@ -37,25 +37,29 @@ class AnimalMurderCollection extends ResourceCollection
         });
 
         // Merge camels and other camelids.
-
-        $animals = $animals->map(function ($animal) use ($animals) {
-            switch ($animal['name']) {
-                case 'Camel':
-                    $animal->resource['value'] += $animals
-                        ->where('name', 'Other Camelids')
-                        ->where('year', $animal['year'])
-                        ->pluck('value')
-                        ->sum();
-
-                    return $animal;
-                default:
-                    return $animal;
+        $merges = [
+            'Other' => ['Ass', 'Game', 'Mule'],
+            'Camel' => ['Other Camelids'],
+        ];
+        $animals = $animals->map(function ($animal) use ($animals, $merges) {
+            if (!isset($merges[$animal['name']])) {
+                return $animal;
             }
+            foreach ($merges[$animal['name']] as $name) {
+                $animal->resource['value'] += $animals
+                    ->where('name', $name)
+                    ->where('year', $animal['year'])
+                    ->pluck('value')
+                    ->sum();
+            }
+
+            return $animal;
         });
-        $animals = $animals->filter(function ($animal) {
-            switch ($animal['name']) {
-                case 'Other Camelids':
+        $animals = $animals->filter(function ($animal) use ($merges) {
+            foreach ($merges as $names) {
+                if (in_array($animal['name'], $names)) {
                     return false;
+                }
             }
 
             return true;

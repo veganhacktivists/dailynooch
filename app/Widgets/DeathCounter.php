@@ -8,11 +8,10 @@ class DeathCounter extends AbstractWidget
 {
     protected $name = 'Death Counter';
     protected $type = 'death-counter';
-    protected $description = 'Animals killed for food since this page opened.';
+    protected $description = 'Animals murdered for food since this page was opened.';
 
     public function getTtl(): int
     {
-        return -1;
         return 24 * 60;
     }
 
@@ -22,12 +21,7 @@ class DeathCounter extends AbstractWidget
             ->sortBy('year')
             ->groupBy('year')
             ->last()
-            ->values()
-            // ->map(function ($animal) {
-            //     $animal->resource['value'] /= 365 * 24 * 60 * 60;
-            //     return $animal;
-            // })
-        ;
+            ->values();
 
         return [
             'animals' => $animals->toArray(),
