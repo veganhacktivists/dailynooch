@@ -18,6 +18,5 @@ export default {
   'quote-of-the-day': QuoteOfTheDay,
   recipe: Recipe,
   'reddit-rvegan': RedditRvegan,
-  'animals-saved-counter': AnimalsSavedCounter,
-  'death-counter': DeathCounter
+  'death-counter': DeathCounter,
 }
