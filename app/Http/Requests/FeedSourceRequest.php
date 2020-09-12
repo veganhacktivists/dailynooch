@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RssSourceRequest extends FormRequest
+class FeedSourceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,6 +26,7 @@ class RssSourceRequest extends FormRequest
     {
         return [
             'widget_type' => 'required',
+            'feed_type' => 'required',
             'url' => 'required',
         ];
     }

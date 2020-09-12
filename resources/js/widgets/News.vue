@@ -1,17 +1,17 @@
 <template>
   <Widget :name="name" :error="data.error">
-    <template v-if="data.feedItems">
+    <template v-if="data.feedItems && data.feedItems.length">
       <swiper ref="mySwiper" :options="swiperOptions">
         <swiper-slide v-for="item in data.feedItems.slice(0, 4)" :key="item.link">
           <div class="card" style="width: 20rem;">
             <a :href="item.link">
-              <img class="card-img-top" :src="item.enclosures[0].link" alt="Card image cap">
+              <img class="card-img-top" :src="item.featured_image" alt="Card image cap">
             </a>
             <div class="card-body d-flex flex-column justify-content-between">
               <a :href="item.link">
                 <h5 class="card-title">{{ item.title }}</h5>
               </a>
-              <p class="card-text text-muted small">{{ item.authors[0].name }} | {{ item.date }}</p>
+              <p class="card-text text-muted small">{{ getSiteName(item.link) }} | {{ item.date }}</p>
             </div>
           </div>
         </swiper-slide>
@@ -46,7 +46,6 @@ export default {
           pagination: {
             el: '.swiper-pagination'
           },
-          // Some Swiper option/callback...
         }
       }
     },
@@ -57,6 +56,11 @@ export default {
   },
   directives: {
     swiper: directive
+  },
+  methods: {
+    getSiteName(url) {
+      return (new URL(url)).hostname.split(".")[1].toUpperCase();
+    }
   },
 }
 </script>

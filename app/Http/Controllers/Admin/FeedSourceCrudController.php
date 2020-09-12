@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\RssSourceRequest;
+use App\Http\Requests\FeedSourceRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 /**
- * Class RssSourceCrudController.
+ * Class FeedSourceCrudController.
  *
  * @property \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class RssSourceCrudController extends CrudController
+class FeedSourceCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -20,9 +20,9 @@ class RssSourceCrudController extends CrudController
 
     public function setup()
     {
-        $this->crud->setModel('App\Models\RssSource');
-        $this->crud->setRoute(config('backpack.base.route_prefix').'/rss-source');
-        $this->crud->setEntityNameStrings('rss source', 'RSS Sources');
+        $this->crud->setModel('App\Models\FeedSource');
+        $this->crud->setRoute(config('backpack.base.route_prefix').'/feed-source');
+        $this->crud->setEntityNameStrings('feed source', 'Feed Sources');
     }
 
     protected function setupListOperation()
@@ -33,7 +33,7 @@ class RssSourceCrudController extends CrudController
 
     protected function setupCreateOperation()
     {
-        $this->crud->setValidation(RssSourceRequest::class);
+        $this->crud->setValidation(FeedSourceRequest::class);
 
         // TODO: remove setFromDb() and manually define Fields
         $this->crud->setFromDb();

@@ -42,8 +42,8 @@
 </li>
 
 <li class="nav-item">
-    <a class="nav-link" href="{{ backpack_url('rss-source') }}">
+    <a class="nav-link" href="{{ backpack_url('feed-source') }}">
         <i class="nav-icon fa fa-question"></i>
-        <span>RssSources</span>
+        <span>Feed Sources</span>
     </a>
 </li>
