@@ -11,7 +11,7 @@
               <a :href="item.link" target="_blank" rel="noopener">
                 <h5 class="card-title">{{ item.title }}</h5>
               </a>
-              <p class="card-text text-muted small">{{ getSiteName(item.link) }} | {{ item.date }}</p>
+              <p class="card-text text-muted small">{{ getSiteName(item.link) }} | {{ getTimeago(item.date) }}</p>
             </div>
           </div>
         </swiper-slide>
@@ -24,6 +24,7 @@
 <script>
 import Widget from '../components/Widget'
 import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
+import * as timeago from 'timeago.js';
 
 export default {
   name: 'news',
@@ -60,6 +61,9 @@ export default {
   methods: {
     getSiteName(url) {
       return (new URL(url)).hostname.split(".")[1].toUpperCase();
+    },
+    getTimeago(date) {
+      return timeago.format(date);
     }
   },
 }

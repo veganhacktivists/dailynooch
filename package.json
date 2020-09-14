@@ -29,6 +29,7 @@
         "alpinejs": "^2.2.1",
         "date-fns": "^2.11.0",
         "swiper": "^6.1.2",
+        "timeago.js": "^4.0.2",
         "turbolinks": "^5.2.0",
         "vue-awesome-swiper": "^4.1.1",
         "vue-carousel": "^0.18.0",
