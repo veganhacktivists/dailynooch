@@ -2,6 +2,7 @@
 
 use App\Models\FeedSource;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
 
 class FeedSourcesTableSeeder extends Seeder
 {
@@ -10,28 +11,14 @@ class FeedSourcesTableSeeder extends Seeder
      */
     public function run()
     {
-        $sources = [
-            [
-                'widget_type' => 'nutrition-facts',
-                'feed_type' => 'rss',
-                'url' => 'https://nutritionfacts.org/feed',
-            ],
-            [
-                'widget_type' => 'nutrition-facts-videos',
-                'feed_type' => 'rss',
-                'url' => 'https://nutritionfacts.org/feed?post_type=video',
-            ],
-            [
-                'widget_type' => 'news',
-                'feed_type' => 'rss',
-                'url' => 'https://www.plantbasednews.org/.rss/full/',
-            ],
-            [
-                'widget_type' => 'news',
-                'feed_type' => 'wp-json',
-                'url' => 'https://www.livekindly.co/wp-json/wp/v2/posts?_embed',
-            ],
-        ];
-        FeedSource::create($sources);
+        $feedSourcesJson = File::get('database/data/feed-sources.json');
+        $feedSources = collect(json_decode($feedSourcesJson, true));
+        $newFeedSources = $feedSources->map(function ($feedSource) {
+            $feedSource['created_at'] = $feedSource['updated_at'] = now();
+
+            return $feedSource;
+        });
+
+        FeedSource::insert($newFeedSources->toArray());
     }
 }

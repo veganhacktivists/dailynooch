@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\BackpackUser;
+use App\Models\FeedSource;
 use App\Models\Quote;
 use App\Role;
 use Illuminate\Console\Command;
@@ -103,8 +104,10 @@ class SeedProduction extends Command
 
     private function seedCustomData()
     {
-        $this->info('Seeding Quotes');
         $this->seedQuotes();
+        $this->info('Quotes successfully created');
+        $this->seedFeedSources();
+        $this->info('Feed Sources successfully created');
     }
 
     private function seedQuotes()
@@ -122,5 +125,22 @@ class SeedProduction extends Command
             array_push($newQuotes, $newQuote);
         }
         Quote::insert($newQuotes);
+    }
+
+    private function seedFeedSources()
+    {
+        if (FeedSource::count() > 0) {
+            return;
+        }
+
+        $feedSourcesJson = File::get('database/data/feed-sources.json');
+        $feedSources = collect(json_decode($feedSourcesJson, true));
+        $newFeedSources = $feedSources->map(function ($feedSource) {
+            $feedSource['created_at'] = $feedSource['updated_at'] = now();
+
+            return $feedSource;
+        });
+
+        FeedSource::insert($newFeedSources->toArray());
     }
 }
