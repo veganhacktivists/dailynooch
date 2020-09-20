@@ -6,7 +6,6 @@ import QuoteOfTheDay from './QuoteOfTheDay'
 import Recipe from './Recipe'
 import RedditRvegan from './RedditRvegan'
 import NutritionFactsVideos from './NutritionFactsVideos'
-import AnimalsSavedCounter from './AnimalsSavedCounter'
 import DeathCounter from './DeathCounter'
 
 export default {
