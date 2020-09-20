@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class AnimalMurderCollection extends ResourceCollection
@@ -11,7 +12,6 @@ class AnimalMurderCollection extends ResourceCollection
     public static function fromFaostat(array $data): self
     {
         $animals = collect($data);
-
         $animals = $animals->map(function ($animal) {
             $name = (string) Str::of($animal['Item'])
                 ->after('Meat,')
@@ -35,17 +35,19 @@ class AnimalMurderCollection extends ResourceCollection
                 'year' => (int) $animal['Year'],
             ]);
         });
+        $animals = self::mergeAnimals($animals, 'Other', ['Ass', 'Game', 'Mule']);
+        $animals = self::mergeAnimals($animals, 'Camel', ['Other Camelids']);
 
-        // Merge camels and other camelids.
-        $merges = [
-            'Other' => ['Ass', 'Game', 'Mule'],
-            'Camel' => ['Other Camelids'],
-        ];
-        $animals = $animals->map(function ($animal) use ($animals, $merges) {
-            if (!isset($merges[$animal['name']])) {
+        return self::make($animals);
+    }
+
+    private static function mergeAnimals(Collection $animals, string $from, array $to): Collection
+    {
+        $animals = $animals->map(function ($animal) use ($from, $to, $animals) {
+            if ($animal['name'] !== $from) {
                 return $animal;
             }
-            foreach ($merges[$animal['name']] as $name) {
+            foreach ($to as $name) {
                 $animal->resource['value'] += $animals
                     ->where('name', $name)
                     ->where('year', $animal['year'])
@@ -55,16 +57,10 @@ class AnimalMurderCollection extends ResourceCollection
 
             return $animal;
         });
-        $animals = $animals->filter(function ($animal) use ($merges) {
-            foreach ($merges as $names) {
-                if (in_array($animal['name'], $names)) {
-                    return false;
-                }
-            }
-
-            return true;
+        $animals = $animals->filter(function ($animal) use ($from, $to) {
+            return !in_array($animal['name'], $to);
         });
 
-        return self::make($animals);
+        return $animals;
     }
 }
