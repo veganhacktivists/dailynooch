@@ -35,10 +35,10 @@ class AnimalMurderCollection extends ResourceCollection
                 'year' => (int) $animal['Year'],
             ]);
         });
-        $animals = self::mergeAnimals($animals, 'Other', ['Ass', 'Game', 'Mule']);
-        $animals = self::mergeAnimals($animals, 'Camel', ['Other Camelids']);
+        $animals = static::mergeAnimals($animals, 'Other', ['Ass', 'Game', 'Mule']);
+        $animals = static::mergeAnimals($animals, 'Camel', ['Other Camelids']);
 
-        return self::make($animals);
+        return static::make($animals);
     }
 
     private static function mergeAnimals(Collection $animals, string $from, array $to): Collection
