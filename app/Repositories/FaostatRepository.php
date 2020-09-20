@@ -20,7 +20,7 @@ class FaostatRepository
     private const REGION_WORLD = 5000;
     private const ITEM_MEAT_TOTAL = 1765;
 
-    public function all(): AnimalMurderCollection
+    public function getAnimalMurders(): AnimalMurderCollection
     {
         $response = $this->get(self::API_ENDPOINT, [
             'area' => self::REGION_WORLD,

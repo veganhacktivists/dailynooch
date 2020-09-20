@@ -17,7 +17,7 @@ class DeathCounter extends AbstractWidget
 
     public function getData(): array
     {
-        $animals = (new FaostatRepository())->all()
+        $animals = (new FaostatRepository())->getAnimalMurders()
             ->sortBy('year')
             ->groupBy('year')
             ->last()
