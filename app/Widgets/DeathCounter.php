@@ -8,7 +8,7 @@ class DeathCounter extends AbstractWidget
 {
     protected $name = 'Death Counter';
     protected $type = 'death-counter';
-    protected $description = 'Animals murdered for food since this page was opened.';
+    protected $description = 'Animals killed for food since this page was opened.';
 
     public function getTtl(): int
     {
@@ -17,7 +17,7 @@ class DeathCounter extends AbstractWidget
 
     public function getData(): array
     {
-        $animals = (new FaostatRepository)->all()
+        $animals = (new FaostatRepository())->all()
             ->sortBy('year')
             ->groupBy('year')
             ->last()
