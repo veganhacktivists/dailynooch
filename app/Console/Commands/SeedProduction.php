@@ -126,14 +126,14 @@ class SeedProduction extends Command
 
     private function seedQuotes()
     {
+        if (Quote::count() > 0) {
+            return;
+        }
+
         $quotesJson = File::get('database/data/quotes.json');
         $quotes = json_decode($quotesJson);
         $newQuotes = [];
         foreach ($quotes as $quote) {
-            if (Quote::count() > 0) {
-                return;
-            }
-
             $newQuote = [
                 'author' => $quote->Author,
                 'text' => $quote->Text,
