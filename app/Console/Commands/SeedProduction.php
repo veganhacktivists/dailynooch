@@ -112,7 +112,7 @@ class SeedProduction extends Command
                 $user->assignRole('admin');
             });
 
-            $this->info('User successfully created');
+            $this->info('User successfully created or updated');
         } catch (QueryException $e) {
             $this->error($e->getMessage());
             $this->seedFirstUser();
@@ -122,14 +122,15 @@ class SeedProduction extends Command
     private function seedCustomData()
     {
         $this->seedQuotes();
-        $this->info('Quotes successfully created');
+
         $this->seedFeedSources();
-        $this->info('Feed Sources successfully created');
     }
 
     private function seedQuotes()
     {
         if (Quote::count() > 0) {
+            $this->info('Quotes already created, skipping');
+
             return;
         }
 
@@ -146,11 +147,14 @@ class SeedProduction extends Command
             array_push($newQuotes, $newQuote);
         }
         Quote::insert($newQuotes);
+        $this->info('Quotes successfully created');
     }
 
     private function seedFeedSources()
     {
         if (FeedSource::count() > 0) {
+            $this->info('Feed Sources already created, skipping');
+
             return;
         }
 
@@ -163,5 +167,6 @@ class SeedProduction extends Command
         });
 
         FeedSource::insert($newFeedSources->toArray());
+        $this->info('Feed Sources successfully created');
     }
 }
