@@ -55,14 +55,23 @@ class SeedProduction extends Command
          * DO NOT change/remove the admin role. It is
          * required for the admin panel to work.
          */
-        $roleNames = [
-            'admin',
+        $roles = [
+            [
+                'id' => 1,
+                'name' => 'admin',
+                'guard_name' => 'backpack',
+            ],
         ];
 
         $this->info('Creating roles:');
-        foreach ($roleNames as $roleName) {
-            Role::create(['name' => $roleName, 'guard_name' => 'backpack']);
-            $this->line("* `$roleName` role created");
+
+        foreach ($roles as $role) {
+            Role::updateOrCreate(
+                ['id' => $role['id']],
+                $role
+            );
+
+            $this->line("* `{$role['name']}` role created");
         }
     }
 
@@ -81,17 +90,25 @@ class SeedProduction extends Command
             $password = $this->secret('Password');
         } while (!$password);
 
-        $user = (new BackpackUser())->fill([
+        $user = [
+            'id' => 1,
             'name' => $name,
             'email' => $email,
             'password' => Hash::make($password),
-        ]);
-
-        $user->email_verified_at = time();
+        ];
 
         try {
             DB::transaction(function () use ($user) {
-                $user->save();
+                $user = BackpackUser::updateOrCreate(
+                    ['id' => $user['id']],
+                    $user
+                );
+
+                if (!isset($user->email_verified_at)) {
+                    $user->email_verified_at = time();
+                    $user->save();
+                }
+
                 $user->assignRole('admin');
             });
 
@@ -112,6 +129,10 @@ class SeedProduction extends Command
 
     private function seedQuotes()
     {
+        if (Quote::count() > 0) {
+            return;
+        }
+
         $quotesJson = File::get('database/data/quotes.json');
         $quotes = json_decode($quotesJson);
         $newQuotes = [];

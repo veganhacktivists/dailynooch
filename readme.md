@@ -1,4 +1,4 @@
-# Vegan Dashboard
+# Daily Nooch
 
 If you find any errors in the documentation, or if something doesn't work on your computer (e.g. the git hooks), let Gerard or another project leader know.
 
