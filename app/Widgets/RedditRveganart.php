@@ -16,7 +16,7 @@ class RedditRveganart extends AbstractRedditWidget
 
     protected function filterThread(array $redditThread): bool
     {
-        return !$this->isImage($redditThread['url']);
+        return !$this->isImage($redditThread);
     }
 
     private function isImage(array $redditThread): bool
