@@ -38,6 +38,7 @@ abstract class AbstractRedditWidget extends AbstractWidget
                 $this->subreddit,
                 $this->sortMode,
                 $this->numberOfThreads + $this->extraLimitToAccountForFilter
+                + $this->sortMode == self::SORTMODE_TOP ? '&t=all' : ''
             )
         );
 
