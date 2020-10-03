@@ -14,7 +14,7 @@ abstract class AbstractRedditWidget extends AbstractWidget
     protected const SORTMODE_TOP           = 'top';
     protected const SORTMODE_CONTROVERSIAL = 'controversial';
     protected const SORTMODE_RISING        = 'rising';
-    protected const REDDIT_URL_FORMAT      = 'https://www.reddit.com/r/%s/%s/.json?limit=%s';
+    protected const REDDIT_URL_FORMAT      = 'https://www.reddit.com/r/%s/%s/.json?limit=%s%s';
     protected const REDDIT_URL_BASE        = 'https://www.reddit.com';
 
     protected $subreddit;
@@ -37,8 +37,8 @@ abstract class AbstractRedditWidget extends AbstractWidget
                 self::REDDIT_URL_FORMAT,
                 $this->subreddit,
                 $this->sortMode,
-                $this->numberOfThreads + $this->extraLimitToAccountForFilter
-                + $this->sortMode == self::SORTMODE_TOP ? '&t=all' : ''
+                $this->numberOfThreads + $this->extraLimitToAccountForFilter,
+                ($this->sortMode == self::SORTMODE_TOP) ? '&t=all' : ''
             )
         );
 
