@@ -3,9 +3,9 @@
     <template v-if="data.feedItems && data.feedItems.length">
       <swiper ref="mySwiper" :options="swiperOptions">
         <swiper-slide v-for="item in data.feedItems.slice(0, 4)" :key="item.link">
-          <div class="card" style="width: 20rem;">
+          <div class="card">
             <a :href="item.link" target="_blank" rel="noopener">
-              <img class="card-img-top" :src="item.featured_image" alt="Card image cap">
+              <img class="card-img-top" :src="item.featured_image">
             </a>
             <div class="card-body d-flex flex-column justify-content-between">
               <a :href="item.link" target="_blank" rel="noopener">
@@ -39,17 +39,17 @@ export default {
     },
   },
   data() {
-      return {
-        swiperOptions: {
-          loop: true,
-          slidesPerView: 'auto',
-          spaceBetween: 10,
-          pagination: {
-            el: '.swiper-pagination'
-          },
-        }
+    return {
+      swiperOptions: {
+        loop: true,
+        slidesPerView: 'auto',
+        spaceBetween: 10,
+        pagination: {
+          el: '.swiper-pagination'
+        },
       }
-    },
+    }
+  },
   components: {
     Widget,
     Swiper,
@@ -90,7 +90,7 @@ export default {
 }
 
 .card-img-top {
-  height: 148px;
+  height: 9.25rem;
   object-fit: cover;
   object-position: 50% 50%;
 }

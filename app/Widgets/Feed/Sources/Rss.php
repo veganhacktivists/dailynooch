@@ -2,12 +2,12 @@
 
 namespace App\Widgets\Feed\Sources;
 
-use App\Widgets\Feed\Feed;
+use App\Widgets\Feed\AbstractFeed;
 use App\Widgets\Feed\FeedItem;
 use Illuminate\Support\Collection;
 use Vedmant\FeedReader\Facades\FeedReader;
 
-class Rss extends Feed
+class Rss extends AbstractFeed
 {
     protected string $feedType = 'rss';
 

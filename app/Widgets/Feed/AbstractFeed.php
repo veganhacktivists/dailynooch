@@ -4,7 +4,7 @@ namespace App\Widgets\Feed;
 
 use Illuminate\Support\Collection;
 
-abstract class Feed
+abstract class AbstractFeed
 {
     protected string $feedType;
     protected string $feedUrl;

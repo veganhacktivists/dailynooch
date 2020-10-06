@@ -3,7 +3,6 @@
 namespace App\Widgets;
 
 use App\Models\FeedSource;
-use App\Widgets\Feed\Feed;
 use Illuminate\Support\Collection;
 
 class AbstractFeedWidget extends AbstractWidget
@@ -18,17 +17,17 @@ class AbstractFeedWidget extends AbstractWidget
     {
         $feeds = $this->getFeeds();
 
-        $feedItems = $feeds->reduce(function ($carry, Feed $feed) {
+        $feedItems = new Collection();
+        foreach ($feeds as $feed) {
             $feedItemsData = $feed->fetchFeedItems();
-
-            return $carry->merge($feedItemsData->slice(0, $this->itemsToGetPerFeed));
-        }, new Collection());
+            $feedItems = $feedItems->merge($feedItemsData->slice(0, $this->itemsToGetPerFeed));
+        }
 
         return ['feedItems' => $this->formatFeedItemsData($feedItems)->values()];
     }
 
     /**
-     * Perform any final formatting/transormations on the feed items
+     * Perform any final formatting/transformations on the feed items
      * before they're kicked out the door.
      */
     protected function formatFeedItemsData(Collection $data): Collection
@@ -44,14 +43,14 @@ class AbstractFeedWidget extends AbstractWidget
     private function getFeeds(): Collection
     {
         $sources = FeedSource::where('widget_type', $this->type)->select('feed_type', 'url')->get();
-        $feeds = $sources->reduce(function ($carry, $source) {
+
+        $feeds = new Collection();
+        foreach ($sources as $source) {
             $className = 'App\\Widgets\\Feed\\Sources\\'.kebabToPascal($source->feed_type);
             if (class_exists($className)) {
-                $carry->push(new $className($source->url));
+                $feeds->push(app()->makeWith($className, ['url' => $source->url]));
             }
-
-            return $carry;
-        }, new Collection());
+        }
 
         return $feeds;
     }

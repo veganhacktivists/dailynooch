@@ -2,14 +2,22 @@
 
 namespace App\Widgets\Feed\Sources;
 
-use App\Widgets\Feed\Feed;
+use App\Widgets\Feed\AbstractFeed;
 use App\Widgets\Feed\FeedItem;
 use GuzzleHttp\Client;
 use Illuminate\Support\Collection;
 
-class WpJson extends Feed
+class WpJson extends AbstractFeed
 {
     protected string $feedType = 'wp-json';
+    private Client $client;
+
+    public function __construct(string $url, Client $client)
+    {
+        parent::__construct($url);
+
+        $this->client = $client;
+    }
 
     public function fetchFeedItems(): Collection
     {
@@ -19,7 +27,7 @@ class WpJson extends Feed
             $feedItem = new FeedItem();
             $feedItem->link = $item->link;
             $feedItem->date = $item->date;
-            $feedItem->title = $item->title->rendered;
+            $feedItem->title = htmlspecialchars_decode($item->title->rendered);
             $feedItem->featured_image = $item->_embedded->{'wp:featuredmedia'}[0]->link ?? '';
 
             return $feedItem;
@@ -33,7 +41,7 @@ class WpJson extends Feed
                 'Accept' => 'application/json',
             ],
         ];
-        $response = (new Client())->request('GET', $url, $params);
+        $response = $this->client->request('GET', $url, $params);
 
         return collect(json_decode($response->getBody()->getContents()));
     }
