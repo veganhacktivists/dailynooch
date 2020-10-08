@@ -57,7 +57,7 @@ class AnimalMurderCollection extends ResourceCollection
 
             return $animal;
         });
-        $animals = $animals->filter(function ($animal) use ($from, $to) {
+        $animals = $animals->filter(function ($animal) use ($to) {
             return !in_array($animal['name'], $to);
         });
 
