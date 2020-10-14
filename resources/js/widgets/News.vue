@@ -24,7 +24,7 @@
 <script>
 import Widget from '../components/Widget'
 import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
-import * as timeago from 'timeago.js';
+import { getTimeAgo } from '../util/time-ago';
 
 export default {
   name: 'news',
@@ -60,10 +60,11 @@ export default {
   },
   methods: {
     getSiteName(url) {
-      return (new URL(url)).hostname.split(".")[1].toUpperCase();
+      const hostname = new URL(url).hostname.split('.');
+      return hostname[hostname.length - 2].toUpperCase();
     },
     getTimeago(date) {
-      return timeago.format(date);
+      return getTimeAgo(date);
     }
   },
 }

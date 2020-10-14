@@ -19,9 +19,9 @@ class WpJson extends AbstractFeed
         $this->client = $client;
     }
 
-    public function fetchFeedItems(): Collection
+    public function fetchFeedItems(int $fetchCount = null): Collection
     {
-        $feed = $this->fetchData($this->feedUrl);
+        $feed = $this->fetchData($this->feedUrl, $fetchCount);
 
         return $feed->map(function ($item) {
             $feedItem = new FeedItem();
@@ -34,14 +34,18 @@ class WpJson extends AbstractFeed
         });
     }
 
-    private function fetchData(string $url): Collection
+    private function fetchData(string $url, int $fetchCount = null): Collection
     {
         $params = [
             'headers' => [
                 'Accept' => 'application/json',
             ],
+            'query' => ['_embed' => true],
         ];
-        $response = $this->client->request('GET', $url, $params);
+        if (isset($fetchCount)) {
+            $params['query']['per_page'] = $fetchCount;
+        }
+        $response = $this->client->get($url, $params);
 
         return collect(json_decode($response->getBody()->getContents()));
     }

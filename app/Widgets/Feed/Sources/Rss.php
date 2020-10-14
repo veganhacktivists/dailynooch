@@ -11,9 +11,9 @@ class Rss extends AbstractFeed
 {
     protected string $feedType = 'rss';
 
-    public function fetchFeedItems(): Collection
+    public function fetchFeedItems(int $fetchCount = null): Collection
     {
-        $feed = $this->fetchData($this->feedUrl);
+        $feed = $this->fetchData($this->feedUrl, $fetchCount);
 
         return $feed->map(function ($item) {
             $feedItem = new FeedItem();
@@ -30,10 +30,11 @@ class Rss extends AbstractFeed
         });
     }
 
-    private function fetchData(string $url): Collection
+    private function fetchData(string $url, int $fetchCount = null): Collection
     {
         $feedData = FeedReader::read($url);
+        $feedItems = collect($feedData->get_items());
 
-        return collect($feedData->get_items());
+        return isset($fetchCount) ? $feedItems->splice(0, $fetchCount) : $feedItems;
     }
 }

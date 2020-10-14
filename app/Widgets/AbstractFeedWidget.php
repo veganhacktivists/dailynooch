@@ -19,8 +19,7 @@ class AbstractFeedWidget extends AbstractWidget
 
         $feedItems = new Collection();
         foreach ($feeds as $feed) {
-            $feedItemsData = $feed->fetchFeedItems();
-            $feedItems = $feedItems->merge($feedItemsData->slice(0, $this->itemsToGetPerFeed));
+            $feedItems = $feedItems->merge($feed->fetchFeedItems($this->itemsToGetPerFeed));
         }
 
         return ['feedItems' => $this->formatFeedItemsData($feedItems)->values()];

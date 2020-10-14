@@ -11,12 +11,12 @@
   },
   {
     "widget_type": "news",
-    "feed_type": "rss",
-    "url": "https://www.plantbasednews.org/.rss/full/"
+    "feed_type": "wp-json",
+    "url": "https://www.plantbasednews.org/wp-json/wp/v2/posts"
   },
   {
     "widget_type": "news",
     "feed_type": "wp-json",
-    "url": "https://www.livekindly.co/wp-json/wp/v2/posts?_embed"
+    "url": "https://www.livekindly.co/wp-json/wp/v2/posts"
   }
 ]

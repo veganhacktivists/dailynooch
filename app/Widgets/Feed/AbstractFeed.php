@@ -19,5 +19,5 @@ abstract class AbstractFeed
      *
      * @return Collection|FeedItem[]
      */
-    abstract public function fetchFeedItems(): Collection;
+    abstract public function fetchFeedItems(int $fetchCount = null): Collection;
 }
