@@ -40,3 +40,10 @@
         <span>Quotes</span>
     </a>
 </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="{{ backpack_url('feed-source') }}">
+        <i class="nav-icon fa fa-question"></i>
+        <span>Feed Sources</span>
+    </a>
+</li>

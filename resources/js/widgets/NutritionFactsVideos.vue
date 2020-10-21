@@ -1,6 +1,6 @@
 <template>
   <Widget :name="name" :error="data.error">
-    <template v-if="data.feedItems">
+    <template v-if="data.feedItems && data.feedItems.length">
       <Carousel :perPage="1" loop>
         <Slide v-for="item in data.feedItems.slice(0, 5)" :key="item.link">
           <video width="100%" :poster="getVideoThumbnail(item)" controls>
@@ -37,13 +37,13 @@ export default {
   },
   methods: {
     getVideoThumbnail(item) {
-      return item.enclosures[0].link
+      return item.featured_image
     },
     getVideoLink(item) {
-      return item.enclosures[1].link
+      return item.video.link
     },
     getVideoType(item) {
-      return item.enclosures[1].type
+      return item.video.type
     }
   },
 }
