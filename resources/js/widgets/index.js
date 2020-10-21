@@ -1,14 +1,16 @@
 import Art from './Art'
+import DeathCounter from './DeathCounter'
 import LivesCounter from './LivesCounter'
 import News from './News'
 import NutritionFacts from './NutritionFacts'
+import NutritionFactsVideos from './NutritionFactsVideos'
 import QuoteOfTheDay from './QuoteOfTheDay'
 import Recipe from './Recipe'
 import RedditRvegan from './RedditRvegan'
-import NutritionFactsVideos from './NutritionFactsVideos'
 
 export default {
   art: Art,
+  'death-counter': DeathCounter,
   'lives-counter': LivesCounter,
   news: News,
   'nutrition-facts': NutritionFacts,
