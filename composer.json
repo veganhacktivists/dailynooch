@@ -68,7 +68,8 @@
             "database/factories"
         ],
         "files": [
-            "bootstrap/view-helpers.php"
+            "bootstrap/view-helpers.php",
+            "app/helpers.php"
         ]
     },
     "autoload-dev": {
@@ -92,7 +93,7 @@
         "post-install-cmd": "vendor/bin/cghooks add --ignore-lock --force-win",
         "post-update-cmd": "vendor/bin/cghooks update",
         "cghooks": "vendor/bin/cghooks",
-        "php-cs-fixer": "vendor/bin/php-cs-fixer fix $(git diff --cached --name-only --diff-filter=ACM -- '*.php') --stop-on-violation --config .php_cs",
+        "php-cs-fixer": "vendor/bin/php-cs-fixer fix $(git diff --cached --name-only --diff-filter=ACM -- '*.php') --config .php_cs",
         "prettier": "yarn run prettier"
     }
 }

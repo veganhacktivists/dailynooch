@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class QuoteRequest extends FormRequest
+class FeedSourceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,9 @@ class QuoteRequest extends FormRequest
     public function rules()
     {
         return [
-            'author' => 'required',
-            'text' => 'required',
+            'widget_type' => 'required',
+            'feed_type' => 'required',
+            'url' => 'required',
         ];
     }
 

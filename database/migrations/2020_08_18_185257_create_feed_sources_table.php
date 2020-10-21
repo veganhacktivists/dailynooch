@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateQuotesTable extends Migration
+class CreateFeedSourcesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,12 @@ class CreateQuotesTable extends Migration
      */
     public function up()
     {
-        Schema::create('quotes', function (Blueprint $table) {
+        Schema::create('feed_sources', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('author')->nullable();
-            $table->text('text');
+            $table->string('widget_type');
+            $table->string('feed_type');
+            $table->string('url');
+            $table->unique(['widget_type', 'feed_type', 'url']);
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ class CreateQuotesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('quotes');
+        Schema::dropIfExists('feed_sources');
     }
 }

@@ -36,22 +36,16 @@ class WidgetCreator
 
     /**
      * The name of the widget.
-     *
-     * @var string
      */
     protected string $widgetName;
 
     /**
      * The name of the widget in pascal-case.
-     *
-     * @var string
      */
     protected string $widgetNamePascal;
 
     /**
      * The name of the widget in kebab-case.
-     *
-     * @var string
      */
     protected string $widgetNameKebab;
 

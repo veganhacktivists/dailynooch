@@ -1,0 +1,22 @@
+[
+  {
+    "widget_type": "nutrition-facts",
+    "feed_type": "rss",
+    "url": "https://nutritionfacts.org/feed"
+  },
+  {
+    "widget_type": "nutrition-facts-videos",
+    "feed_type": "rss",
+    "url": "https://nutritionfacts.org/feed?post_type=video"
+  },
+  {
+    "widget_type": "news",
+    "feed_type": "wp-json",
+    "url": "https://www.plantbasednews.org/wp-json/wp/v2/posts"
+  },
+  {
+    "widget_type": "news",
+    "feed_type": "wp-json",
+    "url": "https://www.livekindly.co/wp-json/wp/v2/posts"
+  }
+]

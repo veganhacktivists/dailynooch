@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\BackpackUser;
+use App\Models\FeedSource;
 use App\Models\Quote;
 use App\Role;
 use Illuminate\Console\Command;
@@ -54,14 +55,23 @@ class SeedProduction extends Command
          * DO NOT change/remove the admin role. It is
          * required for the admin panel to work.
          */
-        $roleNames = [
-            'admin',
+        $roles = [
+            [
+                'id' => 1,
+                'name' => 'admin',
+                'guard_name' => 'backpack',
+            ],
         ];
 
         $this->info('Creating roles:');
-        foreach ($roleNames as $roleName) {
-            Role::create(['name' => $roleName, 'guard_name' => 'backpack']);
-            $this->line("* `$roleName` role created");
+
+        foreach ($roles as $role) {
+            Role::updateOrCreate(
+                ['id' => $role['id']],
+                $role
+            );
+
+            $this->line("* `{$role['name']}` role created");
         }
     }
 
@@ -80,21 +90,29 @@ class SeedProduction extends Command
             $password = $this->secret('Password');
         } while (!$password);
 
-        $user = (new BackpackUser())->fill([
+        $user = [
+            'id' => 1,
             'name' => $name,
             'email' => $email,
             'password' => Hash::make($password),
-        ]);
-
-        $user->email_verified_at = time();
+        ];
 
         try {
             DB::transaction(function () use ($user) {
-                $user->save();
+                $user = BackpackUser::updateOrCreate(
+                    ['id' => $user['id']],
+                    $user
+                );
+
+                if (!isset($user->email_verified_at)) {
+                    $user->email_verified_at = time();
+                    $user->save();
+                }
+
                 $user->assignRole('admin');
             });
 
-            $this->info('User successfully created');
+            $this->info('User successfully created or updated');
         } catch (QueryException $e) {
             $this->error($e->getMessage());
             $this->seedFirstUser();
@@ -103,12 +121,19 @@ class SeedProduction extends Command
 
     private function seedCustomData()
     {
-        $this->info('Seeding Quotes');
         $this->seedQuotes();
+
+        $this->seedFeedSources();
     }
 
     private function seedQuotes()
     {
+        if (Quote::count() > 0) {
+            $this->info('Quotes already created, skipping');
+
+            return;
+        }
+
         $quotesJson = File::get('database/data/quotes.json');
         $quotes = json_decode($quotesJson);
         $newQuotes = [];
@@ -122,5 +147,26 @@ class SeedProduction extends Command
             array_push($newQuotes, $newQuote);
         }
         Quote::insert($newQuotes);
+        $this->info('Quotes successfully created');
+    }
+
+    private function seedFeedSources()
+    {
+        if (FeedSource::count() > 0) {
+            $this->info('Feed Sources already created, skipping');
+
+            return;
+        }
+
+        $feedSourcesJson = File::get('database/data/feed-sources.json');
+        $feedSources = collect(json_decode($feedSourcesJson, true));
+        $newFeedSources = $feedSources->map(function ($feedSource) {
+            $feedSource['created_at'] = $feedSource['updated_at'] = now();
+
+            return $feedSource;
+        });
+
+        FeedSource::insert($newFeedSources->toArray());
+        $this->info('Feed Sources successfully created');
     }
 }

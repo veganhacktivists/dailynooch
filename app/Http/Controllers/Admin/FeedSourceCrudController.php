@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\QuoteRequest;
+use App\Http\Requests\FeedSourceRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 /**
- * Class QuoteCrudController.
+ * Class FeedSourceCrudController.
  *
  * @property \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class QuoteCrudController extends CrudController
+class FeedSourceCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -20,9 +20,9 @@ class QuoteCrudController extends CrudController
 
     public function setup()
     {
-        $this->crud->setModel('App\Models\Quote');
-        $this->crud->setRoute(config('backpack.base.route_prefix').'/quote');
-        $this->crud->setEntityNameStrings('quote', 'quotes');
+        $this->crud->setModel('App\Models\FeedSource');
+        $this->crud->setRoute(config('backpack.base.route_prefix').'/feed-source');
+        $this->crud->setEntityNameStrings('feed source', 'Feed Sources');
     }
 
     protected function setupListOperation()
@@ -33,7 +33,7 @@ class QuoteCrudController extends CrudController
 
     protected function setupCreateOperation()
     {
-        $this->crud->setValidation(QuoteRequest::class);
+        $this->crud->setValidation(FeedSourceRequest::class);
 
         // TODO: remove setFromDb() and manually define Fields
         $this->crud->setFromDb();
