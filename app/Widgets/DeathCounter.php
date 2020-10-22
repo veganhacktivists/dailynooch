@@ -8,7 +8,7 @@ class DeathCounter extends AbstractWidget
 {
     protected $name = 'Death Counter';
     protected $type = 'death-counter';
-    protected $description = 'Animals murdered since this page was opened. All numbers are extracted from FAOSTAT.';
+    protected $description = 'Animals murdered since this page was opened.';
 
     public function getTtl(): int
     {
