@@ -15,12 +15,15 @@
       </div>
     </div>
 
-    <p class="text-muted">{{ description }}</p>
+    <p class="text-muted">
+      Animals murdered since this page was opened {{ timeSinceOpened }}. All numbers are extracted from FAOSTAT.
+    </p>
   </Widget>
 </template>
 
 <script>
 import Widget from '../components/Widget'
+import { formatDistance, subMilliseconds, subSeconds } from 'date-fns'
 
 export default {
   name: 'death-counter',
@@ -42,6 +45,7 @@ export default {
       duration: 0,
       interval: 50,
       columns: 4,
+      opened: new Date(),
     }
   },
   mounted() {
@@ -63,6 +67,13 @@ export default {
     },
     description() {
       return this.data.description
+    },
+    timeSinceOpened() {
+      return formatDistance(
+        subMilliseconds(this.opened, this.duration),
+        this.opened,
+        { addSuffix: true, includeSeconds: true },
+      )
     },
   },
 }
