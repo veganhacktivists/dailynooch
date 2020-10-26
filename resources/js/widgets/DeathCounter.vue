@@ -42,18 +42,19 @@ export default {
   },
   data() {
     return {
-      duration: 0,
-      interval: 50,
       columns: 4,
+      interval: 50,
+      now: new Date(),
       opened: new Date(),
     }
   },
   mounted() {
-    setInterval(() => {
-      this.duration += this.interval
-    }, this.interval)
+    setInterval(() => this.now = new Date(), this.interval)
   },
   computed: {
+    duration() {
+      return this.now.getTime() - this.opened.getTime()
+    },
     chunks() {
       let animals = _.cloneDeep(this.data.animals)
       animals = _.orderBy(animals, 'value', 'desc')
