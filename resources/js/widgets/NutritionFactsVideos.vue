@@ -1,22 +1,21 @@
 <template>
   <Widget :name="name" :error="data.error">
     <template v-if="data.feedItems && data.feedItems.length">
-      <Carousel :perPage="1" loop>
-        <Slide v-for="item in data.feedItems.slice(0, 5)" :key="item.link">
-          <video width="100%" :poster="getVideoThumbnail(item)" controls>
-            <source :src="getVideoLink(item)" :type="getVideoType(item)" />
-            Your browser does not support the video tag.
-          </video>
-          <h5>{{ item.title }}</h5>
-        </Slide>
-      </Carousel>
+      <Slider
+        width="full"
+        cardHeadType="video"
+        :items="items"
+        pagination
+      >
+      </Slider>
     </template>
   </Widget>
 </template>
 
 <script>
 import Widget from '../components/Widget'
-import { Carousel, Slide } from 'vue-carousel'
+import Slider from '../components/Slider';
+import { getTimeAgo } from '../util/time-ago';
 
 export default {
   name: 'nutrition-facts-videos',
@@ -32,26 +31,15 @@ export default {
   },
   components: {
     Widget,
-    Carousel,
-    Slide,
+    Slider,
   },
-  methods: {
-    getVideoThumbnail(item) {
-      return item.featured_image
-    },
-    getVideoLink(item) {
-      return item.video.link
-    },
-    getVideoType(item) {
-      return item.video.type
+  computed: {
+    items() {
+      return this.data.feedItems.map(i => {
+        i.footerText = getTimeAgo(i.date);
+        return i;
+      });
     }
   },
 }
 </script>
-
-<style lang="scss">
-.VueCarousel-dot-container,
-.VueCarousel-dot {
-  margin-top: 0 !important;
-}
-</style>
