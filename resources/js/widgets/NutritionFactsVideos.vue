@@ -6,8 +6,7 @@
         cardHeadType="video"
         :items="items"
         pagination
-      >
-      </Slider>
+      />
     </template>
   </Widget>
 </template>

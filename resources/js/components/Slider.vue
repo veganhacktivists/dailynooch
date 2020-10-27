@@ -118,6 +118,7 @@ export default {
 
   .card {
     height: 100%;
+    width: 100%;
   }
 
   .card-img-top {

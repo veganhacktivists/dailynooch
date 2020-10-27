@@ -4,8 +4,7 @@
       <Slider
         width="peek"
         :items="items"
-      >
-      </Slider>
+      />
     </template>
   </Widget>
 </template>
