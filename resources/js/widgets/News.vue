@@ -86,10 +86,6 @@ export default {
   min-width: 12rem;
 }
 
-.card {
-  height: 100%;
-}
-
 .card-img-top {
   height: 9.25rem;
   object-fit: cover;
