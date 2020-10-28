@@ -2,6 +2,7 @@
   <Widget :name="name" :error="data.error">
     <template v-if="data.feedItems && data.feedItems.length">
       <Slider
+        name="nf-videos-slider"
         width="full"
         cardHeadType="video"
         :items="items"

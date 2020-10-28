@@ -1,6 +1,7 @@
 <template>
   <Widget :name="name">
     <Slider
+      name="r-vegan-slider"
       :items="items"
     />
   </Widget>
