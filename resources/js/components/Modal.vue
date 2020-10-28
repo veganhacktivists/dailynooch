@@ -44,6 +44,7 @@ export default {
   transition: opacity 0.3s ease;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 }
 
 .modal-container {
