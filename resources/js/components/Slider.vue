@@ -1,8 +1,8 @@
 <template>
-  <div v-swiper:mySwiper="swiperOptions" :class="swiperClass">
-    <div v-if="width == 'peek'" class="overlay"></div>
+  <div :ref="name" :class="swiperClass">
     <div class="swiper-wrapper">
-      <div class="swiper-slide" v-for="item in items" :key="item[itemKey]">
+      <div class="swiper-slide" v-for="item in items" :key="item[itemKey]"
+      >
         <div class="card">
           <a v-if="cardHeadType == 'image'" :href="item.link" target="_blank" rel="noopener">
             <img class="card-img-top" :src="item.featuredImage">
@@ -22,15 +22,21 @@
         </div>
       </div>
     </div>
-    <div v-if="pagination" class="swiper-pagination" slot="pagination"></div>
+    <div v-if="width == 'peek'" class="overlay"></div>
+    <div v-if="pagination" :class="paginationClass"></div>
   </div>
 </template>
 
 <script>
-import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
+import Swiper, { Pagination } from 'swiper';
+Swiper.use([Pagination]);
 
 export default {
   props: {
+    name: {
+      type: String,
+      required: true,
+    },
     width: {
       validator: (val) => ['peek', 'full'].includes(val),
       default: 'peek',
@@ -52,27 +58,28 @@ export default {
       default: 'link',
     }
   },
-  directives: {
-    swiper: directive
-  },
-  components: {
-    Swiper,
-    SwiperSlide,
+  data() {
+    return {
+      uniquePaginationClass: `swiper-pagination-${this.name}`,
+    };
   },
   computed: {
+    paginationClass() {
+      return `swiper-pagination ${this.uniquePaginationClass}`;
+    },
     swiperOptions() {
       return {
         loop: true,
         slidesPerView: this.width === 'peek' ? 'auto' : '1',
         spaceBetween: 10,
         pagination: {
-          el: '.swiper-pagination',
+          el: `.${this.uniquePaginationClass}`,
           clickable: true
         },
       };
     },
     swiperClass() {
-      return `width-${this.width}`;
+      return `swiper-container width-${this.width}`;
     },
   },
   methods: {
@@ -86,25 +93,32 @@ export default {
       return item.video.type
     }
   },
+  mounted: function() {
+    const swiper = new Swiper(this.$refs[this.name], this.swiperOptions);
+  },
 }
 </script>
 
 <style lang="scss">
-@import '~swiper/swiper';
-@import '~swiper/components/pagination/pagination';
+@import '~swiper/swiper-bundle';
 </style>
 
 <style lang="scss" scoped>
 .swiper-container {
   width: 100%;
+  z-index: auto;
 
   .overlay {
     position: absolute;
     width: 20%;
     height: 100%;
+    top: 0;
     right: 0;
     background-image: linear-gradient(to right, rgba(255, 255, 255, 0) , rgb(160, 160, 160));
-    z-index: 2;
+  }
+
+  .swiper-wrapper {
+    z-index: auto;
   }
 }
 
