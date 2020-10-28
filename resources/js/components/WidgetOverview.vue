@@ -12,57 +12,43 @@
 
     <div v-else class="row">
       <div class="col col-md-3">
-        <button class="btn btn-primary mb-4" @click="toggleEdit">Toggle edit mode</button>
-        <Container
-          group-name="movable"
-          :get-child-payload="i => widgetsLeft[i]"
-          drag-handle-selector=".handle"
-          @drop="onDrop('widgetsLeft', $event)"
-        >
-          <Draggable v-for="widget in widgetsLeft" :key="widget.id">
-            <component :is="widget.type" :name="widget.name" :data="widget.data" />
-          </Draggable>
-        </Container>
+        <component
+          v-for="widget in widgetsLeft"
+          :key="widget.id"
+          :is="widget.type"
+          :name="widget.name"
+          :data="widget.data"
+        />
       </div>
       <div class="col-12 col-md-9 col-lg-6">
-        <Container
-          group-name="movable"
-          :get-child-payload="i => widgetsCenter[i]"
-          drag-handle-selector=".handle"
-          @drop="onDrop('widgetsCenter', $event)"
-        >
-          <Draggable v-for="widget in widgetsCenter" :key="widget.id">
-            <component :is="widget.type" :name="widget.name" :data="widget.data" />
-          </Draggable>
-        </Container>
+        <component
+          v-for="widget in widgetsCenter"
+          :key="widget.id"
+          :is="widget.type"
+          :name="widget.name"
+          :data="widget.data"
+        />
       </div>
       <div class="col col-md-3">
-        <Container
-          group-name="movable"
-          :get-child-payload="i => widgetsRight[i]"
-          drag-handle-selector=".handle"
-          @drop="onDrop('widgetsRight', $event)"
-        >
-          <Draggable v-for="widget in widgetsRight" :key="widget.id">
-            <component :is="widget.type" :name="widget.name" :data="widget.data" />
-          </Draggable>
-        </Container>
+        <component
+          v-for="widget in widgetsRight"
+          :key="widget.id"
+          :is="widget.type"
+          :name="widget.name"
+          :data="widget.data"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { Container, Draggable } from 'vue-smooth-dnd'
 import Widget from './Widget'
-import { applyDrag } from '../util/helpers'
 import widgetComponents from '../widgets'
 
 export default {
   name: 'widget-overview',
   components: {
-    Container,
-    Draggable,
     ...widgetComponents,
   },
   provide() {
@@ -106,19 +92,8 @@ export default {
       this.state = 'error'
     }
   },
-  methods: {
-    onDrop(collection, dropResult) {
-      this[collection] = applyDrag(this[collection], dropResult)
-    },
-    toggleEdit() {
-      this.widgetContext.mode = this.widgetContext.mode === 'edit' ? 'view' : 'edit'
-    },
-  },
 }
 </script>
 
 <style>
-.smooth-dnd-container {
-  min-height: 100%;
-}
 </style>

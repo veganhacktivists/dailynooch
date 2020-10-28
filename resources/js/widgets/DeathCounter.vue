@@ -42,15 +42,15 @@ export default {
   },
   data() {
     return {
+      columns: 4,
       duration: 0,
       interval: 50,
-      columns: 4,
       opened: new Date(),
     }
   },
   mounted() {
     setInterval(() => {
-      this.duration += this.interval
+      this.duration = Date.now() - this.opened.getTime()
     }, this.interval)
   },
   computed: {
