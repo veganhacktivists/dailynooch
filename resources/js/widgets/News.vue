@@ -32,10 +32,11 @@ export default {
   },
   computed: {
     items() {
-      return this.data.feedItems.map(i => {
-        i.footerText = `${this.getSiteName(i.link)} | ${getTimeAgo(i.date)}`;
-        return i;
-      });
+      return this.data.feedItems.map(item => ({
+        ...item,
+        featuredImage: item.featured_image,
+        footerText: `${this.getSiteName(item.link)} | ${getTimeAgo(item.date)}`,
+      }));
     }
   },
   methods: {

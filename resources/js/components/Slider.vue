@@ -5,11 +5,11 @@
       <div class="swiper-slide" v-for="item in items" :key="item[itemKey]">
         <div class="card">
           <a v-if="cardHeadType == 'image'" :href="item.link" target="_blank" rel="noopener">
-            <img class="card-img-top" :src="item.featured_image">
+            <img class="card-img-top" :src="item.featuredImage">
           </a>
           <video v-else width="100%" :poster="getVideoThumbnail(item)" controls>
-              <source :src="getVideoLink(item)" :type="getVideoType(item)" />
-              Your browser does not support the video tag.
+            <source :src="getVideoLink(item)" :type="getVideoType(item)" />
+            Your browser does not support the video tag.
           </video>
           <div class="card-body d-flex flex-column justify-content-between">
             <a :href="item.link" target="_blank" rel="noopener">
@@ -77,7 +77,7 @@ export default {
   },
   methods: {
     getVideoThumbnail(item) {
-      return item.featured_image
+      return item.featuredImage
     },
     getVideoLink(item) {
       return item.video.link
@@ -117,7 +117,6 @@ export default {
   }
 
   .card {
-    height: 100%;
     width: 100%;
   }
 

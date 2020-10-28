@@ -34,10 +34,11 @@ export default {
   },
   computed: {
     items() {
-      return this.data.feedItems.map(i => {
-        i.footerText = getTimeAgo(i.date);
-        return i;
-      });
+      return this.data.feedItems.map(item => ({
+        ...item,
+        featuredImage: item.featured_image,
+        footerText: getTimeAgo(item.date)
+      }));
     }
   },
 }

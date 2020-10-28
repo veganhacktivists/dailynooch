@@ -28,12 +28,12 @@ export default {
   },
   computed: {
     items() {
-      return this.data.map(i => {
-        i.link = i.permalink;
-        i.featured_image = i.preview.images[0].resolutions[2].url.replace(/&amp;/g, '&');
-        i.footerText = `${ i.ups } upvotes | ${ i.num_comments } comments`;
-        return i;
-      });
+      return this.data.map(item => ({
+        ...item,
+        link: item.permalink,
+        featuredImage: item.preview.images[0].resolutions[2].url.replace(/&amp;/g, '&'),
+        footerText: `${item.ups} upvotes | ${item.num_comments} comments`,
+      }));
     }
   }
 }
