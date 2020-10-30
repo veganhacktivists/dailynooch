@@ -27,7 +27,7 @@ class WpJson extends AbstractFeed
             $feedItem = new FeedItem();
             $feedItem->link = $item->link;
             $feedItem->date = $item->date;
-            $feedItem->title = htmlspecialchars_decode($item->title->rendered);
+            $feedItem->title = html_entity_decode($item->title->rendered);
             $feedItem->featured_image = $item->_embedded->{'wp:featuredmedia'}[0]->link ?? '';
 
             return $feedItem;
