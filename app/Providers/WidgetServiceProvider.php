@@ -17,8 +17,8 @@ class WidgetServiceProvider extends RouteServiceProvider
         'news',
         'nutrition-facts',
         'nutrition-facts-videos',
-        'nutrition-facts',
         'quote-of-the-day',
+        'fact-of-the-day',
         'reddit-rvegan',
     ];
 
