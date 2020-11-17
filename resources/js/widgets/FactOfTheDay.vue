@@ -1,9 +1,9 @@
 <template>
   <Widget :name="name" :error="data.error">
     <blockquote class="blockquote">
-      <ReadMore more-str="More" :text="factText" less-str="Less" :max-chars="150"></ReadMore>
+      <ReadMore more-str="More" :text="data.text" less-str="Less" :max-chars="150" />
     </blockquote>
-    <ShareUs :title="shareTitle"></ShareUs>
+    <ShareUs :title="data.text + ' - find more vegan quotes at '" />
   </Widget>
 </template>
 
@@ -28,19 +28,6 @@ export default {
     Widget,
     ReadMore,
     ShareUs
-  },
-  computed: {
-    factText() {
-      return `${this.data.text}`
-    },
-    shareTitle() {
-      return `${this.factText} - find more vegan facts at ${window.location.protocol + '//' + window.location.hostname}!`
-    }
-  },
-  methods: {
-    share() {
-      alert('not yet implemented')
-    },
   },
 }
 </script>

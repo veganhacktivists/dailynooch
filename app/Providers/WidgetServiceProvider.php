@@ -14,11 +14,11 @@ class WidgetServiceProvider extends RouteServiceProvider
 
     private $defaultTypes = [
         'death-counter',
+        'fact-of-the-day',
         'news',
         'nutrition-facts',
         'nutrition-facts-videos',
         'quote-of-the-day',
-        'fact-of-the-day',
         'reddit-rvegan',
     ];
 

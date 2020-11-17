@@ -23,10 +23,5 @@ export default {
   components: {
     Widget,
   },
-  methods: {
-    share() {
-      alert('not yet implemented')
-    },
-  },
 }
 </script>
