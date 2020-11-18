@@ -1,5 +1,6 @@
 import Art from './Art'
 import DeathCounter from './DeathCounter'
+import FactOfTheDay from './FactOfTheDay'
 import LivesCounter from './LivesCounter'
 import News from './News'
 import NutritionFacts from './NutritionFacts'
@@ -11,6 +12,7 @@ import RedditRvegan from './RedditRvegan'
 export default {
   art: Art,
   'death-counter': DeathCounter,
+  'fact-of-the-day': FactOfTheDay,
   'lives-counter': LivesCounter,
   news: News,
   'nutrition-facts': NutritionFacts,
