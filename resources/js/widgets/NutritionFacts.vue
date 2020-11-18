@@ -1,16 +1,17 @@
 <template>
   <Widget :name="name" :error="data.error">
     <template v-if="data.feedItems && data.feedItems.length">
-      <!-- @todo Implement proper design -->
-      <p v-for="item of data.feedItems.slice(0, 10)" :key="item.link">
-        {{ item.title }}
-      </p>
+      <Slider
+        name="nutrition-facts-slider"
+        :items="items"
+      />
     </template>
   </Widget>
 </template>
 
 <script>
 import Widget from '../components/Widget'
+import Slider from '../components/Slider'
 
 export default {
   name: 'nutrition-facts',
@@ -26,6 +27,15 @@ export default {
   },
   components: {
     Widget,
+    Slider,
+  },
+  computed: {
+    items() {
+      return this.data.feedItems.map(item => ({
+        ...item,
+        featuredImage: item.featured_image,
+      }));
+    }
   },
 }
 </script>
