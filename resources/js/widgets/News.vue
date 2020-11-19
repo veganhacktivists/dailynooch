@@ -5,6 +5,7 @@
         name="news-slider"
         width="peek"
         :items="items"
+        pagination
       />
     </template>
   </Widget>
@@ -48,3 +49,9 @@ export default {
   },
 }
 </script>
+
+<style lang="scss">
+.swiper-pagination-news-slider {
+  position: initial;
+}
+</style>
