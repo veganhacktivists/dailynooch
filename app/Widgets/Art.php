@@ -8,7 +8,7 @@ class Art extends AbstractWidget
 {
     protected $name = 'Art of the Day';
     protected $type = 'art';
-    protected $description = 'Description of this widget.';
+    protected $description = 'Vegan artwork of the day.';
 
     protected const ARTWORK_DIR = 'img/art';
 
