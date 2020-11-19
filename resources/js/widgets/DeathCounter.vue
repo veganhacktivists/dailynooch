@@ -1,7 +1,7 @@
 <template>
   <Widget :name="name" :error="data.error">
     <div class="row">
-      <div class="col-6 col-sm-3" v-for="(animals, i) in chunks" :key="i">
+      <div class="col-6 col-sm-6" v-for="(animals, i) in chunks" :key="i">
         <ul class="list-group" v-for="animal in animals" :key="animal.name">
           <li class="list-group-item px-0 border-0">
             <img
