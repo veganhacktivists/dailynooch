@@ -2,18 +2,33 @@
 
 namespace App\Widgets;
 
+use File;
+
 class Art extends AbstractWidget
 {
-    protected $name = 'Art';
+    protected $name = 'Art of the Day';
     protected $type = 'art';
     protected $description = 'Description of this widget.';
+
+    protected const ARTWORK_DIR = 'img/art';
+
+    public function getTtl(): int
+    {
+        return 24 * 60;
+    }
 
     public function getData(): array
     {
         return [
-            'caption' => 'By anonymous',
-            'imageAlt' => 'Life is too short to make other lives shorter',
-            'imageUrl' => 'https://i.imgur.com/Qvh34OM.png'
+            'caption' => null,
+            'imageAlt' => null,
+            'imageUrl' => $this->getRandomArtwork()
         ];
+    }
+
+    private function getRandomArtwork(): String
+    {
+        $artwork = File::files(public_path(self::ARTWORK_DIR));
+        return self::ARTWORK_DIR.'/'.$artwork[array_rand($artwork)]->getFilename();
     }
 }
