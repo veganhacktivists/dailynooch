@@ -13,7 +13,7 @@ import Widget from '../components/Widget'
 import ShareUs from '../components/ShareUs'
 
 export default {
-  name: 'art-widget',
+  name: 'art',
   props: {
     data: {
       type: Object,
