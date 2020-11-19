@@ -1,8 +1,8 @@
 <template>
   <Widget :name="name" :error="data.error">
     <figure>
-      <img class="image" :src="data.imageUrl" :alt="data.imageAlt" />
-      <figcaption>— {{ data.caption }}</figcaption>
+      <img class="image" :src="data.imageUrl" v-bind:alt="data.imageAlt" />
+      <figcaption v-if="data.caption">— {{ data.caption }}</figcaption>
     </figure>
     <ShareUs :title="shareTitle"></ShareUs>
   </Widget>
