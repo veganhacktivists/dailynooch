@@ -16,7 +16,7 @@
     </div>
 
     <p class="text-muted">
-      Animals murdered since this page was opened {{ timeSinceOpened }}. All numbers are extracted from FAOSTAT.
+      Animals murdered since page was opened {{ timeSinceOpened }}.
     </p>
   </Widget>
 </template>
