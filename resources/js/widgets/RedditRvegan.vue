@@ -3,6 +3,7 @@
     <Slider
       name="r-vegan-slider"
       :items="items"
+      pagination
     />
   </Widget>
 </template>
@@ -44,3 +45,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.swiper-pagination-r-vegan-slider {
+  position: initial;
+}
+</style>
