@@ -49,8 +49,8 @@
 </li>
 
 <li class="nav-item">
-  <a class="nav-link" href="{{ backpack_url('fact') }}">
-      <i class="nav-icon fa fa-question"></i>
-      <span>Facts</span>
-  </a>
+    <a class="nav-link" href="{{ backpack_url('fact') }}">
+        <i class="nav-icon fa fa-question"></i>
+        <span>Facts</span>
+    </a>
 </li>
