@@ -73,17 +73,32 @@ export default {
     try {
       const { data } = await axios.get('/widgets')
 
+      let widgetsMap = new Map();
+      data.widgets.forEach(widget => widgetsMap.set(widget.type, widget));
       this.state = 'success'
-      // @todo Figure how where each widget should be positioned and how to
-      // store this in state.
-      data.widgets.forEach(widget => {
-        if (widget.type == 'art') {
-          this.widgetsRight.push(widget);
-        }
-        else {
-          this.widgetsCenter.push(widget);
-        }
+
+      // Make sure that you update one of these three columns with the types of any new widgets or they won't appear.
+      let leftWidgetOrder = ['quote-of-the-day','meme-of-the-day','fact-of-the-day','help-make-vegans'];
+      let centerWidgetOrder = ['news','reddit-rvegan','nutrition-facts','nutrition-facts-videos','animal-rights-map'];
+      let rightWidgetOrder = ['art','project-of-the-month','death-counter','documentary-of-the-month'];
+
+      [{
+        targetContainer: this.widgetsLeft,
+        widgetOrder: leftWidgetOrder
+      },
+      {
+        targetContainer: this.widgetsCenter,
+        widgetOrder: centerWidgetOrder
+      },
+      {
+        targetContainer: this.widgetsRight,
+        widgetOrder: rightWidgetOrder
+      }
+      ].forEach(function(mapping) {
+        let targetContainer = mapping.targetContainer, widgetOrder = mapping.widgetOrder;
+        widgetOrder.filter(widgetType => widgetsMap.has(widgetType)).forEach(widgetType => targetContainer.push(widgetsMap.get(widgetType)));
       });
+
     } catch (err) {
       this.state = 'error'
     }
