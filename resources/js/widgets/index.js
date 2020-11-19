@@ -10,7 +10,7 @@ import Recipe from './Recipe'
 import RedditRvegan from './RedditRvegan'
 
 export default {
-  art: Art,
+  'art': Art,
   'death-counter': DeathCounter,
   'fact-of-the-day': FactOfTheDay,
   'lives-counter': LivesCounter,

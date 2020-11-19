@@ -64,18 +64,7 @@ export default {
       widgetContext: { mode: 'view' },
       widgetsLeft: [],
       widgetsCenter: [],
-      widgetsRight: [
-        {
-          id: 1,
-          type: 'art',
-          name: 'Art of the day',
-          data: {
-            caption: 'By anonymous',
-            imageAlt: 'Life is too short to make other lives shorter',
-            imageUrl: 'https://i.imgur.com/Qvh34OM.png'
-          }
-        },
-      ],
+      widgetsRight: [],
       // Either loading, success or error.
       state: 'loading',
     }
@@ -87,7 +76,14 @@ export default {
       this.state = 'success'
       // @todo Figure how where each widget should be positioned and how to
       // store this in state.
-      this.widgetsCenter = data.widgets
+      data.widgets.forEach(widget => {
+        if (widget.type == 'art') {
+          this.widgetsRight.push(widget);
+        }
+        else {
+          this.widgetsCenter.push(widget);
+        }
+      });
     } catch (err) {
       this.state = 'error'
     }

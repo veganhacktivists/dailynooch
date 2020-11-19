@@ -13,6 +13,7 @@ class WidgetServiceProvider extends RouteServiceProvider
     private const CACHE_KEY = 'widgets.%s';
 
     private $defaultTypes = [
+        'art',
         'death-counter',
         'fact-of-the-day',
         'news',
