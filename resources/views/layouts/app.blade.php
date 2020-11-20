@@ -48,7 +48,7 @@
     <div class="card mb-4 border-0">
 	<div class="card-body">
 	<blockquote class="blockquote" style="margin-bottom: -20px;">
-	<p style="font-size: 15px;color: #5c5c5c;">👋&nbsp;&nbsp;Find the latest vegan news, recipes and more! Please <a href="#" onclick="window.external.AddFavorite(location.href, document.title);">add us to your favorites</a> for new content everyday!</p>
+	<p style="font-size: 15px;color: #5c5c5c;">😍&nbsp;Find the latest vegan news, recipes and more! Please <a href="#" onclick="window.external.AddFavorite(location.href, document.title);">add us to your favorites</a> for new content everyday!</p>
     </blockquote>
     </div>
     </div>
