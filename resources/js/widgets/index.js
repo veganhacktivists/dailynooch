@@ -8,6 +8,7 @@ import NutritionFactsVideos from './NutritionFactsVideos'
 import QuoteOfTheDay from './QuoteOfTheDay'
 import Recipe from './Recipe'
 import RedditRvegan from './RedditRvegan'
+import MemeOfTheDay from './MemeOfTheDay'
 
 export default {
   'art': Art,
@@ -20,4 +21,5 @@ export default {
   'quote-of-the-day': QuoteOfTheDay,
   recipe: Recipe,
   'reddit-rvegan': RedditRvegan,
+  'meme-of-the-day': MemeOfTheDay,
 }
