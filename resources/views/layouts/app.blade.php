@@ -83,6 +83,7 @@
   
         @yield('content')
       </main>
+	  <img src="https://i.imgur.com/0ACWn9B.png" style="width: 100%;">
     </div>
   </body>
 </html>
