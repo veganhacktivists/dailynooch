@@ -7,6 +7,9 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+// Buttons
+@import 'buttons';
+
 .bg-tertiary {
   background-color: color("orange");
 }
