@@ -1,9 +1,7 @@
 <div class="container pt-5 mb-2">
   <div class="row">
     <div class="col d-flex flex-column">
-      <span class="h1 font-weight-bold text-dark mb-0 logo-text">
-        My<span class="text-primary">Vegan</span>Dashboard
-      </span>
+      <img src="https://i.imgur.com/8aayF0l.png" alt="Daily Nooch">
       <span class="logo-tagline">Customizable dashboard with news, resources and inspiration</span>
     </div>
 
