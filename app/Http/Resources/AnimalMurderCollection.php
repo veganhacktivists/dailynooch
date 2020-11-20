@@ -38,6 +38,8 @@ class AnimalMurderCollection extends ResourceCollection
         $animals = static::mergeAnimals($animals, 'Other', ['Ass', 'Game', 'Mule']);
         $animals = static::mergeAnimals($animals, 'Camel', ['Other Camelids']);
 
+        $animals = static::removeAnimals($animals, ['Other']);
+
         return static::make($animals);
     }
 
@@ -62,5 +64,14 @@ class AnimalMurderCollection extends ResourceCollection
         });
 
         return $animals;
+    }
+
+    private static function removeAnimals(Collection $currentAnimals, $animalsToRemove): Collection
+    {
+        $currentAnimals = $currentAnimals->filter(function ($animal) use ($animalsToRemove) {
+            return !in_array($animal['name'], $animalsToRemove);
+        });
+
+        return $currentAnimals;
     }
 }
