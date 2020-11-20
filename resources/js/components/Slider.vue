@@ -114,7 +114,7 @@ export default {
     height: 100%;
     top: 0;
     right: 0;
-    background-image: linear-gradient(to right, rgba(255, 255, 255, 0) , rgb(160, 160, 160));
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0) , rgba(0, 0, 0, 0.259));
   }
 
   .swiper-wrapper {

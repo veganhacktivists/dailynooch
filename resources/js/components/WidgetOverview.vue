@@ -11,7 +11,7 @@
     </div>
 
     <div v-else class="row">
-      <div class="col col-md-3">
+      <div class="col-14 col-md-4">
         <component
           v-for="widget in widgetsLeft"
           :key="widget.id"
@@ -20,7 +20,7 @@
           :data="widget.data"
         />
       </div>
-      <div class="col-12 col-md-9 col-lg-6">
+      <div class="col-14 col-md-6">
         <component
           v-for="widget in widgetsCenter"
           :key="widget.id"
@@ -29,7 +29,7 @@
           :data="widget.data"
         />
       </div>
-      <div class="col col-md-3">
+      <div class="col-14 col-md-4">
         <component
           v-for="widget in widgetsRight"
           :key="widget.id"
