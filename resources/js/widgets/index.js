@@ -9,9 +9,10 @@ import QuoteOfTheDay from './QuoteOfTheDay'
 import Recipe from './Recipe'
 import RedditRvegan from './RedditRvegan'
 import MemeOfTheDay from './MemeOfTheDay'
+import HelpPotentialVegans from './HelpPotentialVegans'
 
 export default {
-  'art': Art,
+  art: Art,
   'death-counter': DeathCounter,
   'fact-of-the-day': FactOfTheDay,
   'lives-counter': LivesCounter,
@@ -22,4 +23,5 @@ export default {
   recipe: Recipe,
   'reddit-rvegan': RedditRvegan,
   'meme-of-the-day': MemeOfTheDay,
+  'help-potential-vegans': HelpPotentialVegans,
 }
