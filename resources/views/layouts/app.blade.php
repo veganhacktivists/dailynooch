@@ -18,6 +18,32 @@
 
 	  gtag('config', 'UA-150398169-12');
 	</script>
+	
+	<SCRIPT LANGUAGE="JavaScript">
+
+	<!-- Begin
+
+	function bookmark()
+
+	{
+
+	bookmarkurl="https://www.example.com";// replace your site URL
+
+	bookmarktitle="example.com: PHP SQL and Javascript Source"; // replace this line with your site title
+
+	if (document.all)
+
+	window.external.AddFavorite(bookmarkurl,bookmarktitle)
+
+	else if (window.sidebar) // firefox
+
+		window.sidebar.addPanel(bookmarktitle, bookmarkurl, "");
+
+	}
+
+	// End -->
+
+	</script>
 
     <!-- Scripts -->
     <script>
@@ -48,7 +74,7 @@
     <div class="card mb-4 border-0">
 	<div class="card-body">
 	<blockquote class="blockquote" style="margin-bottom: -20px;">
-	<p style="font-size: 15px;color: #5c5c5c;">😍&nbsp;Find the latest vegan news, recipes and more! Please <a href="#" onclick="window.external.AddFavorite(location.href, document.title);">add us to your favorites</a> for new content everyday!</p>
+	<p style="font-size: 15px;color: #5c5c5c;">😍&nbsp;Find the latest vegan news, recipes and more! Please <a href="javascript:bookmark()">bookmark this page</a> for new content everyday!</p>
     </blockquote>
     </div>
     </div>
