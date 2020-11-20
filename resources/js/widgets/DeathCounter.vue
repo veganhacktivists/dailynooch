@@ -42,7 +42,7 @@ export default {
   },
   data() {
     return {
-      columns: 4,
+      columns: 2,
       duration: 0,
       interval: 50,
       opened: new Date(),
