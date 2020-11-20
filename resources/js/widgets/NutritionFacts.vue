@@ -4,6 +4,7 @@
       <Slider
         name="nutrition-facts-slider"
         :items="items"
+        pagination
       />
     </template>
   </Widget>
@@ -39,3 +40,9 @@ export default {
   },
 }
 </script>
+
+<style lang="scss">
+.swiper-pagination-nutrition-facts-slider {
+  position: initial;
+}
+</style>
