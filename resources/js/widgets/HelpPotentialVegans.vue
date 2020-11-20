@@ -1,16 +1,6 @@
 <template>
   <Widget :name="name" :error="data.error">
-    <iframe
-      id="twitter-widget-0"
-      scrolling="no"
-      frameborder="0"
-      allowtransparency="true"
-      allowfullscreen="true"
-      class="twitter-timeline twitter-timeline-rendered"
-      style="position: static; visibility: visible; display: inline-block; width: 100%; padding: 0px; border: none; max-width: 100%; min-width: 180px; margin-top: 0px; margin-bottom: 0px; min-height: 200px; height: 5661.98px;"
-      data-widget-id="profile:5m5v_en"
-      title="Twitter Timeline"
-    ></iframe>
+    <a class="twitter-timeline" href="https://twitter.com/5m5v_en?ref_src=twsrc%5Etfw">Tweets by 5m5v_en</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   </Widget>
 </template>
 
