@@ -3,6 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Get your daily vegan news, memes, art, videos, inspiration, and more!" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:image" content="https://dailynooch.org/og-img.png" />
+	<meta property="og:image:width" content="550" />
+	<meta property="og:image:height" content="330" />
+	<meta property="og:description" content="Get your daily vegan news, memes, art, videos, inspiration, and more!" />
+	<link rel="canonical" href="https://dailynooch.org/" />
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
