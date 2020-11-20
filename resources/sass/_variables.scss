@@ -1,6 +1,12 @@
 // Body
 $body-bg: #f7f7f7;
 
+// Sizes
+$grid-columns: 14;
+$container-max-widths: (
+  xl: 1330px,
+);
+
 // Typography
 $font-family-sans-serif: 'Roboto', sans-serif;
 $font-size-base: 0.9rem;
