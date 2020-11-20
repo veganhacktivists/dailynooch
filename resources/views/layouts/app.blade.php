@@ -82,8 +82,7 @@
   
   
         @yield('content')
-		<center><br>Created with love by the <a href="https://veganhacktivists.org" target="_blank">Vegan Hacktivists!</a><br><br>Support us <a href="https://www.patreon.com/veganhacktivists" target="">on Patreon!</a>&nbsp;&nbsp;🐮&nbsp;💕</center>
-      </main>
+		<center><br>Daily Nooch was created with love by <a href="https://veganhacktivists.org" target="_blank">Vegan Hacktivists!</a><br><br><a href="https://veganhacktivists.org/contact" target="_blank">Contact us,</a> or support us <a href="https://www.patreon.com/veganhacktivists" target="">on Patreon!</a>&nbsp;&nbsp;🐮&nbsp;💕</center>      </main>
 	  <img src="https://i.imgur.com/0ACWn9B.png" style="width: 100%;">
     </div>
   </body>
