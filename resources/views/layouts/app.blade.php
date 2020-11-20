@@ -93,10 +93,10 @@
     @endif
   </head>
   <body>
-    <div id="app">
+    <div id="app" class="d-flex flex-column min-vh-100">
       @include('inc.navbar')
 
-      <main class="py-4">
+      <main class="py-4 flex-grow-1">
 	  
 	<div class="container">
     <div class="card mb-4 border-0">
