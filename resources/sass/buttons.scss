@@ -1,0 +1,33 @@
+@mixin pressable-button($background, $foreground, $distance) {
+  background-color: $background;
+  box-shadow: 0 $distance darken($background, 10%);
+  color: $foreground;
+  transform: translateY(0);
+
+  &:hover {
+    box-shadow: 0 $distance * 0.75 darken($background, 10%);
+    color: $foreground;
+    transform: translateY($distance * 0.25);
+  }
+
+  &:active {
+    box-shadow: 0 $distance * 0 darken($background, 10%);
+    color: $foreground;
+    transform: translateY($distance * 1);
+  }
+}
+
+.btn {
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.15s ease-in-out;
+
+  &.btn-primary {
+    @include pressable-button($primary, white, $btn-distance);
+  }
+
+  &.btn-secondary {
+    @include pressable-button($secondary, white, $btn-distance);
+  }
+}
