@@ -73,8 +73,8 @@
 	
 	<style>
 	 #bookmark-this {
-	  padding: 7px 11px;
-	  margin: 3px 3px;
+	  padding: 5px 10px;
+	  margin: 4px 5px;
 	  background-color: #f0ad4e;
 	  border: 1px solid #eea236;
 	  border-radius: 4px;
