@@ -13,6 +13,7 @@ import MemeOfTheDay from './MemeOfTheDay'
 import HelpPotentialVegans from './HelpPotentialVegans'
 import DocOfTheMonth from './DocOfTheMonth'
 import VeganBootcamp from './VeganBootcamp'
+import AnimalRightsMap from './AnimalRightsMap'
 
 export default {
   art: Art,
@@ -30,4 +31,5 @@ export default {
   'help-potential-vegans': HelpPotentialVegans,
   'doc-of-the-month': DocOfTheMonth,
   'vegan-bootcamp': VeganBootcamp,
+  'animal-rights-map': AnimalRightsMap,
 }

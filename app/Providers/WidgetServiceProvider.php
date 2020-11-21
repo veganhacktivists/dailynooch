@@ -26,6 +26,7 @@ class WidgetServiceProvider extends RouteServiceProvider
 		'reddit-rveganrecipes',
 		'doc-of-the-month',
 		'vegan-bootcamp',
+		'animal-rights-map',
     ];
 
     public function boot(): void
