@@ -1,7 +1,7 @@
 <template>
   <Widget :name="name" :error="data.error">
     <figure>
-      <img class="image" :src="data.imageUrl" v-bind:alt="data.imageAlt" />
+      <a href="data.imageUrl" target="_blank"><img class="image" :src="data.imageUrl" v-bind:alt="data.imageAlt" /></a>
       <figcaption v-if="data.caption">— {{ data.caption }}</figcaption>
     </figure>
     <ShareUs :buttonText="'today\'s art'" :title="shareTitle"></ShareUs>
