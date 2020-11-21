@@ -1,7 +1,7 @@
 <template>
   <Widget :name="name" :error="data.error">
     <figure>
-      <a href="data.imageUrl" target="_blank"><img class="image" :src="data.imageUrl" /></a>
+      <a :href="data.imageUrl" target="_blank"><img class="image" :src="data.imageUrl" /></a>
     </figure>
     <ShareUs :buttonText="name" :title="shareTitle"></ShareUs>
   </Widget>
