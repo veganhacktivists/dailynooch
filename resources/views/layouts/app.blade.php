@@ -63,7 +63,8 @@
 	
 	<style>
 	 #bookmark-this {
-	  padding: 5px 10px;
+	  padding: 7px 11px;
+	  margin: 3px 3px;
 	  background-color: #f0ad4e;
 	  border: 1px solid #eea236;
 	  border-radius: 4px;
@@ -128,7 +129,7 @@
     <div class="card mb-4 border-0">
 	<div class="card-body">
 	<blockquote class="blockquote" style="margin-bottom: -20px;">
-	<p style="font-size: 15px;color: #5c5c5c;">😍&nbsp;Find the latest vegan news, recipes and more! Please <a id="bookmark-this" href="#">bookmark this page</a> for new content everyday!</p>
+	<p style="font-size: 15px;color: #5c5c5c;">😍&nbsp;Find the latest vegan news, recipes and more! Explore new vegan content every day by <a id="bookmark-this" href="#">bookmarking this page!</a></p>
     </blockquote>
 
     </div>
