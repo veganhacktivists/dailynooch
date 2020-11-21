@@ -80,7 +80,7 @@ export default {
       // Make sure that you update one of these three columns with the types of any new widgets or they won't appear.
       let leftWidgetOrder = ['quote-of-the-day','meme-of-the-day','help-make-vegans','help-potential-vegans'];
       let centerWidgetOrder = ['news','reddit-rvegan','nutrition-facts','nutrition-facts-videos','animal-rights-map','reddit-rveganrecipes'];
-      let rightWidgetOrder = ['art','project-of-the-month','fact-of-the-day','death-counter','doc-of-the-month'];
+      let rightWidgetOrder = ['art','project-of-the-month','fact-of-the-day','death-counter','doc-of-the-month','vegan-bootcamp'];
 
       [{
         targetContainer: this.widgetsLeft,

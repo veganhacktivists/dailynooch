@@ -12,6 +12,7 @@ import RedditRveganrecipes from './RedditRveganrecipes'
 import MemeOfTheDay from './MemeOfTheDay'
 import HelpPotentialVegans from './HelpPotentialVegans'
 import DocOfTheMonth from './DocOfTheMonth'
+import VeganBootcamp from './VeganBootcamp'
 
 export default {
   art: Art,
@@ -28,4 +29,5 @@ export default {
   'meme-of-the-day': MemeOfTheDay,
   'help-potential-vegans': HelpPotentialVegans,
   'doc-of-the-month': DocOfTheMonth,
+  'vegan-bootcamp': VeganBootcamp,
 }
