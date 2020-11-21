@@ -63,8 +63,11 @@
 	
 	<style>
 	.fab fah fa-lg fa-facebook-f {
-		width: 39px;
-		text-align: center;
+		width: 39px !important;
+		text-align: center !important;
+	}
+	.modal-container {
+	border-radius: 11px !important;
 	}
 	</style>
 	
