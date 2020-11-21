@@ -62,6 +62,13 @@
 	</script>
 	
 	<style>
+	.fab fah fa-lg fa-facebook-f {
+		width: 39px;
+		text-align: center;
+	}
+	</style>
+	
+	<style>
 	 #bookmark-this {
 	  padding: 7px 11px;
 	  margin: 3px 3px;

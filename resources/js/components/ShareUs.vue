@@ -2,7 +2,7 @@
   <Modal>
     <template v-slot:button-inner>Share {{ buttonText }}!</template>
     <template v-slot:body>
-      <h2 class="text-tertiary text-center">Share this on..</h2>
+      <h2 class="text-tertiary text-center" style="margin-bottom: -15px;">Share this on..</h2>
         <div class="share-network-list">
           <ShareNetwork
             v-for="network in networks"
