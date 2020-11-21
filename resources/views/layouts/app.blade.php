@@ -62,7 +62,7 @@
 	</script>
 	
 	<style>
-	.fab fah fa-lg fa-facebook-f {
+	.fa-facebook-f {
 		width: 39px !important;
 		text-align: center !important;
 	}
