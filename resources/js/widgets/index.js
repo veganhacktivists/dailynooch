@@ -8,6 +8,7 @@ import NutritionFactsVideos from './NutritionFactsVideos'
 import QuoteOfTheDay from './QuoteOfTheDay'
 import Recipe from './Recipe'
 import RedditRvegan from './RedditRvegan'
+import RedditRveganrecipes from './RedditRveganrecipes'
 import MemeOfTheDay from './MemeOfTheDay'
 import HelpPotentialVegans from './HelpPotentialVegans'
 
@@ -22,6 +23,7 @@ export default {
   'quote-of-the-day': QuoteOfTheDay,
   recipe: Recipe,
   'reddit-rvegan': RedditRvegan,
+  'reddit-rveganrecipes': RedditRveganrecipes,
   'meme-of-the-day': MemeOfTheDay,
   'help-potential-vegans': HelpPotentialVegans,
 }

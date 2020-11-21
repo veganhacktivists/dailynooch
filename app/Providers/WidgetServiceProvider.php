@@ -23,6 +23,7 @@ class WidgetServiceProvider extends RouteServiceProvider
         'quote-of-the-day',
         'reddit-rvegan',
         'meme-of-the-day',
+		'reddit-rveganrecipes',
     ];
 
     public function boot(): void
