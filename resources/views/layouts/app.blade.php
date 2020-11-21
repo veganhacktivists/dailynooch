@@ -83,7 +83,7 @@
 	  text-decoration: none;
 	  text-shadow: 0 -1px 0 rgba(0, 0, 0, .2);
 	  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
-	  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+	  box-shadow: inset 0 0px 0 rgba(255, 255, 255, 0.4), 0 4px 2px rgb(195 140 83);
 	  -webkit-user-select:none;
 	  -moz-user-select:none;
 	  -ms-user-select:none;
