@@ -22,13 +22,14 @@ class Art extends AbstractWidget
         return [
             'caption' => null,
             'imageAlt' => null,
-            'imageUrl' => $this->getRandomArtwork()
+            'imageUrl' => $this->getRandomArtwork(),
         ];
     }
 
-    private function getRandomArtwork(): String
+    private function getRandomArtwork(): string
     {
         $artwork = File::files(public_path(self::ARTWORK_DIR));
+
         return self::ARTWORK_DIR.'/'.$artwork[array_rand($artwork)]->getFilename();
     }
 }
