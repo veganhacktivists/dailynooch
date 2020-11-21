@@ -1,18 +1,16 @@
 @mixin pressable-button($background, $foreground, $distance) {
   background-color: $background;
   box-shadow: 0 $distance darken($background, 10%);
-  color: $foreground;
+  color: $foreground!important;
   transform: translateY(0);
 
   &:hover {
     box-shadow: 0 $distance * 0.75 darken($background, 10%);
-    color: $foreground;
     transform: translateY($distance * 0.25);
   }
 
   &:active {
     box-shadow: 0 $distance * 0 darken($background, 10%);
-    color: $foreground;
     transform: translateY($distance * 1);
   }
 }
