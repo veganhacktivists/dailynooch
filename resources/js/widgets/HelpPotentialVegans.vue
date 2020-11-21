@@ -1,7 +1,12 @@
 <template>
   <Widget :name="name" :error="data.error">
-    <a class="twitter-timeline" data-height="1500" data-dnt="true" href="https://twitter.com/5m5v_en?ref_src=twsrc%5Etfw">Tweets by 5m5v_en</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-	<a href="https://5minutes5vegans.org/" target="_blank"><button class="btn btn-primary">Help others go vegan!</button></a>
+    <a
+      class="twitter-timeline"
+      data-height="1500"
+      data-dnt="true"
+      href="https://twitter.com/5m5v_en?ref_src=twsrc%5Etfw"
+    >Tweets by 5m5v_en</a>
+	  <a href="https://5minutes5vegans.org/" target="_blank"><button class="btn btn-primary">Help others go vegan!</button></a>
   </Widget>
 </template>
 
@@ -25,13 +30,10 @@ export default {
   },
   mounted() {
       let twitterScript = document.createElement('script');
-      twitterScript.async = true;
       twitterScript.src = 'https://platform.twitter.com/widgets.js';
-      twitterScript.setAttribute('charset', 'utf-8');
-      twitterScript.crossOrigin = 'anonymous';
-      twitterScript.onload = () => document.getElementById('timeline-loading')?.remove()
+      twitterScript.async = true;
+      twitterScript.crossOrigin = true;
       document.head.appendChild(twitterScript);
-      // this.$nextTick(function () { twttr.widgets.load(); });
   },
 }
 </script>
