@@ -3,7 +3,7 @@
     <blockquote class="blockquote">
       <ReadMore more-str="More" :text="data.text" less-str="Less" :max-chars="150" />
     </blockquote>
-    <ShareUs :title="data.text + ' - find more vegan quotes at '" />
+    <ShareUs :buttonText="name" :title="data.text + ' - find more vegan quotes at '" />
   </Widget>
 </template>
 

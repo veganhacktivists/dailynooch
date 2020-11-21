@@ -3,7 +3,7 @@
     <figure>
       <img class="image" :src="data.imageUrl" />
     </figure>
-    <ShareUs :title="shareTitle"></ShareUs>
+    <ShareUs :buttonText="name" :title="shareTitle"></ShareUs>
   </Widget>
 </template>
 

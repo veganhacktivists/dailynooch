@@ -1,6 +1,6 @@
 <template>
   <Modal>
-    <template v-slot:button-inner>Share</template>
+    <template v-slot:button-inner>Share {{ buttonText }}!</template>
     <template v-slot:body>
       <h2 class="text-tertiary text-center">Share This On:</h2>
         <hr>
@@ -12,6 +12,7 @@
             :style="{backgroundColor: network.color}"
             :url="url"
             :title="title"
+            :buttonText="buttonText"
           >
             <i :class="network.icon"></i>
             <span>{{ network.name }}</span>
@@ -35,6 +36,10 @@ export default {
     url: {
       type: String,
       default: window.location.protocol + '//' + window.location.hostname
+    },
+    buttonText: {
+      type: String,
+      required: true,
     },
   },
   components: {
