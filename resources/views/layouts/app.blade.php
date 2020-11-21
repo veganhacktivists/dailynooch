@@ -97,7 +97,7 @@
           <div class="card-body">
             <blockquote class="blockquote">
               <span>
-                😍&nbsp;Find the latest vegan news, recipes and more! Explore new vegan content every day by <a id="bookmark-this" class="btn btn-secondary mt-n1 px-2 py-1" href="#">bookmarking this page</a> !
+                😍&nbsp;Find the latest vegan news, recipes and more! Explore new vegan content every day by <a id="bookmark-this" class="btn btn-secondary mt-n1 px-2 py-1" href="#">bookmarking this page!</a>
               </span>
             </blockquote>
           </div>
