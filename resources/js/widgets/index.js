@@ -11,6 +11,7 @@ import RedditRvegan from './RedditRvegan'
 import RedditRveganrecipes from './RedditRveganrecipes'
 import MemeOfTheDay from './MemeOfTheDay'
 import HelpPotentialVegans from './HelpPotentialVegans'
+import DocOfTheMonth from './DocOfTheMonth'
 
 export default {
   art: Art,
@@ -26,4 +27,5 @@ export default {
   'reddit-rveganrecipes': RedditRveganrecipes,
   'meme-of-the-day': MemeOfTheDay,
   'help-potential-vegans': HelpPotentialVegans,
+  'doc-of-the-month': DocOfTheMonth,
 }
