@@ -1,6 +1,6 @@
 <template>
   <Widget :name="name" :error="data.error">
-    <a class="twitter-timeline" data-height="1500" href="https://twitter.com/5m5v_en?ref_src=twsrc%5Etfw">Tweets by 5m5v_en</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <a class="twitter-timeline" data-height="1500" data-dnt="true" href="https://twitter.com/5m5v_en?ref_src=twsrc%5Etfw">Tweets by 5m5v_en</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   </Widget>
 </template>
 
