@@ -42,8 +42,9 @@ class WidgetServiceProvider extends RouteServiceProvider
             $widgets = [];
             $missingWidgets = [];
             foreach ($types as $type) {
+                $widgetData = [];
                 if (Cache::has(sprintf(self::CACHE_KEY, $type))) {
-                    $widget = Cache::get(sprintf(self::CACHE_KEY, $type));
+                    $widgetData = Cache::get(sprintf(self::CACHE_KEY, $type));
                 } else {
                     $widget = WidgetFactory::make($type);
                     if ($widget === null) {
@@ -51,53 +52,49 @@ class WidgetServiceProvider extends RouteServiceProvider
                         continue;
                     }
 
-                    Cache::put(sprintf(self::CACHE_KEY, $type), $widget, now()->addMinutes($widget->getTtl()));
-                }
-
-                try {
-                    $widgetData = $widget->getData();
-                } catch (\Throwable $th) {
-                    Log::error($th);
-
-                    if (app()->environment('production')) {
+                    try {
                         $widgetData = [
-                            'error' => true,
+                            'type' => $widget->getType(),
+                            'name' => $widget->getName(),
+                            'data' => $widget->getData(),
                         ];
-                    } else {
-                        $widgetData = [
-                            'error' => [
+                        Cache::put(sprintf(self::CACHE_KEY, $type), $widgetData, now()->addMinutes($widget->getTtl()));
+                    } catch (\Throwable $th) {
+                        Log::error($th);
+
+                        if (app()->environment('production')) {
+                            $widgetData['error'] = true;
+                        } else {
+                            $widgetData['error'] = [
                                 'message' => $th->getMessage(),
                                 'file' => $th->getFile(),
                                 'line' => $th->getLine(),
                                 'trace' => $th->getTraceAsString(),
-                            ],
-                        ];
+                            ];
+                        }
                     }
                 }
 
-                $widgets[] = [
-                    'type' => $widget->getType(),
-                    'name' => $widget->getName(),
-                    'data' => $widgetData,
-                ];
+                $widgets[] = $widgetData;
             }
 
             return new JsonResponse(['widgets' => $widgets, 'missing_widgets' => $missingWidgets]);
         });
 
         $this->app['router']->get('widgets/{name}', function (string $name) {
+            $widgetData = [];
             if (Cache::has(sprintf(self::CACHE_KEY, $name))) {
-                $widget = Cache::get(sprintf(self::CACHE_KEY, $name));
+                $widgetData = Cache::get(sprintf(self::CACHE_KEY, $name));
             } else {
                 $widget = WidgetFactory::make($name);
                 if ($widget === null) {
                     return new JsonResponse([], 404);
                 }
 
-                Cache::put(sprintf(self::CACHE_KEY, $name), $widget, now()->addMinutes($widget->getTtl()));
+                Cache::put(sprintf(self::CACHE_KEY, $name), $widget->action(), now()->addMinutes($widget->getTtl()));
             }
 
-            return $widget->action();
+            return $widgetData;
         });
 
         parent::boot();
