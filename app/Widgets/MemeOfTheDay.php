@@ -20,13 +20,14 @@ class MemeOfTheDay extends AbstractWidget
     public function getData(): array
     {
         return [
-            'imageUrl' => $this->getRandomMeme()
+            'imageUrl' => $this->getRandomMeme(),
         ];
     }
 
-    private function getRandomMeme(): String
+    private function getRandomMeme(): string
     {
         $meme = File::files(public_path(self::MEME_DIR));
+
         return self::MEME_DIR.'/'.$meme[array_rand($meme)]->getFilename();
     }
 }
