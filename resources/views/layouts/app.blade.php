@@ -61,31 +61,43 @@
 	  gtag('config', 'UA-150398169-12');
 	</script>
 	
-	<SCRIPT LANGUAGE="JavaScript">
-
-	<!-- Begin
-
-	function bookmark()
-
-	{
-
-	bookmarkurl="https://www.example.com";// replace your site URL
-
-	bookmarktitle="example.com: PHP SQL and Javascript Source"; // replace this line with your site title
-
-	if (document.all)
-
-	window.external.AddFavorite(bookmarkurl,bookmarktitle)
-
-	else if (window.sidebar) // firefox
-
-		window.sidebar.addPanel(bookmarktitle, bookmarkurl, "");
-
+	<style>
+	 #bookmark-this {
+	  padding: 5px 10px;
+	  background-color: #f0ad4e;
+	  border: 1px solid #eea236;
+	  border-radius: 4px;
+	  font-size: 12px;
+	  color: #fff;
+	  text-decoration: none;
+	  text-shadow: 0 -1px 0 rgba(0, 0, 0, .2);
+	  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+	  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+	  -webkit-user-select:none;
+	  -moz-user-select:none;
+	  -ms-user-select:none;
+	  user-select:none;
 	}
 
-	// End -->
+	#bookmark-this:hover {
+	  background-color: #ec971f;
+	  border: 1px solid #d58512;
+	  text-decoration: none;
+	}
 
-	</script>
+	#bookmark-this:active {
+	  background-color: #ec971f;
+	  border: 1px solid #d58512;
+	  -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.2);
+	  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.2);
+	}
+	</style>
+	
+	<link rel="stylesheet" href="addtohomescreen.css">
+	<script src="addtohomescreen.js"></script>
+
+	<!-- Additionally, include jQuery (necessary for the bookmark script) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
     <!-- Scripts -->
     <script>
@@ -116,8 +128,9 @@
     <div class="card mb-4 border-0">
 	<div class="card-body">
 	<blockquote class="blockquote" style="margin-bottom: -20px;">
-	<p style="font-size: 15px;color: #5c5c5c;">😍&nbsp;Find the latest vegan news, recipes and more! Please <a href="javascript:bookmark()">bookmark this page</a> for new content everyday!</p>
+	<p style="font-size: 15px;color: #5c5c5c;">😍&nbsp;Find the latest vegan news, recipes and more! Please <a id="bookmark-this" href="#">bookmark this page</a> for new content everyday!</p>
     </blockquote>
+
     </div>
     </div>
     </div>
@@ -127,5 +140,43 @@
 		<center><br><img src="https://dailynooch.org/favicon.png" style="width:20px;margin-top: -4px;">&nbsp;&nbsp;Daily Nooch was created with love by <a href="https://veganhacktivists.org" target="_blank">Vegan Hacktivists!</a><br><br><a href="https://veganhacktivists.org/contact" target="_blank">Contact us,</a> or support us <a href="https://www.patreon.com/veganhacktivists" target="_blank">on Patreon!</a>&nbsp;&nbsp;🐮&nbsp;💕</center>      </main>
 	  <img src="https://i.imgur.com/LRAAzvY.png" style="width: 100%;">
     </div>
+	
+	<script>
+		jQuery(function ($) {
+
+	  $('#bookmark-this').click(function (e) {
+		var bookmarkTitle = document.title;
+		var bookmarkUrl = window.location.href;
+
+		if ('addToHomescreen' in window && addToHomescreen.isCompatible) {
+		  // Mobile browsers
+		  addToHomescreen({ autostart: false, startDelay: 0 }).show(true);
+		} else if (/CriOS\//.test(navigator.userAgent)) {
+		  // Chrome for iOS
+		  alert('To add to Home Screen, launch this website in Safari, then tap the Share button and select "Add to Home Screen".');
+		} else if (window.sidebar && window.sidebar.addPanel) {
+		  // Firefox <=22
+		  window.sidebar.addPanel(bookmarkTitle, bookmarkUrl, '');
+		} else if ((window.sidebar && /Firefox/i.test(navigator.userAgent) && !Object.fromEntries) || (window.opera && window.print)) {
+		  // Firefox 23-62 and Opera <=14
+		  $(this).attr({
+			href: bookmarkUrl,
+			title: bookmarkTitle,
+			rel: 'sidebar'
+		  }).off(e);
+		  return true;
+		} else if (window.external && ('AddFavorite' in window.external)) {
+		  // IE Favorites
+		  window.external.AddFavorite(bookmarkUrl, bookmarkTitle);
+		} else {
+		  // Other browsers (Chrome, Safari, Firefox 63+, Opera 15+)
+		  alert('Press ' + (/Mac/i.test(navigator.platform) ? 'Cmd' : 'Ctrl') + '+D to bookmark this page.');
+		}
+
+		return false;
+	  });
+
+	});
+	</script>
   </body>
 </html>
