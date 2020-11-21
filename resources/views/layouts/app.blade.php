@@ -68,7 +68,7 @@
 	  background-color: #f0ad4e;
 	  border: 1px solid #eea236;
 	  border-radius: 4px;
-	  font-size: 12px;
+	  font-size: 15px;
 	  color: #fff;
 	  text-decoration: none;
 	  text-shadow: 0 -1px 0 rgba(0, 0, 0, .2);
