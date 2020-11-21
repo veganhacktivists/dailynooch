@@ -3,7 +3,6 @@
     <figure>
       <a href="http://vbcamp.org/dailynooch" target="_blank"><img class="image" :src="data.imageUrl" /></a>
     </figure>
-	<br>
 	<p>
    <b> Vegan Bootcamp </b>is a free challenge website that will take you step-by-step towards a Vegan diet and lifestyle. <b style="
 ">Already Vegan?</b> <a href="http://vbcamp.org/dailynooch" target="_blank">Signup and share</a> the challenge with your friends and family using your own unique trackable link! 🐤
