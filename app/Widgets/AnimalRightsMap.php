@@ -4,7 +4,7 @@ namespace App\Widgets;
 
 use File;
 
-class DocOfTheMonth extends AbstractWidget
+class AnimalRightsMap extends AbstractWidget
 {
     protected $name = 'Animal Rights Map';
     protected $type = 'animal-rights-map';
