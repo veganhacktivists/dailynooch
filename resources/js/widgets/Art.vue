@@ -4,7 +4,7 @@
       <img class="image" :src="data.imageUrl" v-bind:alt="data.imageAlt" />
       <figcaption v-if="data.caption">— {{ data.caption }}</figcaption>
     </figure>
-    <ShareUs :buttonText="'today\'s art!'" :title="shareTitle"></ShareUs>
+    <ShareUs :buttonText="'today\'s art'" :title="shareTitle"></ShareUs>
   </Widget>
 </template>
 

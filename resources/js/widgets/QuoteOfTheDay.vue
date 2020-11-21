@@ -6,7 +6,7 @@
         <em>&mdash;{{ data.author }}</em>
       </p>
     </blockquote>
-    <ShareUs :buttonText="'this quote!'" :title="shareTitle"></ShareUs>
+    <ShareUs :buttonText="'this quote'" :title="shareTitle"></ShareUs>
   </Widget>
 </template>
 
