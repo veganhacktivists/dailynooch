@@ -76,6 +76,7 @@ export default {
 <style lang="scss" scoped>
 .share-network-list {
   display: flex;
+  width: 100%;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -88,6 +89,7 @@ export default {
 a[class^='share-network-'] {
   flex: none;
   color: #ffffff;
+  width: 200px;
   background-color: #333;
   border-radius: 0.1875rem;
   overflow: hidden;
