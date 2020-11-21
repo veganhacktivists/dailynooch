@@ -60,6 +60,12 @@ export default {
           icon: 'fab fah fa-lg fa-twitter',
           color: '#1da1f2',
         },
+		{
+          network: 'reddit',
+          name: 'Reddit',
+          icon: 'fab fah fa-lg fa-reddit',
+          color: '#ff4500',
+        },
         {
           network: 'email',
           name: 'Email',
