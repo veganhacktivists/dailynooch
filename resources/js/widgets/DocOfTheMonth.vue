@@ -3,7 +3,7 @@
     <figure>
       <a href="http://3movies.org/" target="_blank"><img class="image" :src="data.imageUrl" /></a>
     </figure>
-    <ShareUs :buttonText="Doc of the month" :title="shareTitle"></ShareUs>
+    <ShareUs :buttonText="'Doc of the month'" :title="shareTitle"></ShareUs>
   </Widget>
 </template>
 
