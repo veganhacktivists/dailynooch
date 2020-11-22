@@ -4,7 +4,7 @@
       <a :href="data.imageUrl" target="_blank"><img class="image" :src="data.imageUrl" v-bind:alt="data.imageAlt" /></a>
       <figcaption v-if="data.caption">— {{ data.caption }}</figcaption>
     </figure>
-    <ShareUs :buttonText="'today\'s art'" :title="shareTitle"></ShareUs>
+    <ShareUs :buttonText="'today\'s art'" :title="shareTitle" />
   </Widget>
 </template>
 
@@ -30,7 +30,8 @@ export default {
   },
   computed: {
     shareTitle() {
-      return `${this.data.imageUrl} - find more vegan art at ${window.location.protocol + '//' + window.location.hostname}!`
+      const imageUrl = `${document.location.origin}/${this.data.imageUrl}`
+      return `${imageUrl} - find more vegan art at ${window.location.protocol + '//' + window.location.hostname}!`
     }
   },
   methods: {
