@@ -1,7 +1,9 @@
 <template>
   <Widget :name="name" :error="data.error">
     <figure>
-      <a :href="data.imageUrl" target="_blank"><img class="image" :src="data.imageUrl" v-bind:alt="data.imageAlt" /></a>
+      <a :href="data.imageUrl" target="_blank" rel="noopener">
+        <img class="image" :src="data.imageUrl" v-bind:alt="data.imageAlt" />
+      </a>
       <figcaption v-if="data.caption">— {{ data.caption }}</figcaption>
     </figure>
     <ShareUs :buttonText="'today\'s art'" :title="shareTitle" />
@@ -9,41 +11,30 @@
 </template>
 
 <script>
-import Widget from '../components/Widget'
-import ShareUs from '../components/ShareUs'
+  import ShareUs from '../components/ShareUs'
+  import Widget from '../components/Widget'
 
-export default {
-  name: 'art',
-  props: {
-    data: {
-      type: Object,
-      required: true,
+  export default {
+    name: 'art',
+    props: {
+      data: {
+        type: Object,
+        required: true,
+      },
+      name: {
+        type: String,
+        required: true,
+      },
     },
-    name: {
-      type: String,
-      required: true,
+    components: {
+      ShareUs,
+      Widget,
     },
-  },
-  components: {
-    Widget,
-    ShareUs
-  },
-  computed: {
-    shareTitle() {
-      const imageUrl = `${document.location.origin}/${this.data.imageUrl}`
-      return `${imageUrl} - find more vegan art at ${window.location.protocol + '//' + window.location.hostname}!`
-    }
-  },
-  methods: {
-    share() {
-      alert('not yet implemented')
+    computed: {
+      shareTitle() {
+        const { origin } = document.location
+        return `${origin}/${this.data.imageUrl} - find more vegan art at ${origin}!`
+      },
     },
-  },
-}
+  }
 </script>
-
-<style scoped>
-.image {
-  width: 100%;
-}
-</style>

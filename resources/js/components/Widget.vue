@@ -11,14 +11,18 @@
       </div>
       <div v-if="error">
         <div v-if="error.message" class="widget-error">
-          <i class="fa fa-exclamation-triangle" aria-hidden="true" /> Error: <pre>{{ error.message}}</pre>
-          File: <pre>{{ error.file}}</pre>
-          Line: <pre>{{ error.line}}</pre>
-          Trace: <pre>{{ error.trace}}</pre>
+          <i class="fa fa-exclamation-triangle" aria-hidden="true" /> Error:
+          <pre>{{ error.message }}</pre>
+          File:
+          <pre>{{ error.file }}</pre>
+          Line:
+          <pre>{{ error.line }}</pre>
+          Trace:
+          <pre>{{ error.trace }}</pre>
         </div>
         <div v-else class="alert alert-danger" role="alert">
-          <i class="fas fa-kiwi-bird"></i>&nbsp;
-          There was a problem loading this widget. Please try again later.
+          <i class="fas fa-kiwi-bird"></i>&nbsp; There was a problem loading
+          this widget. Please try again later.
         </div>
       </div>
       <slot v-else />
@@ -28,24 +32,24 @@
 
 
 <script>
-import HandleIcon from './HandleIcon'
+  import HandleIcon from './HandleIcon'
 
-export default {
-  name: 'widget',
-  inject: ['widgetContext'],
-  props: {
-    name: {
-      type: String,
-      required: true,
+  export default {
+    name: 'widget',
+    inject: ['widgetContext'],
+    props: {
+      name: {
+        type: String,
+        required: true,
+      },
+      error: {
+        type: Object,
+      },
     },
-    error: {
-      type: Object,
-    }
-  },
-  components: {
-    HandleIcon,
-  },
-}
+    components: {
+      HandleIcon,
+    },
+  }
 </script>
 
 <style scoped lang="scss">

@@ -3,22 +3,22 @@
 </template>
 
 <script>
-import Widget from '../components/Widget'
+  import Widget from '../components/Widget'
 
-export default {
-  name: 'lives-counter',
-  props: {
-    data: {
-      type: Object,
-      required: true,
+  export default {
+    name: 'lives-counter',
+    props: {
+      data: {
+        type: Object,
+        required: true,
+      },
+      name: {
+        type: String,
+        required: true,
+      },
     },
-    name: {
-      type: String,
-      required: true,
+    components: {
+      Widget,
     },
-  },
-  components: {
-    Widget,
-  },
-}
+  }
 </script>
