@@ -49,7 +49,7 @@
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
 
-    <title>@yield('title')</title>
+    <title>Daily Nooch - Your vegan homepage with news, resources and inspiration!</title>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-150398169-12"></script>
