@@ -29,3 +29,10 @@
     @include pressable-button($secondary, white, $btn-distance);
   }
 }
+
+.btn-bookmark {
+  @include pressable-button(#f0ad4e, white, $btn-distance);
+  margin-left: 5px;
+  padding: .25rem .5rem;
+  margin-top: -.25rem;
+}
