@@ -6,7 +6,7 @@ use Illuminate\Support\Collection;
 
 class News extends AbstractFeedWidget
 {
-    protected $name = 'Latest news';
+    protected $name = 'Latest News';
     protected $type = 'news';
     protected $description = 'Vegan news';
 

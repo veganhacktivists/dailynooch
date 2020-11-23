@@ -6,7 +6,7 @@ use App\Models\Fact;
 
 class FactOfTheDay extends AbstractWidget
 {
-    protected $name = 'Fact of the day';
+    protected $name = 'Fact of the Day';
     protected $type = 'fact-of-the-day';
     protected $description = 'Vegan fact of the day.';
 

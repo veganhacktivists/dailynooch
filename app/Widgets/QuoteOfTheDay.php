@@ -6,7 +6,7 @@ use App\Models\Quote;
 
 class QuoteOfTheDay extends AbstractWidget
 {
-    protected $name = 'Quote of the day';
+    protected $name = 'Quote of the Day';
     protected $type = 'quote-of-the-day';
     protected $description = 'Vegan quotes of the day.';
 

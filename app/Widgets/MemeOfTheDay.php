@@ -6,7 +6,7 @@ use File;
 
 class MemeOfTheDay extends AbstractWidget
 {
-    protected $name = 'Meme Of The Day';
+    protected $name = 'Meme of the Day';
     protected $type = 'meme-of-the-day';
     protected $description = 'Vegan meme of the day.';
 

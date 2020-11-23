@@ -4,7 +4,7 @@ namespace App\Widgets;
 
 class RedditRveganrecipes extends AbstractRedditWidget
 {
-    protected $name = 'Recipes of the week';
+    protected $name = 'Recipes of the Week';
     protected $type = 'reddit-rveganrecipes';
     protected $description = 'Displays threads from the vegan recipes subreddit.';
 
