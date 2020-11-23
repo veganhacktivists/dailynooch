@@ -6,7 +6,7 @@ use File;
 
 class DocOfTheMonth extends AbstractWidget
 {
-    protected $name = 'Documentary of the month';
+    protected $name = 'Documentary of the Month';
     protected $type = 'doc-of-the-month';
     protected $description = 'Documentary of the month';
 
