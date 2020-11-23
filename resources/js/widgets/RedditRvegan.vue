@@ -32,14 +32,20 @@
     },
     computed: {
       items() {
-        return this.data.map((item) => ({
-          ...item,
-          link: item.permalink,
-          featuredImage:
-            item.preview?.images[0].resolutions[2].url.replace(/&amp;/g, '&') ??
-            this.placeholderThumbEncoded,
-          footerText: `${item.ups} upvotes | ${item.num_comments} comments`,
-        }))
+        return this.data.map((item) => {
+          let featuredImage = this.placeholderThumbEncoded;
+          const imageResolutions = item.preview?.images[0]?.resolutions;
+          if (imageResolutions && imageResolutions.length > 0) {
+            featuredImage = imageResolutions[imageResolutions.length - 1].url.replace(/&amp;/g, '&');
+          }
+
+          return {
+            ...item,
+            link: item.permalink,
+            featuredImage,
+            footerText: `${item.ups} upvotes | ${item.num_comments} comments`,
+          }
+        });
       },
     },
   }
