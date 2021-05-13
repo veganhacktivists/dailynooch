@@ -2,7 +2,7 @@
   <Widget :name="name" :error="data.error">
     <figure>
       <a href="http://vbcamp.org/dailynooch" target="_blank">
-        <img class="image" :src="data.imageUrl" />
+        <img class="image" :src="data.imageUrl" alt="Vegan Bootcamp – Take the Vegan 30 Day Challenge" />
       </a>
     </figure>
     <p>
