@@ -2,7 +2,7 @@
   <Widget :name="name" :error="data.error">
     <figure>
       <a :href="data.imageUrl" target="_blank">
-        <img class="image" :src="data.imageUrl" />
+        <img class="image" :src="data.imageUrl" :alt="imageAlt" />
       </a>
     </figure>
     <ShareUs :buttonText="name" :title="shareTitle" />
@@ -30,6 +30,10 @@
       Widget,
     },
     computed: {
+      imageAlt() {
+        const { imageAlt } = this.data;
+        return imageAlt ? imageAlt : "";
+      },
       shareTitle() {
         const { origin } = document.location
         return `${origin}/${this.data.imageUrl} - find more vegan memes at ${origin}!`

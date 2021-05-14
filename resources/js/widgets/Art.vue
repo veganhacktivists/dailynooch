@@ -2,7 +2,7 @@
   <Widget :name="name" :error="data.error">
     <figure>
       <a :href="data.imageUrl" target="_blank" rel="noopener">
-        <img class="image" :src="data.imageUrl" v-bind:alt="data.imageAlt" />
+        <img class="image" :src="data.imageUrl" :alt="imageAlt" />
       </a>
       <figcaption v-if="data.caption">— {{ data.caption }}</figcaption>
     </figure>
@@ -31,6 +31,10 @@
       Widget,
     },
     computed: {
+      imageAlt() {
+        const { imageAlt } = this.data;
+        return imageAlt ? imageAlt : "";
+      },
       shareTitle() {
         const { origin } = document.location
         return `${origin}/${this.data.imageUrl} - find more vegan art at ${origin}!`
