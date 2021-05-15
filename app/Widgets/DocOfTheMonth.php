@@ -19,15 +19,20 @@ class DocOfTheMonth extends AbstractWidget
 
     public function getData(): array
     {
-        return [
-            'imageUrl' => $this->getRandomDoc(),
-        ];
+        return $this->getRandomDoc();
     }
 
-    private function getRandomDoc(): string
+    private function getRandomDoc(): array
     {
-        $doc = File::files(public_path(self::DOC_DIR));
+        $docs = File::files(public_path(self::DOC_DIR));
+        $randDoc = $docs[array_rand($docs)];
+        $docFileName = $randDoc->getFileName();
+        $docName = pathinfo($docFileName, PATHINFO_FILENAME);
+        $imageUrl = self::DOC_DIR.'/'.$docFileName;
 
-        return self::DOC_DIR.'/'.$doc[array_rand($doc)]->getFilename();
+        return [
+            'imageUrl' => $imageUrl,
+            'docName' => $docName,
+        ];
     }
 }

@@ -10,7 +10,7 @@
               target="_blank"
               rel="noopener"
             >
-              <img class="card-img-top" :src="item.featuredImage" />
+              <img class="card-img-top" :src="item.featuredImage" alt="" />
             </a>
             <video
               v-else

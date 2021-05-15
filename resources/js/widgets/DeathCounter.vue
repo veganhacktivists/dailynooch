@@ -6,7 +6,7 @@
           <li class="list-group-item px-0 border-0">
             <img
               :src="animal.icon"
-              :alt="animal.name + ' icon'"
+              :alt="animal.name"
               :title="animal.name"
             />
             {{ Math.ceil(animal.value).toLocaleString() }}

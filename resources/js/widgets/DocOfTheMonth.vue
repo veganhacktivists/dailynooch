@@ -2,7 +2,7 @@
   <Widget :name="name" :error="data.error">
     <figure>
       <a href="http://3movies.org/" target="_blank" rel="noopener">
-        <img class="image" :src="data.imageUrl" />
+        <img class="image" :src="data.imageUrl" :alt="imageAlt" />
       </a>
     </figure>
     <ShareUs :buttonText="'Doc of the month'" :title="shareTitle" />
@@ -30,6 +30,10 @@
       Widget,
     },
     computed: {
+      imageAlt() {
+        const { docName } = this.data;
+        return docName.charAt(0).toUpperCase() + docName.slice(1);
+      },
       shareTitle() {
         const { origin } = document.location
         return `${origin}/${this.data.imageUrl} - find more vegan documentaries at ${origin}!`
